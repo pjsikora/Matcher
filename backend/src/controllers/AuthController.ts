@@ -14,27 +14,37 @@ exports.registerController = async (req: Request, res: Response) => {
     Number(process.env.SALT_ROUNDS),
     async function (err: Error, hash: String) {
       const activation_code = randomstring.generate(8)
-      const user = new User({
-        ...req.body,
-        activation_code: activation_code,
-        activation_code_exp: moment(new Date().getTime()).add(30, 'minutes'),
-        password: hash,
-      })
-      try {
-        const result = await user.save()
 
-        res.status(200).json({
-          success: true,
-          activation_code: activation_code, ///Do zmiany
-          message: 'Register successfully!',
-        })
-      } catch (err) {
-        res.status(500).json({
-          ///tutaj bedzie error hanbdl;er
-          success: false,
-          message: err,
-        })
-      }
+      bcrypt.hash(
+        activation_code,
+        Number(process.env.SALT_ROUNDS),
+        async (err: Error, hashedCode: String) => {
+          const user = new User({
+            ...req.body,
+            activation_code: hashedCode,
+            activation_code_exp: moment(new Date().getTime()).add(
+              30,
+              'minutes'
+            ),
+            password: hash,
+          })
+          try {
+            const result = await user.save()
+
+            res.status(200).json({
+              success: true,
+              activation_code: activation_code, ///Do zmiany
+              message: 'Register successfully!',
+            })
+          } catch (err) {
+            res.status(500).json({
+              ///tutaj bedzie error hanbdl;er
+              success: false,
+              message: err,
+            })
+          }
+        }
+      )
     }
   )
 }
@@ -50,24 +60,24 @@ exports.activateAccount = async (req: Request, res: Response) => {
           success: true,
           message: 'Account is already active!',
         })
-      }
-      if (
-        user.activation_code === code &&
-        new Date() < user.activation_code_exp
-      ) {
-        user.account_status = true
-        user.activation_code = null
-        user.activation_code_exp = null
-        await user.save()
-
-        return res
-          .status(200)
-          .json({ success: true, message: 'Account activaed' })
       } else {
-        return res.status(500).json({
-          success: false,
-          message: 'Activation code is invalid or expired',
-        })
+        const match = await bcrypt.compare(code, user.activation_code)
+
+        if (match && new Date() < user.activation_code_exp) {
+          user.account_status = true
+          user.activation_code = null
+          user.activation_code_exp = null
+          await user.save()
+
+          return res
+            .status(200)
+            .json({ success: true, message: 'Account activaed' })
+        } else {
+          return res.status(500).json({
+            success: false,
+            message: 'Activation code is invalid or expired',
+          })
+        }
       }
     } else {
       return res.status(404).json({ success: false, message: 'User not found' })

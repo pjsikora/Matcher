@@ -75,8 +75,6 @@ const userSchema = new Schema(
     },
     activation_code: {
       type: String,
-      minlength: 8,
-      maxlength: 8,
     },
     activation_code_exp: {
       type: Date,
