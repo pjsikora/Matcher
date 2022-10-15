@@ -86,3 +86,40 @@ exports.activateAccount = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: err })
   }
 }
+exports.resendActivationCode = async (req: Request, res: Response) => {
+  const { email } = req.body
+
+  try {
+    const user = await User.findOne({ email })
+
+    if (user) {
+      const activation_code = randomstring.generate(8)
+      bcrypt.hash(
+        activation_code,
+        Number(process.env.SALT_ROUNDS),
+        async (err: Error, hash: String) => {
+          user.activation_code = hash
+          user.activation_code_exp = moment(new Date().getTime()).add(
+            30,
+            'minutes'
+          )
+          await user.save()
+
+          res
+            .status(200)
+            .json({ success: true, activation_code, message: 'Code sended' })
+        }
+      )
+    } else {
+      res.status(404).json({
+        success: false,
+        message: 'User not found',
+      })
+    }
+  } catch (err) {
+    res.status(404).json({
+      success: false,
+      message: err,
+    })
+  }
+}
