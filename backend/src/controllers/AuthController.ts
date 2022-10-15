@@ -1,9 +1,11 @@
+import { getActivationMessage } from './../templates/activationMessage'
 import { Request, Response } from 'express'
 
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const randomstring = require('randomstring')
 const moment = require('moment')
+const sendEmail = require('../tools/mailSender')
 
 exports.registerController = async (req: Request, res: Response) => {
   const { username, email, password, age, city, gender, searchFor, desc } =
@@ -30,6 +32,14 @@ exports.registerController = async (req: Request, res: Response) => {
           })
           try {
             const result = await user.save()
+
+            // const emailMessage = getActivationMessage(activation_code)
+            // await sendEmail({
+            //   from: process.env.MAIL_USERNAME,
+            //   to: email,
+            //   subject: 'Matcher - activate your account',
+            //   html: emailMessage,
+            // })
 
             res.status(200).json({
               success: true,
@@ -105,6 +115,13 @@ exports.resendActivationCode = async (req: Request, res: Response) => {
           )
           await user.save()
 
+          // const emailMessage = getActivationMessage(activation_code)
+          // await sendEmail({
+          //   from: process.env.MAIL_USERNAME,
+          //   to: email,
+          //   subject: 'Matcher - activate your account',
+          //   html: emailMessage,
+          // })
           res
             .status(200)
             .json({ success: true, activation_code, message: 'Code sended' })
