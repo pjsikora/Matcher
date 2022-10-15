@@ -6,7 +6,7 @@ import { Text, View } from "../components/Themed";
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Jebać cie</Text>
+      <Text style={styles.title}>Wojnowski cwel</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
