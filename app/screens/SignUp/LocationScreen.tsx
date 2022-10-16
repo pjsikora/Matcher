@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
+import { RegisterUserData } from "../../types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmail } from "../../redux/registerSlice";
 
-const NameScreen = ({ navigation }) => {
-  const [text, setText] = useState("");
+interface EmailScreenProps {
+  navigation: any;
+}
+const LocationScreen = ({ navigation }: EmailScreenProps) => {
+  const dispatch = useDispatch();
+  const count = useSelector((state: RegisterUserData) => state);
+
+  const emailHandler = (email: string) => {
+    dispatch(addEmail(email));
+    console.log(count);
+  };
 
   return (
     <View style={styles.container}>
@@ -13,15 +25,14 @@ const NameScreen = ({ navigation }) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <Text style={styles.title}>Your Name is...</Text>
+          <Text style={styles.title}>Your Localization is...</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(newText) => setText(newText)}
-            value={text}
-            placeholder="Enter your name"
+            onChangeText={(newText) => emailHandler(newText)}
+            placeholder="Enter your city"
             placeholderTextColor="#ABABAB"
           />
-          <RegisterButton toScreen="ageInput" navigation={navigation} />
+          <RegisterButton toScreen="tokenInput" navigation={navigation} />
         </View>
         <Image
           style={styles.bcgHearths}
@@ -74,4 +85,4 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
 });
-export default NameScreen;
+export default LocationScreen;

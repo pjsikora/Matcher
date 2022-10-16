@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
+import { RegisterUserData } from "../../types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmail } from "../../redux/registerSlice";
 
-const NameScreen = ({ navigation }) => {
-  const [text, setText] = useState("");
+interface EmailScreenProps {
+  navigation: any;
+}
+const AboutYourselfScreen = ({ navigation }: EmailScreenProps) => {
+  const dispatch = useDispatch();
+  const count = useSelector((state: RegisterUserData) => state);
+
+  const emailHandler = (email: string) => {
+    dispatch(addEmail(email));
+    console.log(count);
+  };
 
   return (
     <View style={styles.container}>
@@ -13,15 +25,16 @@ const NameScreen = ({ navigation }) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <Text style={styles.title}>Your Name is...</Text>
+          <Text style={styles.title}>Tell more about yourself...</Text>
           <TextInput
+            multiline={true}
+            numberOfLines={6}
             style={styles.input}
-            onChangeText={(newText) => setText(newText)}
-            value={text}
-            placeholder="Enter your name"
+            onChangeText={(newText) => emailHandler(newText)}
+            placeholder="About me"
             placeholderTextColor="#ABABAB"
           />
-          <RegisterButton toScreen="ageInput" navigation={navigation} />
+          <RegisterButton toScreen="hobbyInput" navigation={navigation} />
         </View>
         <Image
           style={styles.bcgHearths}
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "60%",
+    height: "64%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
@@ -63,9 +76,8 @@ const styles = StyleSheet.create({
   input: {
     width: "80%",
     backgroundColor: "#F7F7F7",
-    height: "10%",
-    marginTop: "20%",
-    marginBottom: "10%",
+    height: "30%",
+    marginTop: "10%",
   },
   btn: {},
   bcgHearths: {
@@ -74,4 +86,4 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
 });
-export default NameScreen;
+export default AboutYourselfScreen;

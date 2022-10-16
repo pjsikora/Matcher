@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -42,6 +36,10 @@ const GenderScreen = ({ navigation }) => {
           </TouchableOpacity>
           <RegisterButton toScreen="searchForInput" navigation={navigation} />
         </View>
+        <Image
+          style={styles.bcgHearths}
+          source={require("../../images/Hearts.png")}
+        />
       </LinearGradient>
     </View>
   );
@@ -80,13 +78,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "90%",
-    height: "15%",
-    backgroundColor: "#333",
+    height: "12%",
+    backgroundColor: "transparent",
+    borderColor: "#C04D9F",
+    borderWidth: 3,
     marginTop: "10%",
     borderRadius: 55,
   },
   text: {
-    color: "#fff",
+    color: "#333",
     fontSize: 30,
   },
   textM: {
@@ -96,6 +96,11 @@ const styles = StyleSheet.create({
   textF: {
     color: "#e317d9",
     fontSize: 30,
+  },
+  bcgHearths: {
+    position: "absolute",
+    top: "60%",
+    zIndex: -1,
   },
 });
 export default GenderScreen;

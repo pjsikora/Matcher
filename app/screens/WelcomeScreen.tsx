@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import WelcomeLogo from "../components/WelcomeScreen/WelcomeLogo";
 import WelcomeButton from "../components/WelcomeScreen/WelcomeButton";
@@ -20,6 +20,10 @@ const WelcomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("emailInput")}
           />
         </View>
+        <Image
+          style={styles.bcgHearths}
+          source={require("../images/Hearts.png")}
+        />
       </LinearGradient>
     </View>
   );
@@ -44,6 +48,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 30,
     textDecorationLine: "solid",
+  },
+  bcgHearths: {
+    position: "absolute",
+    top: "60%",
+    zIndex: -1,
   },
 });
 
