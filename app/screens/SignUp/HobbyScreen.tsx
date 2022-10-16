@@ -1,15 +1,58 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmail } from "../../redux/registerSlice";
 
+const hobbies = [
+  "Music",
+  "Art",
+  "Cooking",
+  "Fishing",
+  "Baking",
+  "Walking",
+  "Outdoors",
+  "Photography",
+  "Travel",
+  "Movies",
+  "Working out",
+  "Yoga",
+  "Swimming",
+  "Instagram",
+  "Foodie",
+  "Astrology",
+  "Dancing",
+  "Board Games",
+  "Fasion",
+  "Cycling",
+  "Dog lover",
+  "Cat lover",
+  "Netflix",
+  "Politics",
+  "Volunteering",
+  "Wine",
+  "Craft Beer",
+  "History",
+  "Geography",
+  "Cars",
+  "Camping",
+  "Biology",
+  "Soccer",
+  "Psychology",
+  "Anime",
+  "DIY",
+];
+
 interface EmailScreenProps {
   navigation: any;
 }
-const LocationScreen = ({ navigation }: EmailScreenProps) => {
+const HobbyScreen = ({ navigation }: EmailScreenProps) => {
+  const hobbiesList = hobbies.map((hobby) => {
+    return <Text style={styles.hobbyItem}>{hobby}</Text>;
+  });
+
   const dispatch = useDispatch();
   const count = useSelector((state: RegisterUserData) => state);
 
@@ -25,14 +68,11 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <Text style={styles.title}>Your Localization is...</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(newText) => emailHandler(newText)}
-            placeholder="Enter your city"
-            placeholderTextColor="#ABABAB"
-          />
-          <RegisterButton toScreen="tokenInput" navigation={navigation} />
+          <Text style={styles.title}>What's your hobbies?</Text>
+          <View style={styles.hobbiesContainer}>
+            <Text>{hobbiesList}</Text>
+          </View>
+          <RegisterButton toScreen="locationInput" navigation={navigation} />
         </View>
         <Image
           style={styles.bcgHearths}
@@ -57,7 +97,7 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "60%",
+    height: "90%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
@@ -65,24 +105,29 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 48,
-    marginTop: "15%",
+    marginTop: "5%",
+    marginBottom: "2%",
   },
   btnTitle: {
     fontSize: 20,
     marginTop: "15%",
   },
-  input: {
-    width: "80%",
-    backgroundColor: "#F7F7F7",
-    height: "10%",
-    marginTop: "20%",
-    marginBottom: "10%",
+  hobbiesContainer: {
+    width: "90%",
+    height: "55%",
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  btn: {},
+  hobbyItem: {
+    backgroundColor: "#F2F2F2",
+  },
   bcgHearths: {
     position: "absolute",
     top: "60%",
     zIndex: -1,
   },
 });
-export default LocationScreen;
+export default HobbyScreen;

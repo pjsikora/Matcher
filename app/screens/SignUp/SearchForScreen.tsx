@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -19,7 +13,7 @@ const SearchForScreen = ({ navigation }) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <Text style={styles.title}>You are a ...</Text>
+          <Text style={styles.title}>You are looking for...</Text>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
@@ -52,6 +46,10 @@ const SearchForScreen = ({ navigation }) => {
           </TouchableOpacity>
           <RegisterButton toScreen="photosInput" navigation={navigation} />
         </View>
+        <Image
+          style={styles.bcgHearths}
+          source={require("../../images/Hearts.png")}
+        />
       </LinearGradient>
     </View>
   );
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "64%",
+    height: "70%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
@@ -90,13 +88,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "90%",
-    height: "15%",
-    backgroundColor: "#333",
-    marginTop: "4%",
+    height: "12%",
+    backgroundColor: "transparent",
+    borderColor: "#C04D9F",
+    borderWidth: 3,
+    marginTop: "8%",
     borderRadius: 55,
   },
   text: {
-    color: "#fff",
+    color: "#333",
     fontSize: 30,
   },
   textM: {
@@ -106,6 +106,11 @@ const styles = StyleSheet.create({
   textF: {
     color: "#e317d9",
     fontSize: 30,
+  },
+  bcgHearths: {
+    position: "absolute",
+    top: "60%",
+    zIndex: -1,
   },
 });
 export default SearchForScreen;

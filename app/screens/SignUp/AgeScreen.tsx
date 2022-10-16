@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -20,9 +20,14 @@ const AgeScreen = ({ navigation }) => {
             onChangeText={(newText) => setText(newText)}
             value={text}
             placeholder="Enter your age"
+            placeholderTextColor="#ABABAB"
           />
           <RegisterButton toScreen="genderInput" navigation={navigation} />
         </View>
+        <Image
+          style={styles.bcgHearths}
+          source={require("../../images/Hearts.png")}
+        />
       </LinearGradient>
     </View>
   );
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "64%",
+    height: "60%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
@@ -50,7 +55,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 48,
-    marginTop: "15%",
+    // marginTop: "15%",
   },
   btnTitle: {
     fontSize: 20,
@@ -60,8 +65,14 @@ const styles = StyleSheet.create({
     width: "80%",
     backgroundColor: "#F7F7F7",
     height: "10%",
-    marginTop: "40%",
+    marginTop: "20%",
+    marginBottom: "10%",
   },
   btn: {},
+  bcgHearths: {
+    position: "absolute",
+    top: "60%",
+    zIndex: -1,
+  },
 });
 export default AgeScreen;

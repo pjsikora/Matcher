@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
@@ -33,15 +34,76 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
         <View style={styles.whiteContainer}>
           <Text style={styles.title}>What do You look like?</Text>
           <View style={styles.photosContainer}>
-            <View style={styles.photo}></View>
-            <View style={styles.photo}></View>
-            <View style={styles.photo}></View>
-            <View style={styles.photo}></View>
-            <View style={styles.photo}></View>
-            <View style={styles.photo}></View>
+            <View style={styles.box}>
+              <TouchableOpacity>
+                <View style={styles.photo}>
+                  <Image
+                    style={styles.btnImage}
+                    source={require("../../images/addBtn.png")}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity>
+                <View style={styles.photo}>
+                  <Image
+                    style={styles.btnImage}
+                    source={require("../../images/addBtn.png")}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity>
+                <View style={styles.photo}>
+                  <Image
+                    style={styles.btnImage}
+                    source={require("../../images/addBtn.png")}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity>
+                <View style={styles.photo}>
+                  <Image
+                    style={styles.btnImage}
+                    source={require("../../images/addBtn.png")}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity>
+                <View style={styles.photo}>
+                  <Image
+                    style={styles.btnImage}
+                    source={require("../../images/addBtn.png")}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity>
+                <View style={styles.photo}>
+                  <Image
+                    style={styles.btnImage}
+                    source={require("../../images/addBtn.png")}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-          <RegisterButton toScreen="locationInput" navigation={navigation} />
+          <RegisterButton
+            toScreen="aboutYourselfInput"
+            navigation={navigation}
+          />
         </View>
+        <Image
+          style={styles.bcgHearths}
+          source={require("../../images/Hearts.png")}
+        />
       </LinearGradient>
     </View>
   );
@@ -61,7 +123,7 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "85%",
+    height: "90%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
@@ -83,20 +145,39 @@ const styles = StyleSheet.create({
   },
   photosContainer: {
     display: "flex",
+    flexDirection: "row",
     flexWrap: "wrap",
-    width: "80%",
+    width: "100%",
     height: "60%",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     marginTop: "5%",
+    padding: "5%",
   },
   btn: {},
+  btnImage: {
+    position: "relative",
+    top: "87%",
+    left: "65%",
+  },
   photo: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#EAEAEA",
+    border: "3px solid #3333",
+    marginBottom: "5%",
+  },
+  box: {
     width: "30%",
-    height: "40%",
+    height: "45%",
     backgroundColor: "#333",
-    borderStyle: "solid",
-    marginRight: "2%",
+    border: "3px solid #3333",
+    marginBottom: "10%",
+  },
+  bcgHearths: {
+    position: "absolute",
+    top: "60%",
+    zIndex: -1,
   },
 });
 export default PhotosScreen;

@@ -13,6 +13,9 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import LocationScreen from "./screens/SignUp/LocationScreen";
 import PhotosScreen from "./screens/SignUp/PhotosScreen";
+import HobbyScreen from "./screens/SignUp/HobbyScreen";
+import AboutYourselfScreen from "./screens/SignUp/AboutYourselfScreen";
+import VerifyEmailScreen from "./screens/SignUp/VerifyEmailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -67,8 +70,23 @@ export default function App() {
               options={{ title: "" }}
             />
             <Stack.Screen
+              name="aboutYourselfInput"
+              component={AboutYourselfScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="hobbyInput"
+              component={HobbyScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
               name="locationInput"
               component={LocationScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="tokenInput"
+              component={VerifyEmailScreen}
               options={{ title: "" }}
             />
           </Stack.Navigator>
