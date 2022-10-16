@@ -17,7 +17,7 @@ export default function TabTwoScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+aconst styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
