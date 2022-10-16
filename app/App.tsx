@@ -1,39 +1,63 @@
-import useCachedResources from './hooks/useCachedResources'
-import * as React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigationContainer } from '@react-navigation/native'
-import WelcomeScreen from './screens/WelcomeScreen'
-import EmailScreen from './screens/SignUp/EmailScreen'
-import PasswordScreen from './screens/SignUp/PasswordScreen'
+import useCachedResources from "./hooks/useCachedResources";
+import * as React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import WelcomeScreen from "./screens/WelcomeScreen";
+import EmailScreen from "./screens/SignUp/EmailScreen";
+import PasswordScreen from "./screens/SignUp/PasswordScreen";
+import NameScreen from "./screens/SignUp/NameScreen";
+import AgeScreen from "./screens/SignUp/AgeScreen";
+import GenderScreen from "./screens/SignUp/GenderInput";
+import SearchForScreen from "./screens/SignUp/SearchForScreen";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const isLoadingComplete = useCachedResources()
+  const isLoadingComplete = useCachedResources();
 
   if (!isLoadingComplete) {
-    return null
+    return null;
   } else {
     return (
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name='Welcome'
+            name="Welcome"
             component={WelcomeScreen}
-            options={{ title: '' }}
+            options={{ title: "" }}
           />
           <Stack.Screen
-            name='emailInput'
+            name="emailInput"
             component={EmailScreen}
-            options={{ title: '' }}
+            options={{ title: "" }}
           />
           <Stack.Screen
-            name='passwordInput'
+            name="passwordInput"
             component={PasswordScreen}
-            options={{ title: '' }}
+            options={{ title: "" }}
+          />
+          <Stack.Screen
+            name="nameInput"
+            component={NameScreen}
+            options={{ title: "" }}
+          />
+          <Stack.Screen
+            name="ageInput"
+            component={AgeScreen}
+            options={{ title: "" }}
+          />
+          <Stack.Screen
+            name="genderInput"
+            component={GenderScreen}
+            options={{ title: "" }}
+          />
+          <Stack.Screen
+            name="searchForInput"
+            component={SearchForScreen}
+            options={{ title: "" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
-    )
+    );
   }
 }

@@ -11,7 +11,8 @@ import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 
 const PasswordScreen = ({ navigation }) => {
-  const [text, setText] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
 
   return (
     <View style={styles.container}>
@@ -24,18 +25,18 @@ const PasswordScreen = ({ navigation }) => {
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
-              onChangeText={(newText) => setText(newText)}
-              value={text}
+              onChangeText={(newText) => setPassword(newText)}
+              value={password}
               placeholder="Enter your password"
             />
             <TextInput
               style={styles.input}
-              onChangeText={(newText) => setText(newText)}
-              value={text}
+              onChangeText={(newText) => setConfPassword(newText)}
+              value={confPassword}
               placeholder="Confirm your password"
             />
           </View>
-          <RegisterButton toScreen="Welcome" navigation={navigation} />
+          <RegisterButton toScreen="nameInput" navigation={navigation} />
         </View>
       </LinearGradient>
     </View>
@@ -73,13 +74,16 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "#F7F7F7",
     width: "100%",
+    marginBottom: "5%",
+    height: "50%",
   },
-  inputContaner: {
+  inputContainer: {
     display: "flex",
     width: "90%",
     height: "20%",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: "20%",
   },
   btn: {},
 });
