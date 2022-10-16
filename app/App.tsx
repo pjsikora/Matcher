@@ -1,38 +1,39 @@
-import useCachedResources from "./hooks/useCachedResources";
-import * as React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import WelcomeScreen from "./screens/WelcomeScreen";
-import EmailScreen from "./screens/SignUp/EmailScreen";
+import useCachedResources from './hooks/useCachedResources'
+import * as React from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+import WelcomeScreen from './screens/WelcomeScreen'
+import EmailScreen from './screens/SignUp/EmailScreen'
+import PasswordScreen from './screens/SignUp/PasswordScreen'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
+  const isLoadingComplete = useCachedResources()
 
   if (!isLoadingComplete) {
-    return null;
+    return null
   } else {
     return (
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Welcome"
+            name='Welcome'
             component={WelcomeScreen}
-            options={{ title: "" }}
+            options={{ title: '' }}
           />
           <Stack.Screen
-            name="emailInput"
+            name='emailInput'
             component={EmailScreen}
-            options={{ title: "" }}
+            options={{ title: '' }}
           />
           <Stack.Screen
-            name="passwordInput"
-            component={EmailScreen}
-            options={{ title: "" }}
+            name='passwordInput'
+            component={PasswordScreen}
+            options={{ title: '' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
-    );
+    )
   }
 }
