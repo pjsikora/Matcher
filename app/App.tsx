@@ -5,6 +5,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import WelcomeScreen from './screens/WelcomeScreen'
 import EmailScreen from './screens/SignUp/EmailScreen'
 import PasswordScreen from './screens/SignUp/PasswordScreen'
+import NameScreen from './screens/SignUp/NameScreen'
+import AgeScreen from './screens/SignUp/AgeScreen'
+import GenderScreen from './screens/SignUp/GenderInput'
+import SearchForScreen from './screens/SignUp/SearchForScreen'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 
@@ -33,6 +37,26 @@ export default function App() {
             <Stack.Screen
               name='passwordInput'
               component={PasswordScreen}
+              options={{ title: '' }}
+            />
+            <Stack.Screen
+              name='nameInput'
+              component={NameScreen}
+              options={{ title: '' }}
+            />
+            <Stack.Screen
+              name='ageInput'
+              component={AgeScreen}
+              options={{ title: '' }}
+            />
+            <Stack.Screen
+              name='genderInput'
+              component={GenderScreen}
+              options={{ title: '' }}
+            />
+            <Stack.Screen
+              name='searchForInput'
+              component={SearchForScreen}
               options={{ title: '' }}
             />
           </Stack.Navigator>

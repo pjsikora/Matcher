@@ -85,6 +85,8 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#F7F7F7',
     width: '100%',
+    marginBottom: '5%',
+    height: '50%',
   },
   inputContainer: {
     display: 'flex',
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
     height: '20%',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: '20%',
   },
   btn: {},
 })
