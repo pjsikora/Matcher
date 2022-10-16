@@ -50,7 +50,7 @@ const SearchForScreen = ({ navigation }) => {
               Both
             </Text>
           </TouchableOpacity>
-          <RegisterButton toScreen="searchForInput" navigation={navigation} />
+          <RegisterButton toScreen="photosInput" navigation={navigation} />
         </View>
       </LinearGradient>
     </View>
