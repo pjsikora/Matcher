@@ -8,14 +8,13 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+import { RegisterUserData } from '../../types/types'
 
-const RegisterButton = ({
-  toScreen,
-  navigation,
-}: {
+interface RegisterButtonProps {
   toScreen: string
   navigation: any
-}) => {
+}
+const RegisterButton = ({ toScreen, navigation }: RegisterButtonProps) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(toScreen)}
