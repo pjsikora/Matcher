@@ -1,22 +1,38 @@
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-
 import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
-import Navigation from "./navigation";
+import * as React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import WelcomeScreen from "./screens/WelcomeScreen";
+import EmailScreen from "./screens/SignUp/EmailScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Welcome"
+            component={WelcomeScreen}
+            options={{ title: "" }}
+          />
+          <Stack.Screen
+            name="emailInput"
+            component={EmailScreen}
+            options={{ title: "" }}
+          />
+          <Stack.Screen
+            name="passwordInput"
+            component={EmailScreen}
+            options={{ title: "" }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }
