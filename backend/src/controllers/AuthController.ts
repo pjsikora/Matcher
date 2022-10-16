@@ -33,17 +33,16 @@ exports.registerController = async (req: Request, res: Response) => {
           try {
             const result = await user.save()
 
-            // const emailMessage = getActivationMessage(activation_code)
-            // await sendEmail({
-            //   from: process.env.MAIL_USERNAME,
-            //   to: email,
-            //   subject: 'Matcher - activate your account',
-            //   html: emailMessage,
-            // })
+            const emailMessage = getActivationMessage(activation_code)
+            await sendEmail({
+              from: process.env.MAIL_USERNAME,
+              to: email,
+              subject: 'Matcher - activate your account',
+              html: emailMessage,
+            })
 
             res.status(200).json({
               success: true,
-              activation_code: activation_code, ///Do zmiany
               message: 'Register successfully!',
             })
           } catch (err) {
@@ -115,16 +114,14 @@ exports.resendActivationCode = async (req: Request, res: Response) => {
           )
           await user.save()
 
-          // const emailMessage = getActivationMessage(activation_code)
-          // await sendEmail({
-          //   from: process.env.MAIL_USERNAME,
-          //   to: email,
-          //   subject: 'Matcher - activate your account',
-          //   html: emailMessage,
-          // })
-          res
-            .status(200)
-            .json({ success: true, activation_code, message: 'Code sended' })
+          const emailMessage = getActivationMessage(activation_code)
+          await sendEmail({
+            from: process.env.MAIL_USERNAME,
+            to: email,
+            subject: 'Matcher - activate your account',
+            html: emailMessage,
+          })
+          res.status(200).json({ success: true, message: 'Code sended' })
         }
       )
     } else {
