@@ -47,7 +47,7 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
               placeholder='Confirm your password'
             />
           </View>
-          <RegisterButton toScreen='Welcome' navigation={navigation} />
+          <RegisterButton toScreen='nameInput' navigation={navigation} />
         </View>
       </LinearGradient>
     </View>
