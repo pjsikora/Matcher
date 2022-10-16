@@ -1,3 +1,5 @@
+require('dotenv').config({ path: __dirname + '/config/.env' })
+
 export {}
 
 const express = require('express')
