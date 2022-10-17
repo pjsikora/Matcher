@@ -3,7 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 
-const GenderScreen = ({ navigation }) => {
+interface EmailScreenProps {
+  navigation: any;
+}
+const GenderScreen = ({ navigation }: EmailScreenProps) => {
   const [gender, setGender] = useState("");
 
   return (
@@ -24,6 +27,7 @@ const GenderScreen = ({ navigation }) => {
               Male
             </Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
@@ -59,15 +63,17 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "64%",
+    minHeight: "64%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
     alignItems: "center",
   },
   title: {
-    fontSize: 48,
-    marginTop: "15%",
+    fontSize: 55,
+    marginTop: "5%",
+    marginBottom: "15%",
+    width: "80%",
   },
   btnTitle: {
     fontSize: 20,
@@ -78,11 +84,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "90%",
-    height: "12%",
+    height: 70,
     backgroundColor: "transparent",
     borderColor: "#C04D9F",
     borderWidth: 3,
-    marginTop: "10%",
+    marginBottom: "10%",
     borderRadius: 55,
   },
   text: {

@@ -3,7 +3,10 @@ import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 
-const AgeScreen = ({ navigation }) => {
+interface EmailScreenProps {
+  navigation: any;
+}
+const AgeScreen = ({ navigation }: EmailScreenProps) => {
   const [text, setText] = useState("");
 
   return (
@@ -19,7 +22,7 @@ const AgeScreen = ({ navigation }) => {
             style={styles.input}
             onChangeText={(newText) => setText(newText)}
             value={text}
-            placeholder="Enter your age"
+            placeholder="Age"
             placeholderTextColor="#ABABAB"
           />
           <RegisterButton toScreen="genderInput" navigation={navigation} />
@@ -47,26 +50,30 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "60%",
+    minHeight: "60%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
     alignItems: "center",
   },
   title: {
-    fontSize: 48,
-    // marginTop: "15%",
+    fontSize: 55,
+    width: "80%",
+    marginTop: "10%",
   },
   btnTitle: {
     fontSize: 20,
     marginTop: "15%",
   },
   input: {
-    width: "80%",
-    backgroundColor: "#F7F7F7",
+    width: "20%",
     height: "10%",
-    marginTop: "20%",
-    marginBottom: "10%",
+    marginTop: "15%",
+    marginBottom: "15%",
+    textAlign: "center",
+    fontSize: 24,
+    borderBottomColor: "#1E1E1E",
+    borderBottomWidth: 1,
   },
   btn: {},
   bcgHearths: {

@@ -59,15 +59,17 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "64%",
+    minHeight: "64%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
     alignItems: "center",
   },
   title: {
-    fontSize: 48,
-    marginTop: "15%",
+    fontSize: 55,
+    marginTop: "5%",
+    marginBottom: "5%",
+    width: "80%",
   },
   btnTitle: {
     fontSize: 20,
@@ -76,8 +78,10 @@ const styles = StyleSheet.create({
   input: {
     width: "80%",
     backgroundColor: "#F7F7F7",
-    height: "30%",
+    height: 120,
     marginTop: "10%",
+    marginBottom: "15%",
+    fontSize: 16,
   },
   btn: {},
   bcgHearths: {

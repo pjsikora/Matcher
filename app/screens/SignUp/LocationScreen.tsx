@@ -10,6 +10,7 @@ interface EmailScreenProps {
   navigation: any;
 }
 const LocationScreen = ({ navigation }: EmailScreenProps) => {
+  const [text, setText] = useState("");
   const dispatch = useDispatch();
   const count = useSelector((state: RegisterUserData) => state);
 
@@ -28,10 +29,12 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
           <Text style={styles.title}>Your Localization is...</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(newText) => emailHandler(newText)}
+            onChangeText={(newText) => setText(newText)}
+            value={text}
             placeholder="Enter your city"
             placeholderTextColor="#ABABAB"
           />
+          <Text style={styles.desc}>Your location will be public</Text>
           <RegisterButton toScreen="tokenInput" navigation={navigation} />
         </View>
         <Image
@@ -57,15 +60,17 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "60%",
+    minHeight: "60%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
     alignItems: "center",
   },
   title: {
-    fontSize: 48,
-    marginTop: "15%",
+    fontSize: 55,
+    marginTop: "5%",
+    marginBottom: "2%",
+    width: "80%",
   },
   btnTitle: {
     fontSize: 20,
@@ -73,10 +78,20 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "80%",
-    backgroundColor: "#F7F7F7",
     height: "10%",
     marginTop: "20%",
+    borderBottomColor: "#1E1E1E",
+    borderBottomWidth: 1,
+    lineHeight: 35,
+    fontSize: 20,
+  },
+  desc: {
+    fontSize: 12,
     marginBottom: "10%",
+    color: "#ABABAB",
+    alignSelf: "flex-start",
+    marginLeft: "10%",
+    marginTop: 2,
   },
   btn: {},
   bcgHearths: {

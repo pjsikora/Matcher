@@ -123,15 +123,16 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "90%",
+    minHeight: "90%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
     alignItems: "center",
   },
   title: {
-    fontSize: 48,
+    fontSize: 55,
     marginTop: "5%",
+    width: "80%",
   },
   btnTitle: {
     fontSize: 20,
@@ -151,8 +152,8 @@ const styles = StyleSheet.create({
     height: "60%",
     alignItems: "center",
     justifyContent: "space-evenly",
-    marginTop: "5%",
     padding: "5%",
+    marginBottom: "10%",
   },
   btn: {},
   btnImage: {

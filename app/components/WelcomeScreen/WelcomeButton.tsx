@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
-    height: "10%",
-    marginTop: "25%",
+    height: 57,
+    marginTop: "50%",
   },
   title: {
     textAlign: "center",

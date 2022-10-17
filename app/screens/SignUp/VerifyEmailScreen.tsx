@@ -25,7 +25,7 @@ const VerifyEmailScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <Text style={styles.title}>Verify Your Email</Text>
+          <Text style={styles.title}>Verify Your Email...</Text>
           <Image
             style={styles.icon}
             source={require("../../images/mailIcon.png")}
@@ -64,15 +64,17 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "60%",
+    minHeight: "60%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
     alignItems: "center",
   },
   title: {
-    fontSize: 48,
-    marginTop: "15%",
+    fontSize: 55,
+    marginTop: "5%",
+    marginBottom: "15%",
+    width: "80%",
   },
   icon: {
     marginTop: "5%",
@@ -80,16 +82,22 @@ const styles = StyleSheet.create({
   desc: {
     fontSize: 12,
     marginTop: "2%",
+    marginBottom: "5%",
   },
   btnTitle: {
     fontSize: 20,
     marginTop: "15%",
   },
   input: {
-    width: "80%",
-    backgroundColor: "#F7F7F7",
+    width: "50%",
     height: "10%",
-    marginTop: "20%",
+    marginTop: "2%",
+    marginBottom: "15%",
+    textAlign: "center",
+    borderBottomColor: "#1E1E1E",
+    borderBottomWidth: 1,
+    lineHeight: 35,
+    fontSize: 20,
   },
   btn: {},
   bcgHearths: {

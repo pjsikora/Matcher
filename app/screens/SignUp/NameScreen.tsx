@@ -3,7 +3,10 @@ import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 
-const NameScreen = ({ navigation }) => {
+interface EmailScreenProps {
+  navigation: any;
+}
+const NameScreen = ({ navigation }: EmailScreenProps) => {
   const [text, setText] = useState("");
 
   return (
@@ -21,6 +24,9 @@ const NameScreen = ({ navigation }) => {
             placeholder="Enter your name"
             placeholderTextColor="#ABABAB"
           />
+          <Text style={styles.desc}>
+            This is how it will appear on your profile
+          </Text>
           <RegisterButton toScreen="ageInput" navigation={navigation} />
         </View>
         <Image
@@ -53,8 +59,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 48,
-    marginTop: "15%",
+    fontSize: 55,
+    marginTop: "5%",
+    width: "80%",
   },
   btnTitle: {
     fontSize: 20,
@@ -62,10 +69,20 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "80%",
-    backgroundColor: "#F7F7F7",
     height: "10%",
     marginTop: "20%",
+    borderBottomColor: "#1E1E1E",
+    borderBottomWidth: 1,
+    lineHeight: 35,
+    fontSize: 20,
+  },
+  desc: {
+    fontSize: 12,
     marginBottom: "10%",
+    color: "#ABABAB",
+    alignSelf: "flex-start",
+    marginLeft: "10%",
+    marginTop: 2,
   },
   btn: {},
   bcgHearths: {

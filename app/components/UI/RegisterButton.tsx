@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,13 +6,13 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
-} from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
-import { RegisterUserData } from '../../types/types'
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { RegisterUserData } from "../../types/types";
 
 interface RegisterButtonProps {
-  toScreen: string
-  navigation: any
+  toScreen: string;
+  navigation: any;
 }
 const RegisterButton = ({ toScreen, navigation }: RegisterButtonProps) => {
   return (
@@ -20,36 +20,40 @@ const RegisterButton = ({ toScreen, navigation }: RegisterButtonProps) => {
       onPress={() => navigation.navigate(toScreen)}
       style={styles.btn}
     >
-      <LinearGradient colors={['#F5A3BA', '##CF56A1', '#FCB2BF']}>
+      <LinearGradient
+        colors={["#F5A3BA", "#CF56A1"]}
+        start={{ x: 0, y: 0 }}
+        style={styles.linearGradient}
+      >
         <Text style={styles.btnTitle}>Continue</Text>
       </LinearGradient>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   btn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#C04D9F',
-    borderRadius: 10,
-    width: '80%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    height: '10%',
-    marginTop: '10%',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#C04D9F",
+    borderRadius: 15,
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    height: 50,
+    marginBottom: 50,
   },
   btnTitle: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontSize: 18,
+    textAlign: "center",
+    color: "#FFFFFF",
+    fontSize: 28,
   },
   linearGradient: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    height: 200,
-    width: 350,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+    height: "100%",
+    width: "100%",
   },
-})
-export default RegisterButton
+});
+export default RegisterButton;
