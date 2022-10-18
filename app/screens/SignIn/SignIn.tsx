@@ -7,14 +7,10 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
-import { useDispatch, useSelector } from "react-redux";
-import { RegisterUserData } from "../../types/types";
-import { addPassword } from "../../redux/registerSlice";
 import SignInButton from "../../components/UI/SignInButton";
 import WelcomeLogo from "../../components/WelcomeScreen/WelcomeLogo";
-import { maybeCompleteAuthSession } from "expo-web-browser";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface EmailScreenProps {
   navigation: any;
@@ -25,7 +21,10 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView
+      contentContainerStyle={styles.container}
+      extraScrollHeight={180}
+    >
       <LinearGradient
         colors={["#AD439C", "#FAAEBE"]}
         style={styles.linearGradient}
@@ -79,7 +78,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
           source={require("../../images/Hearts.png")}
         />
       </LinearGradient>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -89,10 +88,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    maxHeight: "100%",
   },
   linearGradient: {
     borderRadius: 5,
-    height: "100%",
+    minHeight: "100%",
     width: "100%",
   },
   whiteContainer: {
