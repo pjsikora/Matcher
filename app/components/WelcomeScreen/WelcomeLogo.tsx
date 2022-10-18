@@ -9,7 +9,9 @@ const WelcomeLogo = () => {
       />
       <Text style={styles.title}>Matcher</Text>
       <Text style={styles.desc}>
-        Find Your Best <Text style={{ color: "#1E1E1E" }}>Match</Text> with Us!
+        Find Your Best{" "}
+        <Text style={{ color: "#1E1E1E", letterSpacing: -1 }}>Match</Text> with
+        Us!
       </Text>
     </View>
   );
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     marginTop: 10,
+    letterSpacing: -2.5,
   },
   desc: {
     fontSize: 18,

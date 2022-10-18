@@ -17,6 +17,7 @@ import HobbyScreen from "./screens/SignUp/HobbyScreen";
 import AboutYourselfScreen from "./screens/SignUp/AboutYourselfScreen";
 import VerifyEmailScreen from "./screens/SignUp/VerifyEmailScreen";
 import SignInScreen from "./screens/SignIn/SignIn";
+import SuccessScreen from "./screens/SignUp/SuccessScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -88,6 +89,11 @@ export default function App() {
             <Stack.Screen
               name="tokenInput"
               component={VerifyEmailScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="success"
+              component={SuccessScreen}
               options={{ title: "" }}
             />
             <Stack.Screen

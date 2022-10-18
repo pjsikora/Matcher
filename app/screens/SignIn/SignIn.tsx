@@ -6,6 +6,8 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SignInButton from "../../components/UI/SignInButton";
@@ -21,64 +23,66 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.container}
-      extraScrollHeight={180}
-    >
-      <LinearGradient
-        colors={["#AD439C", "#FAAEBE"]}
-        style={styles.linearGradient}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.container}
+        extraScrollHeight={150}
       >
-        <WelcomeLogo />
-        <View style={styles.inputsContainer}>
-          <View style={styles.textInputContainer}>
-            <Image
-              style={styles.icon}
-              source={require("../../images/pinkEmailIcon.png")}
-            />
-            <TextInput
-              style={styles.input}
-              // autoFocus={true}
-              onChangeText={(newText) => setText(newText)}
-              placeholder="Email"
-              placeholderTextColor="#ABABAB"
-            />
-          </View>
-          <View style={styles.textInputContainer}>
-            <Image
-              style={styles.icon}
-              source={require("../../images/pinkLockIcon.png")}
-            />
-            <TextInput
-              secureTextEntry={isPasswordSecured}
-              style={styles.input}
-              onChangeText={(newPassword) => setPassword(newPassword)}
-              placeholder="Password"
-              placeholderTextColor="#ABABAB"
-            />
-            <TouchableOpacity
-              style={styles.iconRight}
-              onPress={() => {
-                setIsPasswordSecured(!isPasswordSecured);
-              }}
-            >
+        <LinearGradient
+          colors={["#AD439C", "#FAAEBE"]}
+          style={styles.linearGradient}
+        >
+          <WelcomeLogo />
+          <View style={styles.inputsContainer}>
+            <View style={styles.textInputContainer}>
               <Image
-                source={
-                  isPasswordSecured
-                    ? require("../../images/pinkEyeIcon.png")
-                    : require("../../images/eyeSlashIcon.png")
-                }
+                style={styles.icon}
+                source={require("../../images/pinkEmailIcon.png")}
               />
-            </TouchableOpacity>
+              <TextInput
+                style={styles.input}
+                // autoFocus={true}
+                onChangeText={(newText) => setText(newText)}
+                placeholder="Email"
+                placeholderTextColor="#ABABAB"
+              />
+            </View>
+            <View style={styles.textInputContainer}>
+              <Image
+                style={styles.icon}
+                source={require("../../images/pinkLockIcon.png")}
+              />
+              <TextInput
+                secureTextEntry={isPasswordSecured}
+                style={styles.input}
+                onChangeText={(newPassword) => setPassword(newPassword)}
+                placeholder="Password"
+                placeholderTextColor="#ABABAB"
+              />
+              <TouchableOpacity
+                style={styles.iconRight}
+                onPress={() => {
+                  setIsPasswordSecured(!isPasswordSecured);
+                }}
+              >
+                <Image
+                  source={
+                    isPasswordSecured
+                      ? require("../../images/pinkEyeIcon.png")
+                      : require("../../images/eyeSlashIcon.png")
+                  }
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <SignInButton toScreen="Welcome" navigation={navigation} />
-        <Image
-          style={styles.bcgHearths}
-          source={require("../../images/Hearts.png")}
-        />
-      </LinearGradient>
-    </KeyboardAwareScrollView>
+          <SignInButton toScreen="Welcome" navigation={navigation} />
+          <Image
+            style={styles.bcgHearths}
+            source={require("../../images/Hearts.png")}
+          />
+        </LinearGradient>
+      </KeyboardAwareScrollView>
+    </TouchableWithoutFeedback>
   );
 };
 

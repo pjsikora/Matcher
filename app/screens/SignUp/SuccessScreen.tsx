@@ -8,34 +8,29 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import WelcomeLogo from "../components/WelcomeScreen/WelcomeLogo";
 
 interface EmailScreenProps {
   navigation: any;
 }
-const WelcomeScreen = ({ navigation }: EmailScreenProps) => {
+const SuccessScreen = ({ navigation }: EmailScreenProps) => {
   return (
     <View style={styles.container}>
       <LinearGradient
         colors={["#AD439C", "#FAAEBE"]}
         style={styles.linearGradient}
       >
-        <WelcomeLogo />
+        <View style={styles.whiteContainer}>
+          <Text>Register went succesful</Text>
+        </View>
         <TouchableOpacity
           style={styles.btn}
           onPress={() => navigation.navigate("signIn")}
         >
-          <Text style={styles.title}>SIGN IN WITH EMAIL</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("emailInput")}
-          style={styles.btnContainer}
-        >
-          <Text style={styles.btnText}>Create a new account</Text>
+          <Text style={styles.title}>BACK TO MAIN MENU</Text>
         </TouchableOpacity>
         <Image
           style={styles.bcgHearths}
-          source={require("../images/Hearts.png")}
+          source={require("../../images/Hearts.png")}
         />
       </LinearGradient>
     </View>
@@ -48,6 +43,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  whiteContainer: {
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "55%",
+    width: "100%",
+    borderBottomRightRadius: 60,
+    borderBottomLeftRadius: 60,
   },
   linearGradient: {
     borderRadius: 5,
@@ -89,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomeScreen;
+export default SuccessScreen;
