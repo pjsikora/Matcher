@@ -6,11 +6,13 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SignInButton from "../../components/UI/SignInButton";
-import WelcomeLogo from "../../components/WelcomeScreen/WelcomeLogo";
+import WelcomeLogoLogin from "../../components/WelcomeScreen/WelcomeLogoLogin";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 
 interface EmailScreenProps {
   navigation: any;
@@ -21,15 +23,16 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.container}
-      extraScrollHeight={180}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
     >
-      <LinearGradient
+     <LinearGradient
         colors={["#AD439C", "#FAAEBE"]}
         style={styles.linearGradient}
       >
-        <WelcomeLogo />
+        <WelcomeLogoLogin/>
+
         <View style={styles.inputsContainer}>
           <View style={styles.textInputContainer}>
             <Image
@@ -77,8 +80,10 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.bcgHearths}
           source={require("../../images/Hearts.png")}
         />
+        
       </LinearGradient>
-    </KeyboardAwareScrollView>
+      <View style={{ height: 150 }} />
+    </KeyboardAvoidingView>
   );
 };
 
@@ -88,20 +93,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    maxHeight: "100%",
   },
   linearGradient: {
     borderRadius: 5,
-    minHeight: "100%",
+    minHeight: "121%",
     width: "100%",
-  },
-  whiteContainer: {
-    backgroundColor: "#FFFFFF",
-    minHeight: "64%",
-    width: "100%",
-    borderBottomRightRadius: 60,
-    borderBottomLeftRadius: 60,
-    alignItems: "center",
   },
   title: {
     fontSize: 55,
