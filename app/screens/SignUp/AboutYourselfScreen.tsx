@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
@@ -19,29 +27,31 @@ const AboutYourselfScreen = ({ navigation }: EmailScreenProps) => {
   };
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["#AD439C", "#FAAEBE"]}
-        style={styles.linearGradient}
-      >
-        <View style={styles.whiteContainer}>
-          <Text style={styles.title}>Tell more about yourself...</Text>
-          <TextInput
-            multiline={true}
-            numberOfLines={6}
-            style={styles.input}
-            onChangeText={(newText) => emailHandler(newText)}
-            placeholder="About me"
-            placeholderTextColor="#ABABAB"
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["#AD439C", "#FAAEBE"]}
+          style={styles.linearGradient}
+        >
+          <View style={styles.whiteContainer}>
+            <Text style={styles.title}>Tell more about yourself...</Text>
+            <TextInput
+              multiline={true}
+              numberOfLines={6}
+              style={styles.input}
+              onChangeText={(newText) => emailHandler(newText)}
+              placeholder="About me"
+              placeholderTextColor="#ABABAB"
+            />
+            <RegisterButton toScreen="hobbyInput" navigation={navigation} />
+          </View>
+          <Image
+            style={styles.bcgHearths}
+            source={require("../../images/Hearts.png")}
           />
-          <RegisterButton toScreen="hobbyInput" navigation={navigation} />
-        </View>
-        <Image
-          style={styles.bcgHearths}
-          source={require("../../images/Hearts.png")}
-        />
-      </LinearGradient>
-    </View>
+        </LinearGradient>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
