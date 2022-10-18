@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 60,
   },
   logo: {
-    marginTop: 130
+    marginTop: 130,
   },
   title: {
     fontSize: 40,
