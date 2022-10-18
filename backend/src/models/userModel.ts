@@ -43,7 +43,7 @@ const userSchema = new Schema(
     },
     searchFor: {
       type: String,
-      enum: ['male', 'female","both"'],
+      enum: ['male', 'female', 'both'],
       required: [true, 'You have to set up yuur prferences!'],
     },
     images: [
@@ -63,7 +63,7 @@ const userSchema = new Schema(
     },
     desc: {
       type: String,
-      required: [true, 'Please tell us somethink about you!'],
+      ///required: [true, 'Please tell us somethink about you!'],
     },
     city: {
       type: String,
