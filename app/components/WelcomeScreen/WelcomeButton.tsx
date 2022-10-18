@@ -1,11 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 
-const WelcomeButton = () => {
+interface EmailScreenProps {
+  navigation: any;
+}
+const WelcomeButton = ({ navigation }: EmailScreenProps) => {
   const buttonPressHandler = () => {};
 
   return (
-    <TouchableOpacity style={styles.btn} onPress={() => {}}>
+    <TouchableOpacity
+      style={styles.btn}
+      onPress={() => navigation.navigate("signIn")}
+    >
       <Text style={styles.title}>SIGN IN WITH EMAIL</Text>
     </TouchableOpacity>
   );

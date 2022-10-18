@@ -16,6 +16,7 @@ import PhotosScreen from "./screens/SignUp/PhotosScreen";
 import HobbyScreen from "./screens/SignUp/HobbyScreen";
 import AboutYourselfScreen from "./screens/SignUp/AboutYourselfScreen";
 import VerifyEmailScreen from "./screens/SignUp/VerifyEmailScreen";
+import SignInScreen from "./screens/SignIn/SignIn";
 
 const Stack = createNativeStackNavigator();
 
@@ -87,6 +88,11 @@ export default function App() {
             <Stack.Screen
               name="tokenInput"
               component={VerifyEmailScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="signIn"
+              component={SignInScreen}
               options={{ title: "" }}
             />
           </Stack.Navigator>
