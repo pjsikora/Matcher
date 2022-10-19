@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,19 +12,27 @@ import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmail } from "../../redux/registerSlice";
+import { addItem } from "../../redux/registerSlice";
 
 interface EmailScreenProps {
   navigation: any;
 }
 const AboutYourselfScreen = ({ navigation }: EmailScreenProps) => {
-  const dispatch = useDispatch();
-  const count = useSelector((state: RegisterUserData) => state);
+  const [desc, setDesc] = useState("");
 
-  const emailHandler = (email: string) => {
-    dispatch(addEmail(email));
-    console.log(count);
-  };
+  const dispatch = useDispatch();
+  const state = useSelector((state: RegisterUserData) => state);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    isMounted && dispatch(addItem({ value: "desc", data: desc }));
+    console.log(desc);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [desc]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -39,7 +47,8 @@ const AboutYourselfScreen = ({ navigation }: EmailScreenProps) => {
               multiline={true}
               numberOfLines={6}
               style={styles.input}
-              onChangeText={(newText) => emailHandler(newText)}
+              onChangeText={(desc) => setDesc(desc)}
+              value={desc}
               placeholder="About me"
               placeholderTextColor="#ABABAB"
             />

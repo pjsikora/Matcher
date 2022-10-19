@@ -4,8 +4,14 @@ import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../redux/registerSlice";
 
-const hobbies = [
+type Hobbies = {
+  id: string;
+  name: string;
+  isChosen: boolean;
+};
+const hobbies: Hobbies[] = [
   { id: "0", name: "Music", isChosen: false },
   { id: "1", name: "Art", isChosen: false },
   { id: "2", name: "Cooking", isChosen: false },
@@ -49,15 +55,26 @@ interface EmailScreenProps {
 }
 const HobbyScreen = ({ navigation }: EmailScreenProps) => {
   const [restart, setRestart] = useState(false);
-  const [chosenHobbies, setChosenHobbies] = useState([{}]);
+  const [chosenHobbies, setChosenHobbies] = useState<Hobbies[]>([]);
+
+  const dispatch = useDispatch();
+  const state = useSelector((state: RegisterUserData) => state);
 
   const [isDisabled, setIsDisabled] = useState(true);
+
   useEffect(() => {
     let isMounted = true;
 
     if (isMounted) {
       if (chosenHobbies.length > 2) {
         setIsDisabled(false);
+        dispatch(
+          addItem({
+            value: "hobbies",
+            data: chosenHobbies.map((hobby) => hobby?.name),
+          })
+        );
+        console.log(state);
       } else {
         setIsDisabled(true);
       }
@@ -89,9 +106,6 @@ const HobbyScreen = ({ navigation }: EmailScreenProps) => {
       </TouchableOpacity>
     );
   });
-
-  const dispatch = useDispatch();
-  const count = useSelector((state: RegisterUserData) => state);
 
   return (
     <View style={styles.container}>
@@ -125,6 +139,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  btnContainer: {
+    width: "100%",
+    marginTop: "10%",
   },
   btnContainer: {
     width: "100%",

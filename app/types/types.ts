@@ -1,5 +1,5 @@
 export interface RegisterUserData {
-  [index: string]: string | number | null
+  [index: string]: string | number | null | string[]
   //   email: string
   //   password: string
   //   name: string

@@ -10,25 +10,33 @@ import {
 } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
+import { addItem } from "../../redux/registerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RegisterUserData } from "../../types/types";
 
 interface EmailScreenProps {
   navigation: any;
 }
 const AgeScreen = ({ navigation }: EmailScreenProps) => {
-  const [text, setText] = useState("");
+  const [age, setAge] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+  const state = useSelector((state: RegisterUserData) => state);
 
   useEffect(() => {
     let isMounted = true;
 
     if (isMounted) {
-      if (+text > 17 && +text < 100) {
+      if (+age > 17 && +age < 100) {
         setIsDisabled(false);
         setError("");
+        dispatch(addItem({ value: "age", data: age }));
+        console.log(state);
       } else {
         setIsDisabled(true);
-        if (+text < 18) {
+        if (+age < 18) {
           setError("You are too young :(");
         } else {
           setError("You are too old :(");
@@ -39,7 +47,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     return () => {
       isMounted = false;
     };
-  }, [text]);
+  }, [age]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -53,12 +61,12 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
             <TextInput
               keyboardType="numeric"
               style={styles.input}
-              onChangeText={(newText) => setText(newText)}
-              value={text}
+              onChangeText={(age) => setAge(age)}
+              value={age}
               placeholder="Age"
               placeholderTextColor="#ABABAB"
             />
-            <Text style={styles.error}>{text && error}</Text>
+            <Text style={styles.error}>{age && error}</Text>
             <RegisterButton
               isDisabled={isDisabled}
               toScreen="genderInput"

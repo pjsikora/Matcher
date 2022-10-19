@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
+import { useDispatch, useSelector } from "react-redux";
+import { RegisterUserData } from "../../types/types";
+import { addItem } from "../../redux/registerSlice";
 
 interface EmailScreenProps {
   navigation: any;
@@ -9,12 +12,18 @@ interface EmailScreenProps {
 const GenderScreen = ({ navigation }: EmailScreenProps) => {
   const [gender, setGender] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const dispatch = useDispatch();
+  const state = useSelector((state: RegisterUserData) => state);
+
   useEffect(() => {
     let isMounted = true;
 
     if (isMounted) {
       if (gender.length > 1) {
         setIsDisabled(false);
+        dispatch(addItem({ value: "gender", data: gender }));
+        console.log(state);
       } else {
         setIsDisabled(true);
       }

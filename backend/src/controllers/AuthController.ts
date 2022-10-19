@@ -8,6 +8,7 @@ const moment = require('moment')
 const sendEmail = require('../tools/mailSender')
 
 exports.registerController = async (req: Request, res: Response) => {
+  console.log(req.body)
   const { username, email, password, age, city, gender, searchFor, desc } =
     req.body
 

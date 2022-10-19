@@ -1,25 +1,46 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../redux/registerSlice";
+import { registerCall } from "../../controllers/registerController";
 
 interface EmailScreenProps {
   navigation: any;
 }
 const LocationScreen = ({ navigation }: EmailScreenProps) => {
-  const [text, setText] = useState("");
+  const [city, setCity] = useState("");
   const dispatch = useDispatch();
-  const count = useSelector((state: RegisterUserData) => state);
+  const state = useSelector((state: RegisterUserData) => state);
 
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const registerHandler = async () => {
+    const result = await registerCall(state.registerData);
+
+    if (result) {
+      navigation.navigate("success");
+      console.log(result);
+    }
+  };
+
   useEffect(() => {
     let isMounted = true;
 
     if (isMounted) {
-      if (text.length > 2) {
+      if (city.length > 2) {
         setIsDisabled(false);
+        dispatch(addItem({ value: "city", data: city }));
+        console.log(state);
       } else {
         setIsDisabled(true);
       }
@@ -28,7 +49,7 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
     return () => {
       isMounted = false;
     };
-  }, [text]);
+  }, [city]);
 
   return (
     <View style={styles.container}>
@@ -40,17 +61,25 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
           <Text style={styles.title}>Your Localization is...</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(newText) => setText(newText)}
-            value={text}
+            onChangeText={(city) => setCity(city)}
+            value={city}
             placeholder="Enter your city"
             placeholderTextColor="#ABABAB"
           />
           <Text style={styles.desc}>Your location will be public</Text>
-          <RegisterButton
-            isDisabled={isDisabled}
-            toScreen="success"
-            navigation={navigation}
-          />
+          <TouchableOpacity
+            onPress={() => registerHandler()}
+            style={isDisabled ? styles.disabledBtn : styles.btn}
+            disabled={isDisabled ? true : false}
+          >
+            <LinearGradient
+              colors={["#F5A3BA", "#CF56A1"]}
+              start={{ x: 0, y: 0 }}
+              style={styles.linearGradient}
+            >
+              <Text style={styles.registerBtnTitle}>Register</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
         <Image
           style={styles.bcgHearths}
@@ -111,11 +140,38 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontFamily: "montRegular",
   },
-  btn: {},
+  btn: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#C04D9F",
+    borderRadius: 15,
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    height: 50,
+    marginBottom: 50,
+  },
   bcgHearths: {
     position: "absolute",
     top: "60%",
     zIndex: -1,
+  },
+  disabledBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#C04D9F",
+    borderRadius: 15,
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    height: 50,
+    marginBottom: 50,
+    opacity: 0.5,
+  },
+  registerBtnTitle: {
+    textAlign: "center",
+    color: "#FFFFFF",
+    fontSize: 28,
   },
 });
 export default LocationScreen;

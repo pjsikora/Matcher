@@ -2,20 +2,27 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
+import { useDispatch, useSelector } from "react-redux";
+import { RegisterUserData } from "../../types/types";
+import { addItem } from "../../redux/registerSlice";
 
 interface EmailScreenProps {
   navigation: any;
 }
 const NameScreen = ({ navigation }: EmailScreenProps) => {
-  const [text, setText] = useState("");
+  const [name, setName] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const dispatch = useDispatch();
+  const state = useSelector((state: RegisterUserData) => state);
 
   useEffect(() => {
     let isMounted = true;
 
     if (isMounted) {
-      if (text.length > 1) {
+      if (name.length > 1) {
         setIsDisabled(false);
+        dispatch(addItem({ value: "username", data: name }));
       } else {
         setIsDisabled(true);
       }
@@ -24,7 +31,7 @@ const NameScreen = ({ navigation }: EmailScreenProps) => {
     return () => {
       isMounted = false;
     };
-  }, [text]);
+  }, [name]);
 
   return (
     <View style={styles.container}>
@@ -36,8 +43,8 @@ const NameScreen = ({ navigation }: EmailScreenProps) => {
           <Text style={styles.title}>Your Name is...</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(newText) => setText(newText)}
-            value={text}
+            onChangeText={(name) => setName(name)}
+            value={name}
             placeholder="Enter your name"
             placeholderTextColor="#ABABAB"
           />
