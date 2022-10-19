@@ -1,14 +1,5 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { RegisterUserData } from "../../types/types";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 interface RegisterButtonProps {
   toScreen: string;
@@ -23,6 +14,7 @@ const SignInButton = ({
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(toScreen)}
+      disabled={isDisabled}
       style={isDisabled ? styles.disabledBtn : styles.btn}
     >
       <Text style={styles.btnTitle}>Log In</Text>
@@ -58,6 +50,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFFFFF",
     fontSize: 28,
+    fontFamily: "montMedium",
   },
+  icon: {},
 });
 export default SignInButton;

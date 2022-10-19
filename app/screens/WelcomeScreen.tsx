@@ -18,6 +18,10 @@ const WelcomeScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.btn}
           onPress={() => navigation.navigate("signIn")}
         >
+          <Image
+            style={styles.icon}
+            source={require("../images/signInEmailVector.png")}
+          />
           <Text style={styles.title}>SIGN IN WITH EMAIL</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -75,6 +79,11 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     height: 57,
     marginTop: "50%",
+    display: "flex",
+    flexDirection: "row",
+  },
+  icon: {
+    marginRight: "3%",
   },
   title: {
     textAlign: "center",

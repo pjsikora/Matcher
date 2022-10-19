@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "8%",
+    marginTop: "25%",
   },
   textInputContainer: {
     width: "80%",
