@@ -82,10 +82,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 55,
+    fontSize: 50,
     marginTop: "5%",
     marginBottom: "2%",
     width: "80%",
+    fontFamily: "montMedium",
   },
   btnTitle: {
     fontSize: 20,
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     lineHeight: 35,
     fontSize: 20,
+    fontFamily: "montRegular",
   },
   desc: {
     fontSize: 12,
@@ -107,6 +109,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginLeft: "10%",
     marginTop: 2,
+    fontFamily: "montRegular",
   },
   btn: {},
   bcgHearths: {

@@ -130,9 +130,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 55,
+    fontSize: 50,
     marginTop: "5%",
     width: "80%",
+    fontFamily: "montMedium",
   },
   btnTitle: {
     fontSize: 20,

@@ -43,7 +43,11 @@ const AboutYourselfScreen = ({ navigation }: EmailScreenProps) => {
               placeholder="About me"
               placeholderTextColor="#ABABAB"
             />
-            <RegisterButton toScreen="hobbyInput" navigation={navigation} />
+            <RegisterButton
+              isDisabled={false}
+              toScreen="hobbyInput"
+              navigation={navigation}
+            />
           </View>
           <Image
             style={styles.bcgHearths}
@@ -80,6 +84,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "5%",
     width: "80%",
+    fontFamily: "montMedium",
   },
   btnTitle: {
     fontSize: 20,
@@ -92,6 +97,7 @@ const styles = StyleSheet.create({
     marginTop: "10%",
     marginBottom: "15%",
     fontSize: 16,
+    fontFamily: "montRegular",
   },
   btn: {},
   bcgHearths: {

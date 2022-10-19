@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     lineHeight: 25,
     fontSize: 18,
+    fontFamily: "montRegular",
   },
   icon: {
     marginTop: "5%",

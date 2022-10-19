@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFFFFF",
     fontSize: 28,
+    fontFamily: "montMedium",
   },
   linearGradient: {
     alignItems: "center",

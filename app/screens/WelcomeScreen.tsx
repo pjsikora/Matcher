@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import WelcomeLogo from "../components/WelcomeScreen/WelcomeLogo";
 
@@ -70,6 +63,7 @@ const styles = StyleSheet.create({
   btnText: {
     textDecorationLine: "underline",
     fontSize: 16,
+    fontFamily: "montRegular",
   },
   btn: {
     justifyContent: "center",
@@ -86,6 +80,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFFFFF",
     fontSize: 18,
+    fontFamily: "montMedium",
   },
 });
 

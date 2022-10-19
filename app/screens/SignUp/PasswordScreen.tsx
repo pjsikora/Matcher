@@ -144,10 +144,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "5%",
     width: "80%",
-  },
-  btnTitle: {
-    fontSize: 20,
-    marginTop: "15%",
+    fontFamily: "montMedium",
   },
   textInputContainer: {
     width: "80%",
@@ -166,6 +163,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ABABAB",
     borderBottomWidth: 1,
     lineHeight: 25,
+    fontFamily: "montRegular",
   },
   icon: {
     marginTop: "5%",

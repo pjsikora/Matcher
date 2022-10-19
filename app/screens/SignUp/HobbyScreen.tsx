@@ -102,11 +102,13 @@ const HobbyScreen = ({ navigation }: EmailScreenProps) => {
         <View style={styles.whiteContainer}>
           <Text style={styles.title}>What's your hobbies?</Text>
           <View style={styles.hobbiesContainer}>{hobbiesList}</View>
-          <RegisterButton
-            isDisabled={isDisabled}
-            toScreen="locationInput"
-            navigation={navigation}
-          />
+          <View style={styles.btnContainer}>
+            <RegisterButton
+              isDisabled={isDisabled}
+              toScreen="locationInput"
+              navigation={navigation}
+            />
+          </View>
         </View>
         <Image
           style={styles.bcgHearths}
@@ -124,11 +126,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  btnContainer: {
+    width: "100%",
+    marginTop: "10%",
+  },
   hobbyText: {
     color: "#ABABAB",
+    fontFamily: "montMedium",
   },
   chosenHobbyText: {
     color: "#CB54A0",
+    fontFamily: "montMedium",
   },
   linearGradient: {
     borderRadius: 5,
@@ -144,10 +152,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 55,
+    fontSize: 50,
     marginTop: "5%",
     marginBottom: "2%",
     width: "80%",
+    fontFamily: "montMedium",
   },
   btnTitle: {
     fontSize: 20,

@@ -10,8 +10,16 @@ const WelcomeLogo = () => {
       <Text style={styles.title}>Matcher</Text>
       <Text style={styles.desc}>
         Find Your Best{" "}
-        <Text style={{ color: "#1E1E1E", letterSpacing: -1 }}>Match</Text> with
-        Us!
+        <Text
+          style={{
+            color: "#1E1E1E",
+            fontFamily: "montSBold",
+            letterSpacing: -1,
+          }}
+        >
+          Match
+        </Text>{" "}
+        with Us!
       </Text>
     </View>
   );
@@ -32,11 +40,13 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginTop: 10,
     letterSpacing: -2.5,
+    fontFamily: "montMedium",
   },
   desc: {
     fontSize: 18,
     marginTop: 20,
     color: "#511E78",
+    fontFamily: "montMedium",
   },
 });
 export default WelcomeLogo;

@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 55,
     width: "80%",
     marginTop: "10%",
+    fontFamily: "montRegular",
   },
   error: {
     color: "red",
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     borderBottomColor: "#1E1E1E",
     borderBottomWidth: 1,
+    fontFamily: "montRegular",
   },
   btn: {},
   bcgHearths: {

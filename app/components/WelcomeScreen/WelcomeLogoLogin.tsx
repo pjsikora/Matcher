@@ -9,7 +9,17 @@ const WelcomeLogoLogin = () => {
       />
       <Text style={styles.title}>Matcher</Text>
       <Text style={styles.desc}>
-        Find Your Best <Text style={{ color: "#1E1E1E" }}>Match</Text> with Us!
+        Find Your Best{" "}
+        <Text
+          style={{
+            color: "#1E1E1E",
+            fontFamily: "montSBold",
+            letterSpacing: -1,
+          }}
+        >
+          Match
+        </Text>{" "}
+        with Us!
       </Text>
     </View>
   );
@@ -31,11 +41,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     marginTop: 2,
+    fontFamily: "montMedium",
+    letterSpacing: -2.5,
+    marginBottom: "5%",
   },
   desc: {
     fontSize: 18,
-    marginTop: 5,
+    marginTop: 20,
     color: "#511E78",
+    fontFamily: "montMedium",
   },
 });
 export default WelcomeLogoLogin;
