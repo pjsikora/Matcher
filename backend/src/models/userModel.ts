@@ -38,12 +38,12 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      enum: ['male', 'female'],
+      enum: ['Male', 'Female'],
       required: [true, 'You have to set up gender'],
     },
     searchFor: {
       type: String,
-      enum: ['male', 'female', 'both'],
+      enum: ['Male', 'Female', 'Both'],
       required: [true, 'You have to set up yuur prferences!'],
     },
     images: [
