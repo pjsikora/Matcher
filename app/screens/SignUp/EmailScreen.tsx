@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     marginTop: '5%',
     marginBottom: '5%',
     width: '80%',
-    fontFamily: 'limelight',
   },
   btnTitle: {
     fontSize: 20,

@@ -5,7 +5,7 @@ import { keys } from 'ts-transformer-keys'
 const initialState: RegisterUserData = {
   email: '',
   password: '',
-  name: '',
+  username: '',
   age: null,
   gender: '',
   searchFor: '',
