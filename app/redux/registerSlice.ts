@@ -11,6 +11,7 @@ const initialState: RegisterUserData = {
   searchFor: '',
   desc: '',
   city: '',
+  hobbies: [],
 }
 
 export const registerSlice = createSlice({
