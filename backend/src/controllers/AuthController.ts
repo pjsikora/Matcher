@@ -58,7 +58,25 @@ exports.registerController = async (req: Request, res: Response) => {
     }
   )
 }
+exports.checkEmail = async (req: Request, res: Response) => {
+  const { email } = req.body
 
+  try {
+    const result = await User.findOne({ email })
+
+    console.log(result)
+
+    res.status(200).json({
+      success: true,
+      message: result,
+    })
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err,
+    })
+  }
+}
 exports.activateAccount = async (req: Request, res: Response) => {
   const { email, code } = req.body
 

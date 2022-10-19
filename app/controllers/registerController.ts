@@ -15,3 +15,16 @@ export const registerCall = async (data: any) => {
     return false
   }
 }
+export const checkEmailCall = async (email: string) => {
+  try {
+    const res = await axios.post(
+      'http://192.168.0.9:6000/api/auth/register/check',
+      { email }
+    )
+    if (res.data.message.email) return true
+    else false
+  } catch (err: any) {
+    console.log(err?.response)
+    return false
+  }
+}
