@@ -13,12 +13,18 @@ import { RegisterUserData } from "../../types/types";
 interface RegisterButtonProps {
   toScreen: string;
   navigation: any;
+  isDisabled: boolean;
 }
-const RegisterButton = ({ toScreen, navigation }: RegisterButtonProps) => {
+const RegisterButton = ({
+  isDisabled,
+  toScreen,
+  navigation,
+}: RegisterButtonProps) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(toScreen)}
-      style={styles.btn}
+      style={isDisabled ? styles.disabledBtn : styles.btn}
+      disabled={isDisabled ? true : false}
     >
       <LinearGradient
         colors={["#F5A3BA", "#CF56A1"]}
@@ -42,6 +48,18 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     height: 50,
     marginBottom: 50,
+  },
+  disabledBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#C04D9F",
+    borderRadius: 15,
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    height: 50,
+    marginBottom: 50,
+    opacity: 0.5,
   },
   btnTitle: {
     textAlign: "center",

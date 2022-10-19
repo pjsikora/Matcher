@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,6 +12,23 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const count = useSelector((state: RegisterUserData) => state);
+
+  const [isDisabled, setIsDisabled] = useState(true);
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      if (text.length > 2) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [text]);
 
   return (
     <View style={styles.container}>
@@ -29,7 +46,11 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
             placeholderTextColor="#ABABAB"
           />
           <Text style={styles.desc}>Your location will be public</Text>
-          <RegisterButton toScreen="success" navigation={navigation} />
+          <RegisterButton
+            isDisabled={isDisabled}
+            toScreen="success"
+            navigation={navigation}
+          />
         </View>
         <Image
           style={styles.bcgHearths}

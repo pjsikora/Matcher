@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
@@ -8,6 +8,23 @@ interface EmailScreenProps {
 }
 const SearchForScreen = ({ navigation }: EmailScreenProps) => {
   const [lfGender, setLfGender] = useState("");
+
+  const [isDisabled, setIsDisabled] = useState(true);
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      if (lfGender.length > 1) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [lfGender]);
 
   return (
     <View style={styles.container}>
@@ -47,7 +64,11 @@ const SearchForScreen = ({ navigation }: EmailScreenProps) => {
               Both
             </Text>
           </TouchableOpacity>
-          <RegisterButton toScreen="photosInput" navigation={navigation} />
+          <RegisterButton
+            isDisabled={isDisabled}
+            toScreen="photosInput"
+            navigation={navigation}
+          />
         </View>
         <Image
           style={styles.bcgHearths}

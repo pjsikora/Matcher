@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import SignInButton from "../../components/UI/SignInButton";
 import WelcomeLogoLogin from "../../components/WelcomeScreen/WelcomeLogoLogin";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { validators } from "../../validators/validators";
 
 interface EmailScreenProps {
   navigation: any;
@@ -23,6 +24,24 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
   const [isPasswordSecured, setIsPasswordSecured] = useState(true);
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      if (validators.email.test(text) && password.length > 0) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [text, password]);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -74,7 +93,11 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
               </TouchableOpacity>
             </View>
           </View>
-          <SignInButton toScreen="Welcome" navigation={navigation} />
+          <SignInButton
+            isDisabled={isDisabled}
+            toScreen="Welcome"
+            navigation={navigation}
+          />
           <Image
             style={styles.bcgHearths}
             source={require("../../images/Hearts.png")}

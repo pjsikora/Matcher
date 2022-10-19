@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
@@ -8,6 +8,23 @@ interface EmailScreenProps {
 }
 const NameScreen = ({ navigation }: EmailScreenProps) => {
   const [text, setText] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      if (text.length > 1) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [text]);
 
   return (
     <View style={styles.container}>
@@ -27,7 +44,11 @@ const NameScreen = ({ navigation }: EmailScreenProps) => {
           <Text style={styles.desc}>
             This is how it will appear on your profile
           </Text>
-          <RegisterButton toScreen="ageInput" navigation={navigation} />
+          <RegisterButton
+            isDisabled={isDisabled}
+            toScreen="ageInput"
+            navigation={navigation}
+          />
         </View>
         <Image
           style={styles.bcgHearths}
