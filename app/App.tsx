@@ -1,109 +1,115 @@
-import useCachedResources from "./hooks/useCachedResources";
-import * as React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import WelcomeScreen from "./screens/WelcomeScreen";
-import EmailScreen from "./screens/SignUp/EmailScreen";
-import PasswordScreen from "./screens/SignUp/PasswordScreen";
-import NameScreen from "./screens/SignUp/NameScreen";
-import AgeScreen from "./screens/SignUp/AgeScreen";
-import GenderScreen from "./screens/SignUp/GenderInput";
-import SearchForScreen from "./screens/SignUp/SearchForScreen";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
-import LocationScreen from "./screens/SignUp/LocationScreen";
-import PhotosScreen from "./screens/SignUp/PhotosScreen";
-import HobbyScreen from "./screens/SignUp/HobbyScreen";
-import AboutYourselfScreen from "./screens/SignUp/AboutYourselfScreen";
-import VerifyEmailScreen from "./screens/SignUp/VerifyEmailScreen";
-import SignInScreen from "./screens/SignIn/SignIn";
-import SuccessScreen from "./screens/SignUp/SuccessScreen";
+import useCachedResources from './hooks/useCachedResources'
+import * as React from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+import WelcomeScreen from './screens/WelcomeScreen'
+import EmailScreen from './screens/SignUp/EmailScreen'
+import PasswordScreen from './screens/SignUp/PasswordScreen'
+import NameScreen from './screens/SignUp/NameScreen'
+import AgeScreen from './screens/SignUp/AgeScreen'
+import GenderScreen from './screens/SignUp/GenderInput'
+import SearchForScreen from './screens/SignUp/SearchForScreen'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
+import LocationScreen from './screens/SignUp/LocationScreen'
+import PhotosScreen from './screens/SignUp/PhotosScreen'
+import HobbyScreen from './screens/SignUp/HobbyScreen'
+import AboutYourselfScreen from './screens/SignUp/AboutYourselfScreen'
+import VerifyEmailScreen from './screens/SignUp/VerifyEmailScreen'
+import SignInScreen from './screens/SignIn/SignIn'
+import SuccessScreen from './screens/SignUp/SuccessScreen'
+import { useFonts } from './hooks/useFonts'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
+  const isLoadingComplete = useCachedResources()
+
+  const LoadFonts = async () => {
+    await useFonts()
+  }
 
   if (!isLoadingComplete) {
-    return null;
+    return null
   } else {
+    LoadFonts()
     return (
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
-              name="Welcome"
+              name='Welcome'
               component={WelcomeScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="emailInput"
+              name='emailInput'
               component={EmailScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="passwordInput"
+              name='passwordInput'
               component={PasswordScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="nameInput"
+              name='nameInput'
               component={NameScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="ageInput"
+              name='ageInput'
               component={AgeScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="genderInput"
+              name='genderInput'
               component={GenderScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="searchForInput"
+              name='searchForInput'
               component={SearchForScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="photosInput"
+              name='photosInput'
               component={PhotosScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="aboutYourselfInput"
+              name='aboutYourselfInput'
               component={AboutYourselfScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="hobbyInput"
+              name='hobbyInput'
               component={HobbyScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="locationInput"
+              name='locationInput'
               component={LocationScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="tokenInput"
+              name='tokenInput'
               component={VerifyEmailScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="success"
+              name='success'
               component={SuccessScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
             <Stack.Screen
-              name="signIn"
+              name='signIn'
               component={SignInScreen}
-              options={{ title: "" }}
+              options={{ title: '' }}
             />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
-    );
+    )
   }
 }
