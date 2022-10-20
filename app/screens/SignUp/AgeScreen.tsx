@@ -13,14 +13,17 @@ import { LinearGradient } from "expo-linear-gradient";
 import { addItem } from "../../redux/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RegisterUserData } from "../../types/types";
+import DatePicker from "react-native-datepicker";
+import moment from 'moment'
 
 interface EmailScreenProps {
   navigation: any;
 }
 const AgeScreen = ({ navigation }: EmailScreenProps) => {
-  const [age, setAge] = useState("");
+  
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState("");
+  const [date, setDate] = useState(JSON.stringify(new Date().toISOString));
 
   const dispatch = useDispatch();
   const state = useSelector((state: RegisterUserData) => state);
@@ -29,14 +32,16 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     let isMounted = true;
 
     if (isMounted) {
-      if (+age > 17 && +age < 100) {
+      const age = moment().diff(date,'years')
+
+      if (age > 17 && age < 100) {
         setIsDisabled(false);
         setError("");
         dispatch(addItem({ value: "age", data: age }));
         console.log(state);
       } else {
         setIsDisabled(true);
-        if (+age < 18) {
+        if (age < 18) {
           setError("You are too young :(");
         } else {
           setError("You are too old :(");
@@ -47,7 +52,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     return () => {
       isMounted = false;
     };
-  }, [age]);
+  }, [date]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -57,16 +62,39 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
-            <Text style={styles.title}>What's your age?</Text>
-            <TextInput
-              keyboardType="numeric"
-              style={styles.input}
-              onChangeText={(age) => setAge(age)}
-              value={age}
-              placeholder="Age"
-              placeholderTextColor="#ABABAB"
+            <Text style={styles.title}>What's your day of birth?</Text>
+            
+            <DatePicker style={styles.datePicker}
+                  mode="date"
+                  date={date}
+                  placeholder="Select date"
+                  format="YYYY-MM-DD"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+
+                  customStyles={{
+                    dateIcon: {
+                      display:'none'
+                    },
+                    dateInput: {
+                      borderColor: "gray",
+                      borderWidth: 0,
+                      borderBottomWidth: 2,
+                      
+                    },
+                    dateText: {
+                      fontFamily: "montRegular",
+                      fontSize: 20
+                    }
+
+                  }}
+
+                  onDateChange={(date) => {
+                    setDate(date);
+                  }}
             />
-            <Text style={styles.error}>{age && error}</Text>
+
+            <Text style={styles.error}>{date && error}</Text>
             <RegisterButton
               isDisabled={isDisabled}
               toScreen="genderInput"
@@ -104,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 55,
+    fontSize: 45,
     width: "80%",
     marginTop: "10%",
     fontFamily: "montRegular",
@@ -136,5 +164,8 @@ const styles = StyleSheet.create({
     top: "60%",
     zIndex: -1,
   },
+  datePicker: {
+    marginTop: "15%"
+  }
 });
 export default AgeScreen;

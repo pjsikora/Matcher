@@ -12,8 +12,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SignInButton from "../../components/UI/SignInButton";
-import WelcomeLogoLogin from "../../components/WelcomeScreen/WelcomeLogoLogin";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import WelcomeLogo from "../../components/WelcomeScreen/WelcomeLogo";
 import { validators } from "../../validators/validators";
 
 interface EmailScreenProps {
@@ -44,12 +43,14 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView 
+      style={{flex: 1}} 
+      behavior = "position">
         <LinearGradient
           colors={["#AD439C", "#FAAEBE"]}
           style={styles.linearGradient}
         >
-          <WelcomeLogoLogin />
+          <WelcomeLogo/>
 
           <View style={styles.inputsContainer}>
             <View style={styles.textInputContainer}>
@@ -103,22 +104,16 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
             source={require("../../images/Hearts.png")}
           />
         </LinearGradient>
-        <View style={{ height: 150 }} />
+        
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   linearGradient: {
     borderRadius: 5,
-    minHeight: "121%",
+    minHeight: "100%",
     width: "100%",
   },
   title: {
@@ -135,7 +130,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "25%",
+    marginTop: "15%",
   },
   textInputContainer: {
     width: "80%",
