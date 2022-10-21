@@ -24,7 +24,7 @@ const SuccessScreen = ({ navigation }: EmailScreenProps) => {
         </View>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => navigation.navigate("signIn")}
+          onPress={() => {navigation.reset([navigation.navigate("Welcome")}}
         >
           <Text style={styles.title}>BACK TO MAIN MENU</Text>
         </TouchableOpacity>
