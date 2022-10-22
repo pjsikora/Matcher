@@ -133,9 +133,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 50,
-    marginTop: "5%",
     width: "80%",
-    fontFamily: "montMedium",
+    fontFamily: "montSBold",
   },
   btnTitle: {
     fontSize: 20,
@@ -152,11 +151,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     width: "100%",
-    height: "60%",
+    height: "50%",
     alignItems: "center",
     justifyContent: "space-evenly",
     padding: "5%",
-    marginBottom: "10%",
+    // marginBottom: "10%",
   },
   btn: {},
   btnImage: {
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
   },
   box: {
     width: "30%",
-    height: "45%",
+    height: "40%",
     backgroundColor: "#333",
     border: "3px solid #3333",
     marginBottom: "10%",

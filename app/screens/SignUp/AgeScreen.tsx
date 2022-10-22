@@ -94,7 +94,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
 
             <Text style={styles.error}>{date && error}</Text>
             <RegisterButton
-              isDisabled={isDisabled}
+              isDisabled={false}
               toScreen="genderInput"
               navigation={navigation}
             />
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     width: "80%",
     marginTop: "10%",
-    fontFamily: "montRegular",
+    fontFamily: "montSBold",
   },
   error: {
     color: "red",

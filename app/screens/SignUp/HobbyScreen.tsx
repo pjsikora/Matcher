@@ -170,10 +170,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 50,
-    marginTop: "5%",
     marginBottom: "2%",
     width: "80%",
-    fontFamily: "montMedium",
+    fontFamily: "montSBold",
   },
   btnTitle: {
     fontSize: 20,
@@ -187,7 +186,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "15%",
+    marginBottom: "2%",
   },
   hobbyItem: {
     backgroundColor: "#F2F2F2",

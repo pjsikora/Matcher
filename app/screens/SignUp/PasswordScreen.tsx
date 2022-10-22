@@ -58,7 +58,7 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
-            <BackButton toScreen="emailInput " navigation={navigation} />
+            <BackButton toScreen="emailInput" navigation={navigation} />
             <Text style={styles.title}>Your Password is...</Text>
             <View style={styles.textInputContainer}>
               <Image
@@ -143,20 +143,20 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 55,
-    marginTop: "5%",
     marginBottom: "5%",
     width: "80%",
-    fontFamily: "montMedium",
+    fontFamily: "montSBold",
   },
   textInputContainer: {
     width: "80%",
     backgroundColor: "#F7F7F7",
-    height: "12%",
+    height: "9%",
     padding: 10,
     borderRadius: 10,
     display: "flex",
     flexDirection: "row",
-    marginBottom: "5%",
+    marginBottom: "4%",
+    marginTop: "5%",
   },
   input: {
     width: "80%",

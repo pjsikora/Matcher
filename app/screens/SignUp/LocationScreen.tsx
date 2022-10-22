@@ -6,6 +6,8 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
@@ -53,42 +55,44 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
   }, [city]);
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["#AD439C", "#FAAEBE"]}
-        style={styles.linearGradient}
-      >
-        <View style={styles.whiteContainer}>
-          <BackButton toScreen="hobbyInput" navigation={navigation} />
-          <Text style={styles.title}>Your Localization is...</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(city) => setCity(city)}
-            value={city}
-            placeholder="Enter your city"
-            placeholderTextColor="#ABABAB"
-          />
-          <Text style={styles.desc}>Your location will be public</Text>
-          <TouchableOpacity
-            onPress={() => registerHandler()}
-            style={isDisabled ? styles.disabledBtn : styles.btn}
-            disabled={isDisabled ? true : false}
-          >
-            <LinearGradient
-              colors={["#F5A3BA", "#CF56A1"]}
-              start={{ x: 0, y: 0 }}
-              style={styles.linearGradient}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["#AD439C", "#FAAEBE"]}
+          style={styles.linearGradient}
+        >
+          <View style={styles.whiteContainer}>
+            <BackButton toScreen="hobbyInput" navigation={navigation} />
+            <Text style={styles.title}>Your Localization is...</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(city) => setCity(city)}
+              value={city}
+              placeholder="Enter your city"
+              placeholderTextColor="#ABABAB"
+            />
+            <Text style={styles.desc}>Your location will be public</Text>
+            <TouchableOpacity
+              onPress={() => registerHandler()}
+              style={isDisabled ? styles.disabledBtn : styles.btn}
+              disabled={isDisabled ? true : false}
             >
-              <Text style={styles.registerBtnTitle}>Register</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-        <Image
-          style={styles.bcgHearths}
-          source={require("../../images/Hearts.png")}
-        />
-      </LinearGradient>
-    </View>
+              <LinearGradient
+                colors={["#F5A3BA", "#CF56A1"]}
+                start={{ x: 0, y: 0 }}
+                style={styles.linearGradient}
+              >
+                <Text style={styles.registerBtnTitle}>Register</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+          <Image
+            style={styles.bcgHearths}
+            source={require("../../images/Hearts.png")}
+          />
+        </LinearGradient>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -117,7 +121,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     marginBottom: "2%",
     width: "80%",
-    fontFamily: "montMedium",
+    fontFamily: "montSBold",
   },
   btnTitle: {
     fontSize: 20,
@@ -143,6 +147,7 @@ const styles = StyleSheet.create({
     fontFamily: "montRegular",
   },
   btn: {
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#C04D9F",
@@ -174,6 +179,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFFFFF",
     fontSize: 28,
+    fontFamily: "montMedium",
   },
 });
 export default LocationScreen;

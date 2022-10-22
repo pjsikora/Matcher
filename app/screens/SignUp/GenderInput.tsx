@@ -102,10 +102,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 55,
-    marginTop: "5%",
     marginBottom: "15%",
     width: "80%",
-    fontFamily: "montRegular",
+    fontFamily: "montSBold",
   },
   btnTitle: {
     fontSize: 20,
