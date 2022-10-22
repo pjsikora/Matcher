@@ -178,6 +178,8 @@ exports.activateAccount = async (req: Request, res: Response) => {
 exports.resendActivationCode = async (req: Request, res: Response) => {
   const { email } = req.body
 
+  console.log('dfdf')
+
   try {
     const user = await User.findOne({ email })
 
