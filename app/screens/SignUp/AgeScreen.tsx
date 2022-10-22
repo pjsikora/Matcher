@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 45,
     width: "80%",
-    marginTop: "10%",
     fontFamily: "montSBold",
   },
   error: {
