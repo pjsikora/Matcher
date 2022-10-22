@@ -14,6 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch, useSelector } from "react-redux";
 import { RegisterUserData } from "../../types/types";
 import { addItem } from "../../redux/registerSlice";
+import BackButton from "../../components/UI/BackButton";
 
 interface PasswordScreenProp {
   navigation: any;
@@ -57,6 +58,7 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
+            <BackButton toScreen="emailInput " navigation={navigation} />
             <Text style={styles.title}>Your Password is...</Text>
             <View style={styles.textInputContainer}>
               <Image

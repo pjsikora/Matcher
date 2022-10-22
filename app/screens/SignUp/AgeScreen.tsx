@@ -14,13 +14,13 @@ import { addItem } from "../../redux/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RegisterUserData } from "../../types/types";
 import DatePicker from "react-native-datepicker";
-import moment from 'moment'
+import moment from "moment";
+import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
 }
 const AgeScreen = ({ navigation }: EmailScreenProps) => {
-  
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState("");
   const [date, setDate] = useState(JSON.stringify(new Date().toISOString));
@@ -32,7 +32,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     let isMounted = true;
 
     if (isMounted) {
-      const age = moment().diff(date,'years')
+      const age = moment().diff(date, "years");
 
       if (age > 17 && age < 100) {
         setIsDisabled(false);
@@ -62,36 +62,34 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
+            <BackButton toScreen="nameInput" navigation={navigation} />
             <Text style={styles.title}>What's your day of birth?</Text>
-            
-            <DatePicker style={styles.datePicker}
-                  mode="date"
-                  date={date}
-                  placeholder="Select date"
-                  format="YYYY-MM-DD"
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
 
-                  customStyles={{
-                    dateIcon: {
-                      display:'none'
-                    },
-                    dateInput: {
-                      borderColor: "gray",
-                      borderWidth: 0,
-                      borderBottomWidth: 2,
-                      
-                    },
-                    dateText: {
-                      fontFamily: "montRegular",
-                      fontSize: 20
-                    }
-
-                  }}
-
-                  onDateChange={(date) => {
-                    setDate(date);
-                  }}
+            <DatePicker
+              style={styles.datePicker}
+              mode="date"
+              date={date}
+              placeholder="Select date"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  display: "none",
+                },
+                dateInput: {
+                  borderColor: "gray",
+                  borderWidth: 0,
+                  borderBottomWidth: 2,
+                },
+                dateText: {
+                  fontFamily: "montRegular",
+                  fontSize: 20,
+                },
+              }}
+              onDateChange={(date) => {
+                setDate(date);
+              }}
             />
 
             <Text style={styles.error}>{date && error}</Text>
@@ -165,7 +163,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   datePicker: {
-    marginTop: "15%"
-  }
+    marginTop: "15%",
+  },
 });
 export default AgeScreen;

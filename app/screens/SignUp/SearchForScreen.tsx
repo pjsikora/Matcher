@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch, useSelector } from "react-redux";
 import { RegisterUserData } from "../../types/types";
 import { addItem } from "../../redux/registerSlice";
+import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
@@ -42,6 +43,7 @@ const SearchForScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
+          <BackButton toScreen="genderInput" navigation={navigation} />
           <Text style={styles.title}>You are looking for...</Text>
           <TouchableOpacity
             style={styles.btn}

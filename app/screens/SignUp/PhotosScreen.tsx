@@ -12,6 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmail } from "../../redux/registerSlice";
+import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
@@ -32,6 +33,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
+          <BackButton toScreen="searchForInput" navigation={navigation} />
           <Text style={styles.title}>What do You look like?</Text>
           <View style={styles.photosContainer}>
             <View style={styles.box}>

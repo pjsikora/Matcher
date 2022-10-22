@@ -13,6 +13,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/registerSlice";
+import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
@@ -42,6 +43,7 @@ const AboutYourselfScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
+            <BackButton toScreen="photosInput" navigation={navigation} />
             <Text style={styles.title}>Tell more about yourself...</Text>
             <TextInput
               multiline={true}

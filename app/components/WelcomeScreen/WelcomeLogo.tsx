@@ -1,8 +1,16 @@
 import { StyleSheet, View, Image, Text } from "react-native";
+import BackButton from "../UI/BackButton";
 
-const WelcomeLogo = () => {
+interface WelcomeLogoProps {
+  navigation: any;
+  isWelcomeScreen: boolean;
+}
+const WelcomeLogo = ({ navigation, isWelcomeScreen }: WelcomeLogoProps) => {
   return (
     <View style={styles.whiteContainer}>
+      {!isWelcomeScreen && (
+        <BackButton toScreen="Welcome" navigation={navigation} />
+      )}
       <Image
         style={styles.logo}
         source={require("../../images/matcherLogo.png")}
@@ -30,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
-    height: "55%",
+    height: "60%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,

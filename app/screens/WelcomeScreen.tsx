@@ -13,7 +13,7 @@ const WelcomeScreen = ({ navigation }: EmailScreenProps) => {
         colors={["#AD439C", "#FAAEBE"]}
         style={styles.linearGradient}
       >
-        <WelcomeLogo />
+        <WelcomeLogo navigation={navigation} isWelcomeScreen={true} />
         <TouchableOpacity
           style={styles.btn}
           onPress={() => navigation.navigate("signIn")}

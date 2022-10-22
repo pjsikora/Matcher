@@ -13,6 +13,7 @@ import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/registerSlice";
 import { registerCall } from "../../controllers/registerController";
+import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
@@ -58,6 +59,7 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
+          <BackButton toScreen="hobbyInput" navigation={navigation} />
           <Text style={styles.title}>Your Localization is...</Text>
           <TextInput
             style={styles.input}

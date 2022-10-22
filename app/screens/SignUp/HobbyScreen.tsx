@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/registerSlice";
+import BackButton from "../../components/UI/BackButton";
 
 type Hobbies = {
   id: string;
@@ -114,6 +115,7 @@ const HobbyScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
+          <BackButton toScreen="aboutYourselfInput" navigation={navigation} />
           <Text style={styles.title}>What's your hobbies?</Text>
           <View style={styles.hobbiesContainer}>{hobbiesList}</View>
           <View style={styles.btnContainer}>
@@ -144,10 +146,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: "10%",
   },
-  btnContainer: {
-    width: "100%",
-    marginTop: "10%",
-  },
+
   hobbyText: {
     color: "#ABABAB",
     fontFamily: "montMedium",

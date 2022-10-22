@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch, useSelector } from "react-redux";
 import { RegisterUserData } from "../../types/types";
 import { addItem } from "../../redux/registerSlice";
+import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
@@ -40,6 +41,7 @@ const NameScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
+          <BackButton toScreen="passwordInput" navigation={navigation} />
           <Text style={styles.title}>Your Name is...</Text>
           <TextInput
             style={styles.input}
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    height: "60%",
+    height: "65%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,

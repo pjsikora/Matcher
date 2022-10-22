@@ -14,6 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import SignInButton from "../../components/UI/SignInButton";
 import WelcomeLogo from "../../components/WelcomeScreen/WelcomeLogo";
 import { validators } from "../../validators/validators";
+import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
@@ -43,14 +44,12 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView 
-      style={{flex: 1}} 
-      behavior = "position">
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
         <LinearGradient
           colors={["#AD439C", "#FAAEBE"]}
           style={styles.linearGradient}
         >
-          <WelcomeLogo/>
+          <WelcomeLogo isWelcomeScreen={false} navigation={navigation} />
 
           <View style={styles.inputsContainer}>
             <View style={styles.textInputContainer}>
@@ -104,7 +103,6 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
             source={require("../../images/Hearts.png")}
           />
         </LinearGradient>
-        
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
