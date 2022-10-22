@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 type LoginData = {
   email: string
@@ -15,7 +15,7 @@ export const loginCall = async (
     )
     console.log('XD')
     console.log(res.data.success)
-    return true
+    return res.data
   } catch (err: any) {
     const error = err?.response.data
     if (error.accountStatus === false) {
@@ -25,10 +25,10 @@ export const loginCall = async (
         })
         navigate('tokenInput')
       } catch (err: any) {
-        return err?.response.data.message
+        return err?.response.data
       }
     }
-    return error.message
+    return error
   }
 }
 

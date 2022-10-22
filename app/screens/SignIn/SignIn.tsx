@@ -56,15 +56,12 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
       },
       navigate
     )
-
-    if (result) {
+    if (result.success) {
       Alert.alert('Login', 'Tu bedzie przekierowanie bo udało sie zalogowac', [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
       ])
-    }
-
-    if (result) {
-      setError(result)
+    } else {
+      setError(result.message)
     }
   }
 
