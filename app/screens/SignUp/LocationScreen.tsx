@@ -62,7 +62,7 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
-            <BackButton toScreen="hobbyInput" navigation={navigation} />
+            <BackButton navigation={navigation} />
             <Text style={styles.title}>Your Localization is...</Text>
             <TextInput
               style={styles.input}

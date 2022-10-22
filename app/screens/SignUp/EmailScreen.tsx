@@ -64,7 +64,7 @@ const EmailScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
-            <BackButton toScreen="Welcome" navigation={navigation} />
+            <BackButton navigation={navigation} />
             <Text style={styles.title}>Your Email is...</Text>
             <View style={styles.textInputContainer}>
               <Image

@@ -42,7 +42,7 @@ const GenderScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <BackButton toScreen="ageInput" navigation={navigation} />
+          <BackButton navigation={navigation} />
           <Text style={styles.title}>You are a ...</Text>
           <TouchableOpacity
             style={styles.btn}

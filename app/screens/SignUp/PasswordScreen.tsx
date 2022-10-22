@@ -58,7 +58,7 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
-            <BackButton toScreen="emailInput" navigation={navigation} />
+            <BackButton navigation={navigation} />
             <Text style={styles.title}>Your Password is...</Text>
             <View style={styles.textInputContainer}>
               <Image

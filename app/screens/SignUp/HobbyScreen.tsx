@@ -115,7 +115,7 @@ const HobbyScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <BackButton toScreen="aboutYourselfInput" navigation={navigation} />
+          <BackButton navigation={navigation} />
           <Text style={styles.title}>What's your hobbies?</Text>
           <View style={styles.hobbiesContainer}>{hobbiesList}</View>
           <View style={styles.btnContainer}>

@@ -39,7 +39,7 @@ type ActivationData = {
 export const activationCall = async (data: ActivationData) => {
   try {
     const res = await axios.post(
-      "http://192.168.1.132:6000/api/auth/activate",
+      "http://192.168.8.179:6000/api/auth/activate",
       data
     );
 

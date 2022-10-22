@@ -62,7 +62,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
-            <BackButton toScreen="nameInput" navigation={navigation} />
+            <BackButton navigation={navigation} />
             <Text style={styles.title}>What's your day of birth?</Text>
 
             <DatePicker

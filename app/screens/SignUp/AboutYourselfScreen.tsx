@@ -43,7 +43,7 @@ const AboutYourselfScreen = ({ navigation }: EmailScreenProps) => {
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
-            <BackButton toScreen="photosInput" navigation={navigation} />
+            <BackButton navigation={navigation} />
             <Text style={styles.title}>Tell more about yourself...</Text>
             <TextInput
               multiline={true}

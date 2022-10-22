@@ -8,9 +8,7 @@ interface WelcomeLogoProps {
 const WelcomeLogo = ({ navigation, isWelcomeScreen }: WelcomeLogoProps) => {
   return (
     <View style={styles.whiteContainer}>
-      {!isWelcomeScreen && (
-        <BackButton toScreen="Welcome" navigation={navigation} />
-      )}
+      {!isWelcomeScreen && <BackButton navigation={navigation} />}
       <Image
         style={styles.logo}
         source={require("../../images/matcherLogo.png")}

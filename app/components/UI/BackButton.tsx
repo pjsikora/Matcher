@@ -7,10 +7,9 @@ import {
 } from "react-native";
 
 interface BackButtonProps {
-  toScreen: string;
   navigation: any;
 }
-const BackButton = ({ toScreen, navigation }: BackButtonProps) => {
+const BackButton = ({ navigation }: BackButtonProps) => {
   return (
     <TouchableOpacity
       style={styles.backIconContainer}

@@ -43,7 +43,7 @@ const SearchForScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <BackButton toScreen="genderInput" navigation={navigation} />
+          <BackButton navigation={navigation} />
           <Text style={styles.title}>You are looking for...</Text>
           <TouchableOpacity
             style={styles.btn}

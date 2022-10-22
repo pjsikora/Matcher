@@ -33,7 +33,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <BackButton toScreen="searchForInput" navigation={navigation} />
+          <BackButton navigation={navigation} />
           <Text style={styles.title}>What do You look like?</Text>
           <View style={styles.photosContainer}>
             <View style={styles.box}>
@@ -98,6 +98,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
             </View>
           </View>
           <RegisterButton
+            isDisabled={false}
             toScreen="aboutYourselfInput"
             navigation={navigation}
           />
