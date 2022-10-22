@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import SignInButton from '../../components/UI/SignInButton'
@@ -26,6 +27,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     let isMounted = true
@@ -44,7 +46,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
   }, [email, password])
 
   const navigate = (screen: string) => {
-    navigation.navigate(screen)
+    navigation.navigate(screen, { email })
   }
   const loginHandler = async () => {
     const result = await loginCall(
@@ -54,9 +56,12 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
       },
       navigate
     )
-
-    if (result) {
-      console.log(result)
+    if (result.success) {
+      Alert.alert('Login', 'Tu bedzie przekierowanie bo udało sie zalogowac', [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ])
+    } else {
+      setError(result.message)
     }
   }
 
@@ -110,6 +115,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
                 />
               </TouchableOpacity>
             </View>
+            <Text style={styles.error}>{error && error} </Text>
           </View>
           <SignInButton isDisabled={isDisabled} loginHandler={loginHandler} />
           <Image
@@ -179,6 +185,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '20%',
+  },
+  error: {
+    marginBottom: '2%',
+    color: 'red',
   },
   btn: {},
   bcgHearths: {
