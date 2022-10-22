@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-type Data = {
+type LoginData = {
   email: string
   userPassword: string
 }
 export const loginCall = async (
-  data: Data,
+  data: LoginData,
   navigate: (screen: string) => void
 ) => {
   try {
@@ -17,16 +17,34 @@ export const loginCall = async (
     console.log(res.data.success)
     return true
   } catch (err: any) {
-    if (err?.response.data?.accountStatus === false) {
+    const error = err?.response.data
+    if (error.accountStatus === false) {
       try {
         await axios.post('http://192.168.1.132:6000/api/auth/activate/resend', {
           email: data.email,
         })
         navigate('tokenInput')
-      } catch (err) {
-        return false
+      } catch (err: any) {
+        return err?.response.data.message
       }
     }
-    return false
+    return error.message
+  }
+}
+
+type ActivationData = {
+  email: string
+  code: string
+}
+export const activationCall = async (data: ActivationData) => {
+  try {
+    const res = await axios.post(
+      'http://192.168.1.132:6000/api/auth/activate',
+      data
+    )
+
+    return res.data
+  } catch (err: any) {
+    return err.response.data
   }
 }
