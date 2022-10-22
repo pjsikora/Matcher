@@ -6,7 +6,68 @@ const bcrypt = require('bcrypt')
 const randomstring = require('randomstring')
 const moment = require('moment')
 const sendEmail = require('../tools/mailSender')
+const jwtGenerator = require('../tools/jwtGenerator')
 
+exports.loginController = async (req: Request, res: Response) => {
+  const { email, userPassword } = req.body
+
+  try {
+    const user = await User.findOne({ email }).select('+password')
+
+    if (!user)
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+      })
+    else {
+      console.log(user)
+      const isCorrect = await bcrypt.compare(userPassword, user.password)
+
+      if (!isCorrect) {
+        return res
+          .status(400)
+          .json({ success: false, message: 'Invalid password' })
+      }
+
+      if (user.account_status === false) {
+        return res.status(400).json({
+          success: false,
+          accountStatus: user.account_status,
+        })
+      }
+      const accessToken = jwtGenerator(
+        user._id,
+        process.env.JWT_ACCESS_TOKEN_KEY
+      )
+      const refreshToken = jwtGenerator(
+        user._id,
+        process.env.JWT_REFRESH_TOKEN_KEY
+      )
+
+      const {
+        password,
+        account_status,
+        activation_code,
+        activation_code_exp,
+        ...others
+      } = user._doc
+
+      res.status(200).json({
+        success: true,
+        data: {
+          accessToken,
+          refreshToken,
+          user: others,
+        },
+      })
+    }
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err,
+    })
+  }
+}
 exports.registerController = async (req: Request, res: Response) => {
   console.log(req.body)
   const { username, email, password, age, city, gender, searchFor, desc } =
