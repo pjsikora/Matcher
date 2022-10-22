@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import SignInButton from '../../components/UI/SignInButton'
@@ -55,6 +56,12 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
       },
       navigate
     )
+
+    if (result) {
+      Alert.alert('Login', 'Tu bedzie przekierowanie bo udało sie zalogowac', [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ])
+    }
 
     if (result) {
       setError(result)
