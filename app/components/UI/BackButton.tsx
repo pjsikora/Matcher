@@ -15,7 +15,7 @@ const BackButton = ({ toScreen, navigation }: BackButtonProps) => {
     <TouchableOpacity
       style={styles.backIconContainer}
       onPress={() => {
-        navigation.navigate(toScreen);
+        navigation.goBack();
       }}
     >
       <Image
