@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   textInputContainer: {
     width: "80%",
     backgroundColor: "#F7F7F7",
-    height: "15%",
+    height: "12%",
     padding: 10,
     marginTop: "15%",
 
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     fontFamily: "montRegular",
   },
   icon: {
-    marginTop: "7%",
+    marginTop: "8%",
     marginRight: "2%",
   },
   btn: {},
