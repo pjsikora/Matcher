@@ -13,9 +13,8 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SignInButton from "../../components/UI/SignInButton";
-import WelcomeLogo from "../../components/WelcomeScreen/WelcomeLogo";
+import WelcomeLogoLogin from "../../components/WelcomeScreen/WelcomeLogoLogin";
 import { validators } from "../../validators/validators";
-import BackButton from "../../components/UI/BackButton";
 import { loginCall } from "../../controllers/loginController";
 
 interface EmailScreenProps {
@@ -70,7 +69,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
           colors={["#AD439C", "#FAAEBE"]}
           style={styles.linearGradient}
         >
-          <WelcomeLogo isWelcomeScreen={false} navigation={navigation} />
+          <WelcomeLogoLogin isWelcomeScreen={false} navigation={navigation} />
 
           <View style={styles.inputsContainer}>
             <View style={styles.textInputContainer}>
@@ -129,24 +128,14 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
 const styles = StyleSheet.create({
   linearGradient: {
     borderRadius: 5,
-    minHeight: "100%",
+    height: "100%",
     width: "100%",
-  },
-  title: {
-    fontSize: 55,
-    marginTop: "5%",
-    marginBottom: "5%",
-    width: "80%",
-  },
-  btnTitle: {
-    fontSize: 20,
-    marginTop: "15%",
   },
   inputsContainer: {
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "15%",
+    marginTop: "10%",
   },
   textInputContainer: {
     width: "80%",
@@ -175,14 +164,6 @@ const styles = StyleSheet.create({
   iconRight: {
     marginTop: "6%",
     marginLeft: "4%",
-  },
-  inputContainer: {
-    display: "flex",
-    width: "90%",
-    height: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "20%",
   },
   error: {
     marginBottom: "2%",
