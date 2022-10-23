@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../../redux/registerSlice'
 import { registerCall } from '../../controllers/registerController'
 import BackButton from '../../components/UI/BackButton'
+import { validators } from '../../validators/validators'
 
 interface EmailScreenProps {
   navigation: any
@@ -21,34 +22,51 @@ interface EmailScreenProps {
 const LocationScreen = ({ navigation }: EmailScreenProps) => {
   const [city, setCity] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
   const state = useSelector((state: any) => state.registerData)
 
-  const registerHandler = async () => {
-    const result = await registerCall(state.data)
+  console.log(state.pending)
 
-    if (result) {
+  const registerHandler = async () => {
+    const result = await registerCall(state.data, dispatch)
+
+    console.log(result)
+    if (result.success) {
       navigation.navigate('success')
-    }
+    } else setError(result.message)
   }
 
   useEffect(() => {
     let isMounted = true
 
     if (isMounted) {
-      if (city.length > 2) {
-        setIsDisabled(false)
-        dispatch(addItem({ value: 'city', data: city }))
-      } else {
-        setIsDisabled(true)
-      }
+      if (city.trim())
+        if (validators.city.test(city)) {
+          setError('')
+          setIsDisabled(false)
+          dispatch(addItem({ value: 'city', data: city }))
+        } else {
+          setError('Invalid value')
+          setIsDisabled(true)
+        }
     }
 
     return () => {
       isMounted = false
     }
   }, [city])
+
+  useEffect(() => {
+    let isMounted = true
+
+    isMounted && setLoading(state.pending)
+    return () => {
+      isMounted = false
+    }
+  }, [state.pending])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -68,6 +86,7 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
               placeholderTextColor='#ABABAB'
             />
             <Text style={styles.desc}>Your location will be public</Text>
+            <Text style={styles.error}>{city && error && error}</Text>
             <TouchableOpacity
               onPress={() => registerHandler()}
               style={isDisabled ? styles.disabledBtn : styles.btn}
@@ -78,7 +97,9 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
                 start={{ x: 0, y: 0 }}
                 style={styles.linearGradient}
               >
-                <Text style={styles.registerBtnTitle}>Register</Text>
+                <Text style={styles.registerBtnTitle}>
+                  {!loading ? 'Register' : 'Loading...'}
+                </Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -176,6 +197,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 28,
     fontFamily: 'montMedium',
+  },
+  error: {
+    marginBottom: '2%',
+    color: 'red',
   },
 })
 export default LocationScreen

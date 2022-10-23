@@ -1,18 +1,28 @@
+import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
+import {
+  requestError,
+  requestStart,
+  requestSuccess,
+} from '../redux/registerSlice'
 
-export const registerCall = async (data: any) => {
+export const registerCall = async (data: any, dispatch: Dispatch) => {
+  dispatch(requestStart())
   try {
-    console.log(data)
     const res = await axios.post(
       'http://192.168.0.9:6000/api/auth/register',
       data
     )
-    console.log('haloi')
-    console.log(res)
-    return true
+    dispatch(requestSuccess())
+    return res.data
   } catch (err: any) {
-    console.log(err?.response)
-    return false
+    dispatch(requestError())
+    if (err.hasOwnProperty('response')) return err.response.data
+    else
+      return {
+        success: false,
+        message: 'Check network connection',
+      }
   }
 }
 export const checkEmailCall = async (email: string) => {

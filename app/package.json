@@ -13,7 +13,10 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@expo/vector-icons": "^13.0.0",
+    "@mui/material": "^5.10.10",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/drawer": "^6.5.0",
     "@react-navigation/native": "^6.0.13",
@@ -33,7 +36,9 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
+    "react-native-awesome-loading": "^1.0.15",
     "react-native-datepicker": "^1.7.2",
+    "react-native-fast-image": "^8.6.1",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-reanimated": "~2.9.1",

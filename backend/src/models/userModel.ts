@@ -18,10 +18,10 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
+      unique: true,
       required: [true, 'Please enter email address!'],
       validate: [validator.isEmail, 'Invalid email address'],
       trim: true,
-      unique: [true, 'This email address already exist!'],
     },
     password: {
       type: String,
