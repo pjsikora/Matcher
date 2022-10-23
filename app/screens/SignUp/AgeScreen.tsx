@@ -55,6 +55,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     };
   }, [date]);
 
+  const colorScheme = Appearance.getColorScheme();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -67,7 +68,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
             <Text style={styles.title}>What's your day of birth?</Text>
 
             <DatePicker
-              style={styles.datePicker}
+              style={styles.datePickerContainer}
               mode="date"
               date={date}
               placeholder="Select date"
@@ -89,7 +90,10 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
                   fontSize: 20,
                 },
                 datePickerCon: {
-                  backgroundColor: colorScheme === 'dark' ? '#333' : 'white'
+                  backgroundColor: colorScheme === 'dark' ? '#333' : '#fff'
+                },
+                datePicker: {
+                  backgroundColor: colorScheme === 'dark' ? '#222' : '#fff'
                 }
               }}
               onDateChange={(date) => {
@@ -114,7 +118,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
   );
 };
 
-const colorScheme = Appearance.getColorScheme();
+
 
 const styles = StyleSheet.create({
   container: {
@@ -168,7 +172,7 @@ const styles = StyleSheet.create({
     top: "60%",
     zIndex: -1,
   },
-  datePicker: {
+  datePickerContainer: {
     marginTop: "15%",
   },
 });
