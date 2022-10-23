@@ -7,6 +7,7 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
+  Appearance
 } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
@@ -24,7 +25,6 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState("");
   const [date, setDate] = useState(JSON.stringify(new Date().toISOString));
-
   const dispatch = useDispatch();
   const state = useSelector((state: RegisterUserData) => state);
 
@@ -54,6 +54,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     };
   }, [date]);
 
+  const colorScheme = Appearance.getColorScheme();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -66,13 +67,14 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
             <Text style={styles.title}>What's your day of birth?</Text>
 
             <DatePicker
-              style={styles.datePicker}
+              style={styles.datePickerContainer}
               mode="date"
               date={date}
               placeholder="Select date"
               format="YYYY-MM-DD"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
+              
               customStyles={{
                 dateIcon: {
                   display: "none",
@@ -86,6 +88,12 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
                   fontFamily: "montRegular",
                   fontSize: 20,
                 },
+                datePickerCon: {
+                  backgroundColor: colorScheme === 'dark' ? '#333' : '#fff'
+                },
+                datePicker: {
+                  backgroundColor: colorScheme === 'dark' ? '#222' : '#fff'
+                }
               }}
               onDateChange={(date) => {
                 setDate(date);
@@ -108,6 +116,8 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     </TouchableWithoutFeedback>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -140,10 +150,6 @@ const styles = StyleSheet.create({
     marginBottom: "15%",
     height: 25,
   },
-  btnTitle: {
-    fontSize: 20,
-    marginTop: "15%",
-  },
   input: {
     width: "20%",
     height: "10%",
@@ -155,13 +161,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     fontFamily: "montRegular",
   },
-  btn: {},
   bcgHearths: {
     position: "absolute",
     top: "60%",
     zIndex: -1,
   },
-  datePicker: {
+  datePickerContainer: {
     marginTop: "15%",
   },
 });
