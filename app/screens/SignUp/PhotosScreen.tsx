@@ -1,30 +1,16 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
-import { useDispatch, useSelector } from "react-redux";
-import { addEmail } from "../../redux/registerSlice";
+import { useSelector } from "react-redux";
 import BackButton from "../../components/UI/BackButton";
 
 interface EmailScreenProps {
   navigation: any;
 }
 const PhotosScreen = ({ navigation }: EmailScreenProps) => {
-  const dispatch = useDispatch();
   const count = useSelector((state: RegisterUserData) => state);
-
-  const emailHandler = (email: string) => {
-    dispatch(addEmail(email));
-    console.log(count);
-  };
 
   return (
     <View style={styles.container}>

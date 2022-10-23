@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, TextInput, Image, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
@@ -54,41 +63,43 @@ const VerifyEmailScreen = ({ route, navigation }: EmailScreenProps) => {
     };
   }, [code]);
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["#AD439C", "#FAAEBE"]}
-        style={styles.linearGradient}
-      >
-        <View style={styles.whiteContainer}>
-          <BackButton navigation={navigation} />
-          <Text style={styles.title}>Verify Your Email...</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["#AD439C", "#FAAEBE"]}
+          style={styles.linearGradient}
+        >
+          <View style={styles.whiteContainer}>
+            <BackButton navigation={navigation} />
+            <Text style={styles.title}>Verify Your Email...</Text>
+            <Image
+              style={styles.icon}
+              source={require("../../images/mailIcon.png")}
+            />
+            <Text style={styles.desc}>
+              A cerification code has been sent to your email adress
+            </Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(code) => setCode(code)}
+              placeholder="Enter verification code"
+              placeholderTextColor="#ABABAB"
+            />
+            <Text style={styles.error}>{error && error}</Text>
+            <RegisterButton
+              isDisabled={isDisabled}
+              toScreen="Welcome"
+              navigation={navigation}
+              callback={activationHandler}
+            />
+          </View>
           <Image
-            style={styles.icon}
-            source={require("../../images/mailIcon.png")}
+            style={styles.bcgHearths}
+            source={require("../../images/Hearts.png")}
           />
-          <Text style={styles.desc}>
-            A cerification code has been sent to your email adress
-          </Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(code) => setCode(code)}
-            placeholder="Enter verification code"
-            placeholderTextColor="#ABABAB"
-          />
-          <Text style={styles.error}>{error && error}</Text>
-          <RegisterButton
-            isDisabled={isDisabled}
-            toScreen="Welcome"
-            navigation={navigation}
-            callback={activationHandler}
-          />
-        </View>
-        <Image
-          style={styles.bcgHearths}
-          source={require("../../images/Hearts.png")}
-        />
-      </LinearGradient>
-    </View>
+        </LinearGradient>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -114,9 +125,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 55,
-    marginTop: "5%",
     marginBottom: "15%",
     width: "80%",
+    fontFamily: "montSBold",
   },
   icon: {
     marginTop: "5%",
@@ -149,6 +160,7 @@ const styles = StyleSheet.create({
   },
   error: {
     color: "red",
+    marginBottom: "5%",
   },
 });
 export default VerifyEmailScreen;

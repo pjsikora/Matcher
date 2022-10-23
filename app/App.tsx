@@ -19,6 +19,7 @@ import VerifyEmailScreen from "./screens/SignUp/VerifyEmailScreen";
 import SignInScreen from "./screens/SignIn/SignIn";
 import SuccessScreen from "./screens/SignUp/SuccessScreen";
 import { useFonts } from "./hooks/useFonts";
+import AppContainer from "./screens/Application/AppContainer";
 
 const Stack = createNativeStackNavigator();
 
@@ -105,6 +106,11 @@ export default function App() {
             <Stack.Screen
               name="signIn"
               component={SignInScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="appContainer"
+              component={AppContainer}
               options={{ title: "" }}
             />
           </Stack.Navigator>
