@@ -96,10 +96,6 @@ const styles = StyleSheet.create({
     width: "80%",
     fontFamily: "montSBold",
   },
-  btnTitle: {
-    fontSize: 20,
-    marginTop: "15%",
-  },
   input: {
     width: "80%",
     backgroundColor: "#F7F7F7",
@@ -109,7 +105,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "montRegular",
   },
-  btn: {},
   bcgHearths: {
     position: "absolute",
     top: "60%",

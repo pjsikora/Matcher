@@ -27,7 +27,6 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
   const [date, setDate] = useState(JSON.stringify(new Date().toISOString));
   const dispatch = useDispatch();
   const state = useSelector((state: RegisterUserData) => state);
-  
 
   useEffect(() => {
     let isMounted = true;
@@ -151,10 +150,6 @@ const styles = StyleSheet.create({
     marginBottom: "15%",
     height: 25,
   },
-  btnTitle: {
-    fontSize: 20,
-    marginTop: "15%",
-  },
   input: {
     width: "20%",
     height: "10%",
@@ -166,7 +161,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     fontFamily: "montRegular",
   },
-  btn: {},
   bcgHearths: {
     position: "absolute",
     top: "60%",
