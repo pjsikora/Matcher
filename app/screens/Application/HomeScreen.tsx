@@ -5,6 +5,7 @@ import {
   Image,
   TextInput,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 
 const HomeScreen = () => {
@@ -15,31 +16,37 @@ const HomeScreen = () => {
       id: "id1",
       name: "Ilona",
       photo: require("../../images/users/user1.png"),
+      age: 25,
     },
     {
       id: "id2",
       name: "Wiktoria",
       photo: require("../../images/users/user2.png"),
+      age: 18,
     },
     {
       id: "id3",
       name: "Magda",
       photo: require("../../images/users/user3.png"),
+      age: 22,
     },
     {
       id: "id4",
       name: "Julia",
       photo: require("../../images/users/user4.png"),
+      age: 23,
     },
     {
       id: "id5",
       name: "Zuzia",
       photo: require("../../images/users/user5.png"),
+      age: 19,
     },
     {
       id: "id6",
       name: "Agnieszka",
       photo: require("../../images/users/user6.png"),
+      age: 20,
     },
   ];
 
@@ -95,6 +102,55 @@ const HomeScreen = () => {
       >
         {usersList}
       </ScrollView>
+      <View style={styles.nearbyContainer}>
+        <Text style={styles.text2}>Near You</Text>
+        <TouchableOpacity style={styles.viewAllButton}>
+          <Text style={styles.viewAllButtonText}>View All</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.userNearYou}>
+          <Image
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: 18,
+              position: "absolute",
+            }}
+            source={require("../../images/users/bigUser.png")}
+          />
+          <View style={styles.nearbyUserInfo}>
+            <Text
+              style={{
+                fontFamily: "montBold",
+                color: "#FFF",
+                fontSize: 24,
+                width: "100%",
+              }}
+            >
+              Mia Smith, 25
+            </Text>
+            <Text
+              style={{
+                fontFamily: "montRegular",
+                color: "#FFF",
+                fontSize: 13,
+                width: "50%",
+              }}
+            >
+              Kielce, Poland
+            </Text>
+            <Text
+              style={{
+                fontFamily: "montRegular",
+                color: "#FFF",
+                fontSize: 13,
+                width: "50%",
+              }}
+            >
+              8km
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -136,14 +192,14 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     width: "80%",
-    marginTop: "5%",
+    marginTop: "1%",
     backgroundColor: "#F2F2F2",
     borderRadius: 15,
     height: 50,
     display: "flex",
     alignItems: "center",
     flexDirection: "row",
-    marginBottom: "10%",
+    marginBottom: "7%",
   },
   searchIcon: {
     marginLeft: 20,
@@ -161,11 +217,19 @@ const styles = StyleSheet.create({
     fontFamily: "montMedium",
     width: "80%",
   },
+  text2: {
+    color: "#1E1E1E",
+    fontSize: 18,
+    fontFamily: "montMedium",
+    width: "75%",
+    marginTop: "1.5%",
+  },
   matchedContainer: {
     minWidth: "100%",
-    height: 50,
     marginTop: "5%",
     flexDirection: "row",
+    maxHeight: 100,
+    // marginBottom: 5,
   },
   matchedItemContainer: {
     padding: 1,
@@ -180,11 +244,52 @@ const styles = StyleSheet.create({
     marginRight: 11,
   },
   matchedItem: {
-    height: "100%",
+    // height: "100%",
     width: "100%",
     borderRadius: 50,
     backgroundColor: "#333",
     overflow: "hidden",
+  },
+  viewAllButtonText: {
+    color: "#FFF",
+    fontSize: 12,
+    fontFamily: "montMedium",
+  },
+  viewAllButton: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#CF56A1",
+    width: "25%",
+    height: 33,
+    flexGrow: 0,
+    borderRadius: 10,
+  },
+  nearbyContainer: {
+    width: "80%",
+    height: "45%",
+    marginTop: "10%",
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+  userNearYou: {
+    marginTop: "20%",
+    width: "75%",
+    height: "75%",
+    borderRadius: 18,
+  },
+  nearbyUserInfo: {
+    position: "relative",
+    top: "70%",
+    left: 0,
+    width: "100%",
+    height: "30%",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    padding: 5,
   },
 });
 

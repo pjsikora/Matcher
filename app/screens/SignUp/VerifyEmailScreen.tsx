@@ -13,7 +13,6 @@ import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../redux/registerSlice";
 import { activationCall } from "../../controllers/loginController";
 import BackButton from "../../components/UI/BackButton";
 
@@ -39,9 +38,7 @@ const VerifyEmailScreen = ({ route, navigation }: EmailScreenProps) => {
 
     console.log(result);
     if (result.success) {
-      Alert.alert("Activation", "Tu bedzie przekierowanie", [
-        { text: "OK", onPress: () => console.log("OK Pressed") },
-      ]);
+      navigation.navigate("appContainer");
     } else {
       setError(result.message);
     }
