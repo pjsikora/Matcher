@@ -7,6 +7,7 @@ import {
   Image,
   TouchableWithoutFeedback,
   Keyboard,
+  Appearance
 } from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
@@ -24,9 +25,9 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState("");
   const [date, setDate] = useState(JSON.stringify(new Date().toISOString));
-
   const dispatch = useDispatch();
   const state = useSelector((state: RegisterUserData) => state);
+  
 
   useEffect(() => {
     let isMounted = true;
@@ -73,6 +74,7 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
               format="YYYY-MM-DD"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
+              
               customStyles={{
                 dateIcon: {
                   display: "none",
@@ -86,6 +88,9 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
                   fontFamily: "montRegular",
                   fontSize: 20,
                 },
+                datePickerCon: {
+                  backgroundColor: colorScheme === 'dark' ? '#333' : 'white'
+                }
               }}
               onDateChange={(date) => {
                 setDate(date);
@@ -108,6 +113,8 @@ const AgeScreen = ({ navigation }: EmailScreenProps) => {
     </TouchableWithoutFeedback>
   );
 };
+
+const colorScheme = Appearance.getColorScheme();
 
 const styles = StyleSheet.create({
   container: {
