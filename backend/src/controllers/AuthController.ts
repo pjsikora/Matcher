@@ -7,26 +7,25 @@ const randomstring = require('randomstring')
 const moment = require('moment')
 const sendEmail = require('../tools/mailSender')
 const jwtGenerator = require('../tools/jwtGenerator')
+const ErrorHandler = require('../tools/errorHandler')
 
-exports.loginController = async (req: Request, res: Response) => {
+exports.loginController = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
   const { email, userPassword } = req.body
 
   try {
     const user = await User.findOne({ email }).select('+password')
 
-    if (!user)
-      return res.status(404).json({
-        success: false,
-        message: 'User not found',
-      })
+    if (!user) return next(new ErrorHandler('User not found', 404))
     else {
       console.log(user)
       const isCorrect = await bcrypt.compare(userPassword, user.password)
 
       if (!isCorrect) {
-        return res
-          .status(400)
-          .json({ success: false, message: 'Invalid password' })
+        return next(new ErrorHandler('Invalid password', 400))
       }
 
       if (user.account_status === false) {
@@ -134,17 +133,18 @@ exports.checkEmail = async (req: Request, res: Response) => {
     })
   }
 }
-exports.activateAccount = async (req: Request, res: Response) => {
+exports.activateAccount = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
   const { email, code } = req.body
 
   try {
     const user = await User.findOne({ email })
     if (user) {
       if (user.account_status === true) {
-        return res.status(500).json({
-          success: true,
-          message: 'Account is already active!',
-        })
+        return next(new ErrorHandler('Account is already active', 400))
       } else {
         const match = await bcrypt.compare(code, user.activation_code)
 
@@ -158,20 +158,23 @@ exports.activateAccount = async (req: Request, res: Response) => {
             .status(200)
             .json({ success: true, message: 'Account activaed' })
         } else {
-          return res.status(500).json({
-            success: false,
-            message: 'Activation code is invalid or expired',
-          })
+          return next(
+            new ErrorHandler('Activation code is invalid or expired', 400)
+          )
         }
       }
     } else {
-      return res.status(404).json({ success: false, message: 'User not found' })
+      return next(new ErrorHandler('User not found', 404))
     }
   } catch (err) {
     res.status(500).json({ success: false, message: err })
   }
 }
-exports.resendActivationCode = async (req: Request, res: Response) => {
+exports.resendActivationCode = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
   const { email } = req.body
 
   console.log('dfdf')
@@ -203,10 +206,7 @@ exports.resendActivationCode = async (req: Request, res: Response) => {
         }
       )
     } else {
-      res.status(404).json({
-        success: false,
-        message: 'User not found',
-      })
+      return next(new ErrorHandler('User not found', 404))
     }
   } catch (err) {
     res.status(404).json({

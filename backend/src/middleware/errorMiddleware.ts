@@ -14,3 +14,5 @@ const errorMiddleware = (
     message,
   })
 }
+
+module.exports = errorMiddleware
