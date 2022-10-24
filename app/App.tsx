@@ -9,7 +9,7 @@ import NameScreen from './screens/SignUp/NameScreen'
 import AgeScreen from './screens/SignUp/AgeScreen'
 import GenderScreen from './screens/SignUp/GenderInput'
 import SearchForScreen from './screens/SignUp/SearchForScreen'
-import { Provider, useSelector } from 'react-redux'
+import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import LocationScreen from './screens/SignUp/LocationScreen'
 import PhotosScreen from './screens/SignUp/PhotosScreen'
@@ -19,9 +19,41 @@ import VerifyEmailScreen from './screens/SignUp/VerifyEmailScreen'
 import SignInScreen from './screens/SignIn/SignIn'
 import SuccessScreen from './screens/SignUp/SuccessScreen'
 import { useFonts } from './hooks/useFonts'
-import AppContainer from './screens/Application/AppContainer'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import SwapScreen from './screens/Application/SwapScreen'
+import HomeScreen from './screens/Application/HomeScreen'
+import MatchesScreen from './screens/Application/MatchesScreen'
+import MessagesScreen from './screens/Application/MessagesScreen'
+import SettingsScreen from './screens/Application/SettingsScreen'
+import { View } from 'react-native'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 
+const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
+
+function ProfileScreen() {
+  const Drawer = createDrawerNavigator()
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name='Settings' component={SettingsScreen} />
+    </Drawer.Navigator>
+  )
+}
+
+function AppContainer() {
+  return (
+    <Tab.Navigator
+      initialRouteName='Home'
+      screenOptions={{ headerShown: false }}
+    >
+      <Tab.Screen name='SwapScreen' component={SwapScreen} />
+      <Tab.Screen name='Matches' component={MatchesScreen} />
+      <Tab.Screen name='Home' component={HomeScreen} />
+      <Tab.Screen name='Messages' component={MessagesScreen} />
+      <Tab.Screen name='Profile' component={ProfileScreen} />
+    </Tab.Navigator>
+  )
+}
 
 export default function App() {
   const isLoadingComplete = useCachedResources()
@@ -109,7 +141,7 @@ export default function App() {
               options={{ title: '' }}
             />
             <Stack.Screen
-              name='appContainer'
+              name='signedIn'
               component={AppContainer}
               options={{ title: '', gestureEnabled: false }}
             />
