@@ -12,7 +12,7 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
       defaultStatus="open"
       useLegacyImplementation={true}
       initialRouteName="Home"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false, swipeEnabled: false }}
       drawerContent={(props) => {
         return (
           <View style={styles.container}>
@@ -147,6 +147,9 @@ const styles = StyleSheet.create({
     fontFamily: "montSBold",
     marginLeft: 10,
   },
+  versionText: {},
+  logoIcon: {},
+  buttonIcon: {},
 });
 
 export default ProfileScreen;
