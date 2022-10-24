@@ -56,7 +56,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
       navigate
     );
     if (result.success) {
-      navigation.navigate("appContainer");
+      navigation.navigate("signedIn");
     } else {
       setError(result.message);
     }

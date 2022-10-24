@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
@@ -57,7 +66,7 @@ interface EmailScreenProps {
 const HobbyScreen = ({ navigation }: EmailScreenProps) => {
   const [restart, setRestart] = useState(false);
   const [chosenHobbies, setChosenHobbies] = useState<Hobbies[]>([]);
-
+  const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state: RegisterUserData) => state);
 
@@ -86,7 +95,17 @@ const HobbyScreen = ({ navigation }: EmailScreenProps) => {
     };
   }, [chosenHobbies]);
 
-  const hobbiesList = hobbies.map((hobby) => {
+  const filterBySearch = (item) => {
+    if (item.name.includes(searchText)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const filteredHobbies = hobbies.filter(filterBySearch);
+
+  const hobbiesList = filteredHobbies.map((hobby) => {
     return (
       <TouchableOpacity
         style={hobby.isChosen ? styles.chosenHobbyItem : styles.hobbyItem}
@@ -109,29 +128,44 @@ const HobbyScreen = ({ navigation }: EmailScreenProps) => {
   });
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["#AD439C", "#FAAEBE"]}
-        style={styles.linearGradient}
-      >
-        <View style={styles.whiteContainer}>
-          <BackButton navigation={navigation} />
-          <Text style={styles.title}>What's your hobbies?</Text>
-          <View style={styles.hobbiesContainer}>{hobbiesList}</View>
-          <View style={styles.btnContainer}>
-            <RegisterButton
-              isDisabled={isDisabled}
-              toScreen="locationInput"
-              navigation={navigation}
-            />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <LinearGradient
+          colors={["#AD439C", "#FAAEBE"]}
+          style={styles.linearGradient}
+        >
+          <View style={styles.whiteContainer}>
+            <BackButton navigation={navigation} />
+            <Text style={styles.title}>What's your hobbies?</Text>
+            <View style={styles.searchBarContainer}>
+              <Image
+                style={styles.searchIcon}
+                source={require("../../images/searchIcon.png")}
+              />
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search"
+                placeholderTextColor="#ABABAB"
+                onChangeText={(text) => setSearchText(text)}
+                value={searchText}
+              />
+            </View>
+            <View style={styles.hobbiesContainer}>{hobbiesList}</View>
+            <View style={styles.btnContainer}>
+              <RegisterButton
+                isDisabled={isDisabled}
+                toScreen="locationInput"
+                navigation={navigation}
+              />
+            </View>
           </View>
-        </View>
-        <Image
-          style={styles.bcgHearths}
-          source={require("../../images/Hearts.png")}
-        />
-      </LinearGradient>
-    </View>
+          <Image
+            style={styles.bcgHearths}
+            source={require("../../images/Hearts.png")}
+          />
+        </LinearGradient>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -180,12 +214,10 @@ const styles = StyleSheet.create({
   },
   hobbiesContainer: {
     width: "85%",
-    height: "55%",
+    height: "45%",
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
     marginBottom: "2%",
   },
   hobbyItem: {
@@ -216,6 +248,27 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "60%",
     zIndex: -1,
+  },
+  searchBarContainer: {
+    width: "80%",
+    marginTop: "1%",
+    backgroundColor: "#F2F2F2",
+    borderRadius: 15,
+    height: 50,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row",
+    marginBottom: "7%",
+  },
+  searchIcon: {
+    marginLeft: 20,
+    marginRight: 10,
+  },
+  searchInput: {
+    width: "80%",
+    height: 30,
+    fontFamily: "montMedium",
+    fontSize: 14,
   },
 });
 export default HobbyScreen;
