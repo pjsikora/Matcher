@@ -38,9 +38,17 @@ export const userSlice = createSlice({
       state.accessToken = action.payload.accessToken
       state.refreshToken = action.payload.refreshToken
     },
+    updateUser: (state, action) => {
+      state.user = action.payload
+    },
   },
 })
-export const { saveUserData, requestError, requestStart, requestSuccess } =
-  userSlice.actions
+export const {
+  saveUserData,
+  requestError,
+  requestStart,
+  requestSuccess,
+  updateUser,
+} = userSlice.actions
 
 export default userSlice.reducer
