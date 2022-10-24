@@ -7,10 +7,8 @@ import { DrawerActions } from '@react-navigation/native'
 const ProfileScreen = ({ navigation }: { navigation: any }) => {
   const Drawer = createDrawerNavigator()
 
-  useEffect(() => {
-    console.log('fdgffg')
-    navigation.dispatch(DrawerActions.openDrawer())
-  })
+  navigation.dispatch(DrawerActions.openDrawer())
+
   return (
     <Drawer.Navigator
       useLegacyImplementation={true}
