@@ -1,7 +1,25 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from 'react-native'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import HomeScreen from './HomeScreen'
+import { useEffect } from 'react'
+import { DrawerActions } from '@react-navigation/native'
 
-const ProfileScreen = () => {
-  return <View></View>;
-};
+const ProfileScreen = ({ navigation }: { navigation: any }) => {
+  const Drawer = createDrawerNavigator()
 
-export default ProfileScreen;
+  useEffect(() => {
+    console.log('fdgffg')
+    navigation.dispatch(DrawerActions.openDrawer())
+  })
+  return (
+    <Drawer.Navigator
+      useLegacyImplementation={true}
+      initialRouteName='Home'
+      screenOptions={{ headerShown: false }}
+    >
+      <Drawer.Screen name='Home' component={HomeScreen} />
+    </Drawer.Navigator>
+  )
+}
+
+export default ProfileScreen

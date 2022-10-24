@@ -1,7 +1,7 @@
 import useCachedResources from './hooks/useCachedResources'
 import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigationContainer } from '@react-navigation/native'
+import { DrawerActions, NavigationContainer } from '@react-navigation/native'
 import WelcomeScreen from './screens/WelcomeScreen'
 import EmailScreen from './screens/SignUp/EmailScreen'
 import PasswordScreen from './screens/SignUp/PasswordScreen'
@@ -24,21 +24,13 @@ import SwapScreen from './screens/Application/SwapScreen'
 import HomeScreen from './screens/Application/HomeScreen'
 import MatchesScreen from './screens/Application/MatchesScreen'
 import MessagesScreen from './screens/Application/MessagesScreen'
+import ProfileScreen from './screens/Application/ProfileScreen'
 import SettingsScreen from './screens/Application/SettingsScreen'
 import { View } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
-
-function ProfileScreen() {
-  const Drawer = createDrawerNavigator()
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name='Settings' component={SettingsScreen} />
-    </Drawer.Navigator>
-  )
-}
 
 function AppContainer() {
   return (
@@ -141,7 +133,7 @@ export default function App() {
               options={{ title: '' }}
             />
             <Stack.Screen
-              name='signedIn'
+              name='appContainer'
               component={AppContainer}
               options={{ title: '', gestureEnabled: false }}
             />
