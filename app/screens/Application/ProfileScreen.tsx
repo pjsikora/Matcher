@@ -12,7 +12,7 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
       defaultStatus='open'
       useLegacyImplementation={true}
       initialRouteName='Home'
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false, swipeEnabled: false }}
     >
       <Drawer.Screen name='Home' component={HomeScreen} />
     </Drawer.Navigator>
