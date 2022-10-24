@@ -14,7 +14,7 @@ export const loginCall = async (
   dispatch(requestStart());
   try {
     const res = await axios.post(
-      "http://192.168.0.9:6000/api/auth/login",
+      "http://192.168.8.179:6000/api/auth/login",
       data
     );
     dispatch(requestSuccess());
@@ -27,9 +27,12 @@ export const loginCall = async (
 
       if (error.accountStatus === false) {
         try {
-          await axios.post("http://192.168.0.9:6000/api/auth/activate/resend", {
-            email: data.email,
-          });
+          await axios.post(
+            "http://192.168.8.179:6000/api/auth/activate/resend",
+            {
+              email: data.email,
+            }
+          );
           navigate("tokenInput");
         } catch (err: any) {
           if (err.hasOwnProperty("response")) return err.response.data;
