@@ -4,15 +4,20 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 interface RegisterButtonProps {
   isDisabled: boolean
   loginHandler: () => void
+  isLoading: boolean
 }
-const SignInButton = ({ isDisabled, loginHandler }: RegisterButtonProps) => {
+const SignInButton = ({
+  isDisabled,
+  loginHandler,
+  isLoading,
+}: RegisterButtonProps) => {
   return (
     <TouchableOpacity
       onPress={() => loginHandler()}
       disabled={isDisabled}
       style={isDisabled ? styles.disabledBtn : styles.btn}
     >
-      <Text style={styles.btnTitle}>Log In</Text>
+      <Text style={styles.btnTitle}>{isLoading ? 'Loading...' : 'Log In'}</Text>
     </TouchableOpacity>
   )
 }
