@@ -17,7 +17,7 @@ import WelcomeLogoLogin from '../../components/WelcomeScreen/WelcomeLogoLogin'
 import { validators } from '../../validators/validators'
 import { loginCall } from '../../controllers/loginController'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserData } from '../../redux/userSlice'
+import { saveUserData } from '../../redux/userSlice'
 
 interface EmailScreenProps {
   navigation: any
@@ -74,7 +74,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
       dispatch
     )
     if (result.success) {
-      dispatch(getUserData({ ...result.userData }))
+      dispatch(saveUserData({ ...result.userData }))
       navigation.navigate('appContainer')
     } else {
       setError(result.message)

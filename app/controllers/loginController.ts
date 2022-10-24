@@ -1,11 +1,6 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
-import {
-  getUserData,
-  requestError,
-  requestStart,
-  requestSuccess,
-} from '../redux/userSlice'
+import { requestError, requestStart, requestSuccess } from '../redux/userSlice'
 
 type LoginData = {
   email: string

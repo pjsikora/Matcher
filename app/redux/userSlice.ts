@@ -33,14 +33,14 @@ export const userSlice = createSlice({
       state.pending = false
       state.error = true
     },
-    getUserData: (state, action) => {
+    saveUserData: (state, action) => {
       state.user = action.payload.user
       state.accessToken = action.payload.accessToken
       state.refreshToken = action.payload.refreshToken
     },
   },
 })
-export const { getUserData, requestError, requestStart, requestSuccess } =
+export const { saveUserData, requestError, requestStart, requestSuccess } =
   userSlice.actions
 
 export default userSlice.reducer
