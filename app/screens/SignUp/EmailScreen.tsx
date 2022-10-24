@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import RegisterButton from '../../components/UI/RegisterButton'
 import { LinearGradient } from 'expo-linear-gradient'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../../redux/registerSlice'
 import { validators } from '../../validators/validators'
 import { checkEmailCall } from '../../controllers/registerController'
@@ -20,14 +20,16 @@ interface EmailScreenProps {
   navigation: any
 }
 const EmailScreen = ({ navigation }: EmailScreenProps) => {
+  const state = useSelector((state: any) => state.registerData)
   const dispatch = useDispatch()
 
   const [isDisabled, setIsDisabled] = useState(true)
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const checkEmailExist = async () => {
-    const result: any = await checkEmailCall(email.toLowerCase())
+    const result: any = await checkEmailCall(email.toLowerCase(), dispatch)
 
     if (result) setError('This email address is taken')
     else navigation.navigate('passwordInput')
@@ -51,6 +53,16 @@ const EmailScreen = ({ navigation }: EmailScreenProps) => {
       isMounted = false
     }
   }, [email])
+
+  useEffect(() => {
+    let isMounted = true
+
+    isMounted && setLoading(state.pending)
+
+    return () => {
+      isMounted = false
+    }
+  }, [state.pending])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

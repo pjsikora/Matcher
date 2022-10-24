@@ -1,4 +1,6 @@
-import axios, { AxiosError } from "axios";
+import { Dispatch } from "@reduxjs/toolkit";
+import axios from "axios";
+import { requestError, requestStart, requestSuccess } from "../redux/userSlice";
 
 type LoginData = {
   email: string;
@@ -6,29 +8,44 @@ type LoginData = {
 };
 export const loginCall = async (
   data: LoginData,
-  navigate: (screen: string) => void
+  navigate: (screen: string) => void,
+  dispatch: Dispatch
 ) => {
+  dispatch(requestStart());
   try {
     const res = await axios.post(
-      "http://192.168.8.179:6000/api/auth/login",
+      "http://192.168.0.9:6000/api/auth/login",
       data
     );
-
-    console.log(res.data.success);
+    dispatch(requestSuccess());
     return res.data;
   } catch (err: any) {
-    console.log(err.response);
-    const error = err?.response.data;
-    if (error.accountStatus === false) {
-      try {
-        await axios.post("http://192.168.8.179:6000/api/auth/activate/resend", {
-          email: data.email,
-        });
-        navigate("tokenInput");
-      } catch (err: any) {
-        return err?.response.data;
+    dispatch(requestError());
+    let error;
+    if (err.hasOwnProperty("response")) {
+      error = err?.response.data;
+
+      if (error.accountStatus === false) {
+        try {
+          await axios.post("http://192.168.0.9:6000/api/auth/activate/resend", {
+            email: data.email,
+          });
+          navigate("tokenInput");
+        } catch (err: any) {
+          if (err.hasOwnProperty("response")) return err.response.data;
+          else
+            return {
+              success: false,
+              message: "Check network connection",
+            };
+        }
       }
-    }
+    } else
+      error = {
+        success: false,
+        message: "Check network connection",
+      };
+
     return error;
   }
 };

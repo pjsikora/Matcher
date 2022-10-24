@@ -25,16 +25,18 @@ export const registerCall = async (data: any, dispatch: Dispatch) => {
       };
   }
 };
-export const checkEmailCall = async (email: string) => {
+export const checkEmailCall = async (email: string, dispatch: Dispatch) => {
+  dispatch(requestStart());
   try {
     const res = await axios.post(
       "http://192.168.8.179:6000/api/auth/register/check",
       { email }
     );
+    dispatch(requestSuccess());
     if (res.data.message.email) return true;
     else false;
   } catch (err: any) {
-    console.log(err?.response);
+    dispatch(requestError());
     return false;
   }
 };

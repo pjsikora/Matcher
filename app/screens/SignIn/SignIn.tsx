@@ -16,6 +16,8 @@ import SignInButton from "../../components/UI/SignInButton";
 import WelcomeLogoLogin from "../../components/WelcomeScreen/WelcomeLogoLogin";
 import { validators } from "../../validators/validators";
 import { loginCall } from "../../controllers/loginController";
+import { useDispatch, useSelector } from "react-redux";
+import { saveUserData } from "../../redux/userSlice";
 
 interface EmailScreenProps {
   navigation: any;
@@ -27,6 +29,10 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
   const [password, setPassword] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const state = useSelector((state: any) => state.userData);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let isMounted = true;
@@ -44,19 +50,32 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
     };
   }, [email, password]);
 
+  useEffect(() => {
+    let isMounted = true;
+
+    isMounted && setLoading(state.pending);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [state.pending]);
+
   const navigate = (screen: string) => {
     navigation.navigate(screen, { email });
   };
+
   const loginHandler = async () => {
     const result = await loginCall(
       {
         email: email.toLowerCase(),
         userPassword: password,
       },
-      navigate
+      navigate,
+      dispatch
     );
     if (result.success) {
-      navigation.navigate("signedIn");
+      dispatch(saveUserData({ ...result.userData }));
+      navigation.navigate("appContainer");
     } else {
       setError(result.message);
     }
@@ -114,7 +133,11 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
             </View>
             <Text style={styles.error}>{error && error} </Text>
           </View>
-          <SignInButton isDisabled={isDisabled} loginHandler={loginHandler} />
+          <SignInButton
+            isDisabled={isDisabled}
+            loginHandler={loginHandler}
+            isLoading={loading}
+          />
           <Image
             style={styles.bcgHearths}
             source={require("../../images/Hearts.png")}
