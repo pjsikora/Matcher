@@ -1,10 +1,11 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
 import {
+  getUserData,
   requestError,
   requestStart,
   requestSuccess,
-} from '../redux/registerSlice'
+} from '../redux/userSlice'
 
 type LoginData = {
   email: string
@@ -19,7 +20,6 @@ export const loginCall = async (
   try {
     const res = await axios.post('http://192.168.0.9:6000/api/auth/login', data)
     dispatch(requestSuccess())
-
     return res.data
   } catch (err: any) {
     dispatch(requestError())

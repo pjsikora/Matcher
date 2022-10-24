@@ -49,12 +49,16 @@ exports.loginController = async (req: Request, res: Response) => {
         account_status,
         activation_code,
         activation_code_exp,
+        __v,
+        _id,
+        createdAt,
+        updatedAt,
         ...others
       } = user._doc
 
       res.status(200).json({
         success: true,
-        data: {
+        userData: {
           accessToken,
           refreshToken,
           user: others,
