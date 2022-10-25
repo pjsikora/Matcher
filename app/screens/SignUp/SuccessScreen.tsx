@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import RegisterButton from "../../components/UI/RegisterButton";
 
 interface EmailScreenProps {
   navigation: any;
@@ -20,14 +14,21 @@ const SuccessScreen = ({ navigation }: EmailScreenProps) => {
         style={styles.linearGradient}
       >
         <View style={styles.whiteContainer}>
-          <Text>Register went succesful</Text>
+          <Text style={styles.title}>Success!</Text>
+          <Image
+            style={styles.imageContainer}
+            source={require("../../images/successIcon.png")}
+          />
+          <Text style={styles.text}>Your account has been created</Text>
+          <Text style={styles.grayText}>
+            Please log in and verify your account
+          </Text>
+          <RegisterButton
+            isDisabled={false}
+            toScreen="Welcome"
+            navigation={navigation}
+          />
         </View>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => navigation.navigate("Welcome")}
-        >
-          <Text style={styles.title}>BACK TO MAIN MENU</Text>
-        </TouchableOpacity>
         <Image
           style={styles.bcgHearths}
           source={require("../../images/Hearts.png")}
@@ -46,12 +47,11 @@ const styles = StyleSheet.create({
   },
   whiteContainer: {
     backgroundColor: "#FFFFFF",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "55%",
+    height: "65%",
     width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
+    alignItems: "center",
   },
   linearGradient: {
     borderRadius: 5,
@@ -87,9 +87,27 @@ const styles = StyleSheet.create({
     marginTop: "50%",
   },
   title: {
-    textAlign: "center",
-    color: "#FFFFFF",
-    fontSize: 18,
+    color: "#1E1E1E",
+    fontSize: 48,
+    width: "80%",
+    fontFamily: "montSBold",
+    marginTop: "25%",
+  },
+  imageContainer: {
+    marginTop: "15%",
+  },
+  text: {
+    fontSize: 20,
+    fontFamily: "montRegular",
+    marginTop: "5%",
+    color: "#1E1E1E",
+  },
+  grayText: {
+    marginTop: "8%",
+    color: "#ABABAB",
+    fontFamily: "montMedium",
+    fontSize: 16,
+    marginBottom: "13%",
   },
 });
 
