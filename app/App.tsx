@@ -24,16 +24,16 @@ import SwapScreen from "./screens/Application/SwapScreen";
 import HomeScreen from "./screens/Application/HomeScreen";
 import MatchesScreen from "./screens/Application/MatchesScreen";
 import MessagesScreen from "./screens/Application/MessagesScreen";
-import ProfileScreen from "./screens/Application/ProfileScreen";
 import SettingsScreen from "./screens/Application/SettingsScreen";
 import { View, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TestScreen from "./screens/Application/TestScrees";
+import AppContainer from "./screens/Application/AppContainer";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-export function AppContainer() {
+export function BottomTab() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -260,8 +260,8 @@ export default function App() {
               options={{ title: "" }}
             />
             <Stack.Screen
-              name="profileScreen"
-              component={ProfileScreen}
+              name="appContainer"
+              component={AppContainer}
               options={{ title: "", gestureEnabled: false }}
             />
           </Stack.Navigator>

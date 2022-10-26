@@ -75,7 +75,7 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
     );
     if (result.success) {
       dispatch(saveUserData({ ...result.userData }));
-      navigation.navigate("profileScreen");
+      navigation.navigate("appContainer");
     } else {
       setError(result.message);
     }

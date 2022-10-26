@@ -9,9 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserCall } from "../../controllers/userController";
 import { saveUserData, updateUser } from "../../redux/userSlice";
 import SettingsScreen from "./SettingsScreen";
-import { AppContainer } from "../../App";
+import { BottomTab } from "../../App";
+import EditInfoScreen from "./EditInfoScreen";
 
-const ProfileScreen = ({ navigation }: { navigation: any }) => {
+const AppContainer = ({ navigation }: { navigation: any }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const Drawer = createDrawerNavigator();
@@ -56,9 +57,8 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
   };
   return (
     <Drawer.Navigator
-      defaultStatus="open"
       useLegacyImplementation={true}
-      initialRouteName="appContainer"
+      initialRouteName="bottomTab"
       screenOptions={{ headerShown: false, swipeEnabled: false }}
       drawerContent={(props) => {
         return (
@@ -84,7 +84,11 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
                 </Text>
                 <View style={styles.buttonsContainer}>
                   <View style={styles.buttonContainer}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate("settings");
+                      }}
+                    >
                       <Image
                         style={styles.buttonIcon}
                         source={require("../../images/me/settingsButton.png")}
@@ -93,11 +97,17 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
                     </TouchableOpacity>
                   </View>
                   <View style={styles.buttonContainer}>
-                    <Image
-                      style={styles.buttonIcon}
-                      source={require("../../images/me/editButton.png")}
-                    />
-                    <Text style={styles.btnText}>Edit info</Text>
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate("edit");
+                      }}
+                    >
+                      <Image
+                        style={styles.buttonIcon}
+                        source={require("../../images/me/editButton.png")}
+                      />
+                      <Text style={styles.btnText}>Edit info</Text>
+                    </TouchableOpacity>
                   </View>
                 </View>
                 <View style={styles.versionContainer}>
@@ -126,7 +136,9 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
         );
       }}
     >
-      <Drawer.Screen name="appContainer" component={AppContainer} />
+      <Drawer.Screen name="bottomTab" component={BottomTab} />
+      <Drawer.Screen name="settings" component={SettingsScreen} />
+      <Drawer.Screen name="edit" component={EditInfoScreen} />
     </Drawer.Navigator>
   );
 };
@@ -225,4 +237,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default AppContainer;

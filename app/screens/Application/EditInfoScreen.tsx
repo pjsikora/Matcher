@@ -1,16 +1,16 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import BackButton from "../../components/UI/BackButton";
 
-interface SettingsScreenProps {
+interface EditInfoScreenProps {
   navigation: any;
 }
-const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
+const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
   return (
     <View>
       <BackButton navigation={navigation} />
-      <Text>SETTINGS SCREEN</Text>
+      <Text>EDIT INFO SCREEN</Text>
     </View>
   );
 };
 
-export default SettingsScreen;
+export default EditInfoScreen;
