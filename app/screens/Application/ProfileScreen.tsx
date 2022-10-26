@@ -126,7 +126,7 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
         );
       }}
     >
-      <Drawer.Screen name="Settings" component={SettingsScreen} />
+      <Drawer.Screen name="appContainer" component={AppContainer} />
     </Drawer.Navigator>
   );
 };
