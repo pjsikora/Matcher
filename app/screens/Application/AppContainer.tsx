@@ -59,7 +59,11 @@ const AppContainer = ({ navigation }: { navigation: any }) => {
     <Drawer.Navigator
       useLegacyImplementation={true}
       initialRouteName="bottomTab"
-      screenOptions={{ headerShown: false, swipeEnabled: false }}
+      screenOptions={{
+        headerShown: false,
+        swipeEnabled: false,
+        drawerStyle: { width: "80%" },
+      }}
       drawerContent={(props) => {
         return (
           <View style={styles.container}>
@@ -154,6 +158,8 @@ const styles = StyleSheet.create({
   },
   bcg: {
     position: "absolute",
+    top: 0,
+    left: 0,
   },
   imageContainer: {
     marginTop: "30%",
@@ -205,7 +211,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ABABAB",
     borderBottomWidth: 1,
     padding: 10,
-    marginTop: "30%",
+    marginTop: "45%",
   },
   logoutBtn: {
     marginTop: "12%",

@@ -147,7 +147,7 @@ export function BottomTab() {
         listeners={({ navigation }) => ({
           tabPress: (e) => {
             e.preventDefault();
-            navigation.openDrawer();
+            navigation.toggleDrawer();
           },
         })}
         options={{

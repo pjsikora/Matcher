@@ -15,6 +15,7 @@ import { RegisterUserData } from "../../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/registerSlice";
 import BackButton from "../../components/UI/BackButton";
+import { ScrollView } from "react-native-gesture-handler";
 
 type Hobbies = {
   id: string;
@@ -150,7 +151,9 @@ const HobbyScreen = ({ navigation }: EmailScreenProps) => {
                 value={searchText}
               />
             </View>
-            <View style={styles.hobbiesContainer}>{hobbiesList}</View>
+            <ScrollView contentContainerStyle={styles.scroll}>
+              <View style={styles.hobbiesContainer}>{hobbiesList}</View>
+            </ScrollView>
             <View style={styles.btnContainer}>
               <RegisterButton
                 isDisabled={isDisabled}
@@ -213,12 +216,14 @@ const styles = StyleSheet.create({
     marginTop: "15%",
   },
   hobbiesContainer: {
-    width: "85%",
-    height: "45%",
+    width: "100%",
+    // height: "100%",
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     marginBottom: "2%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   hobbyItem: {
     backgroundColor: "#F2F2F2",
@@ -230,7 +235,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: "2%",
-    marginRight: "2%",
+    marginRight: "4%",
   },
   chosenHobbyItem: {
     backgroundColor: "#F2F2F2",
@@ -242,7 +247,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: "2%",
-    marginRight: "2%",
+    marginRight: "4%",
   },
   bcgHearths: {
     position: "absolute",
@@ -269,6 +274,10 @@ const styles = StyleSheet.create({
     height: 30,
     fontFamily: "montMedium",
     fontSize: 14,
+  },
+  scroll: {
+    width: "80%",
+    maxHeight: "40%",
   },
 });
 export default HobbyScreen;

@@ -126,7 +126,7 @@ const HomeScreen = () => {
                 width: "100%",
               }}
             >
-              Mia Smith, 25
+              Mia, 25
             </Text>
             <Text
               style={{

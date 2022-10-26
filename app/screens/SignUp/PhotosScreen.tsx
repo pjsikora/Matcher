@@ -153,15 +153,14 @@ const styles = StyleSheet.create({
   photo: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#EAEAEA",
-    border: "3px solid #3333",
-    marginBottom: "5%",
   },
   box: {
     width: "30%",
     height: "40%",
-    backgroundColor: "#333",
-    border: "3px solid #3333",
+    backgroundColor: "#F2F2F2",
+    borderWidth: 3,
+    borderColor: "#EAEAEA",
+    borderRadius: 10,
     marginBottom: "10%",
   },
   bcgHearths: {
