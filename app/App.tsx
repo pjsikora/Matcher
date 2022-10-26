@@ -28,11 +28,12 @@ import ProfileScreen from "./screens/Application/ProfileScreen";
 import SettingsScreen from "./screens/Application/SettingsScreen";
 import { View, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import TestScreen from "./screens/Application/TestScrees";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function AppContainer() {
+export function AppContainer() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -143,6 +144,12 @@ function AppContainer() {
         component={MessagesScreen}
       />
       <Tab.Screen
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.openDrawer();
+          },
+        })}
         options={{
           tabBarIcon: ({ focused }) => {
             return !focused ? (
@@ -160,8 +167,8 @@ function AppContainer() {
             );
           },
         }}
-        name="Profile"
-        component={ProfileScreen}
+        name="Test"
+        component={TestScreen}
       />
     </Tab.Navigator>
   );
@@ -253,8 +260,8 @@ export default function App() {
               options={{ title: "" }}
             />
             <Stack.Screen
-              name="appContainer"
-              component={AppContainer}
+              name="profileScreen"
+              component={ProfileScreen}
               options={{ title: "", gestureEnabled: false }}
             />
           </Stack.Navigator>

@@ -8,6 +8,8 @@ import LoadingDots from "react-native-loading-dots";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserCall } from "../../controllers/userController";
 import { saveUserData, updateUser } from "../../redux/userSlice";
+import SettingsScreen from "./SettingsScreen";
+import { AppContainer } from "../../App";
 
 const ProfileScreen = ({ navigation }: { navigation: any }) => {
   const [loading, setLoading] = useState(true);
@@ -56,7 +58,7 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
     <Drawer.Navigator
       defaultStatus="open"
       useLegacyImplementation={true}
-      initialRouteName="Home"
+      initialRouteName="appContainer"
       screenOptions={{ headerShown: false, swipeEnabled: false }}
       drawerContent={(props) => {
         return (
@@ -82,11 +84,13 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
                 </Text>
                 <View style={styles.buttonsContainer}>
                   <View style={styles.buttonContainer}>
-                    <Image
-                      style={styles.buttonIcon}
-                      source={require("../../images/me/settingsButton.png")}
-                    />
-                    <Text style={styles.btnText}>Settings</Text>
+                    <TouchableOpacity>
+                      <Image
+                        style={styles.buttonIcon}
+                        source={require("../../images/me/settingsButton.png")}
+                      />
+                      <Text style={styles.btnText}>Settings</Text>
+                    </TouchableOpacity>
                   </View>
                   <View style={styles.buttonContainer}>
                     <Image
@@ -122,7 +126,7 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
         );
       }}
     >
-      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Settings" component={SettingsScreen} />
     </Drawer.Navigator>
   );
 };
