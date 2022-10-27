@@ -74,8 +74,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "space-evenly",
+    marginTop: "5%",
   },
   btnImage: {
     position: "relative",

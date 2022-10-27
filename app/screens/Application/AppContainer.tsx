@@ -11,6 +11,8 @@ import { saveUserData, updateUser } from "../../redux/userSlice";
 import SettingsScreen from "./SettingsScreen";
 import { BottomTab } from "../../App";
 import EditInfoScreen from "./EditInfoScreen";
+import EditGender from "../editInfo/EditGender";
+import EditHobbies from "../editInfo/EditHobbies";
 
 const AppContainer = ({ navigation }: { navigation: any }) => {
   const [loading, setLoading] = useState(true);
@@ -143,6 +145,8 @@ const AppContainer = ({ navigation }: { navigation: any }) => {
       <Drawer.Screen name="bottomTab" component={BottomTab} />
       <Drawer.Screen name="settings" component={SettingsScreen} />
       <Drawer.Screen name="edit" component={EditInfoScreen} />
+      <Drawer.Screen name="editGender" component={EditGender} />
+      <Drawer.Screen name="editHobbies" component={EditHobbies} />
     </Drawer.Navigator>
   );
 };
