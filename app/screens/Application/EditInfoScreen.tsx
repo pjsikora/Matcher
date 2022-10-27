@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     width: "85%",
     height: 70,
     display: "flex",
-    marginTop: "8%",
+    marginTop: "10%",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",

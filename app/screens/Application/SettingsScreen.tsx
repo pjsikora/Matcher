@@ -35,9 +35,7 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
       <View style={styles.buttonsContainer}>
         <Text style={styles.categoryText}>Account Settings</Text>
         <TouchableOpacity style={styles.buttonContainerWBottom}>
-          <Text style={styles.titleButtonText}>
-            Email <Text style={styles.buttonText}>{user.email}</Text>
-          </Text>
+          <Text style={styles.titleButtonText}>Change your e-mail</Text>
           <Image
             style={styles.icon}
             source={require("../../images/editArrow.png")}
@@ -54,9 +52,7 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
         {/* Location section */}
         <Text style={styles.categoryText}>Location Settings</Text>
         <TouchableOpacity style={styles.buttonContainerWBottom}>
-          <Text style={styles.titleButtonText}>
-            Location <Text style={styles.buttonText}>{user.location}</Text>
-          </Text>
+          <Text style={styles.titleButtonText}>Set your Location</Text>
           <Image
             style={styles.icon}
             source={require("../../images/editArrow.png")}
@@ -118,10 +114,7 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
           />
         </View>
         <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.titleButtonText}>
-            Show me
-            <Text style={styles.buttonText}>{user.genderPreference}</Text>
-          </Text>
+          <Text style={styles.titleButtonText}>Gender preferences</Text>
           <Image
             style={styles.icon}
             source={require("../../images/editArrow.png")}
@@ -163,7 +156,7 @@ const styles = StyleSheet.create({
     width: "85%",
     height: 70,
     display: "flex",
-    marginTop: "8%",
+    marginTop: "10%",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
@@ -190,7 +183,6 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     width: "85%",
-    marginTop: "5%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -238,6 +230,7 @@ const styles = StyleSheet.create({
     color: "#CF56A1",
     marginTop: 20,
     marginBottom: 20,
+    marginLeft: "auto",
   },
   icon: {
     marginLeft: "auto",

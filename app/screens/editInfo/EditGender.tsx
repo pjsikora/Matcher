@@ -25,15 +25,15 @@ const EditGender = ({ navigation }: EditGenderProps) => {
       </View>
       <View style={styles.container}>
         <View style={styles.buttonsContainer}>
-          <View style={styles.button}>
-            <TouchableOpacity
-              style={styles.circle}
-              onPress={() => {
-                setGender("Male");
-              }}
-            >
+          <TouchableOpacity
+            onPress={() => {
+              setGender("Male");
+            }}
+            style={styles.button}
+          >
+            <View style={styles.circle}>
               {gender === "Male" && <View style={styles.circleFill}></View>}
-            </TouchableOpacity>
+            </View>
             <Text
               style={{
                 fontSize: 20,
@@ -43,16 +43,16 @@ const EditGender = ({ navigation }: EditGenderProps) => {
             >
               Male
             </Text>
-          </View>
-          <View style={styles.button}>
-            <TouchableOpacity
-              style={styles.circle}
-              onPress={() => {
-                setGender("Female");
-              }}
-            >
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setGender("Female");
+            }}
+            style={styles.button}
+          >
+            <View style={styles.circle}>
               {gender === "Female" && <View style={styles.circleFill}></View>}
-            </TouchableOpacity>
+            </View>
             <Text
               style={{
                 fontSize: 20,
@@ -62,7 +62,7 @@ const EditGender = ({ navigation }: EditGenderProps) => {
             >
               Female
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     width: "85%",
     height: 70,
     display: "flex",
-    marginTop: "8%",
+    marginTop: "10%",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
