@@ -82,18 +82,6 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      <View style={styles.searchBarContainer}>
-        <Image
-          style={styles.searchIcon}
-          source={require("../../images/searchIcon.png")}
-        />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search"
-          placeholderTextColor="#ABABAB"
-        />
-      </View>
-
       <Text style={styles.text}>Recently Matched</Text>
       <ScrollView
         showsHorizontalScrollIndicator={false}
