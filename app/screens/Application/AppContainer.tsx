@@ -13,6 +13,11 @@ import { BottomTab } from "../../App";
 import EditInfoScreen from "./EditInfoScreen";
 import EditGender from "../editInfo/EditGender";
 import EditHobbies from "../editInfo/EditHobbies";
+import EditEmail from "../editInfo/EditEmail";
+import EditPassword from "../editInfo/EditPassword";
+import EditGenderPreference from "../editInfo/editGenderPreference";
+import EditLocation from "../editInfo/EditLocation";
+import SupportScreen from "./SupportScreen";
 
 const AppContainer = ({ navigation }: { navigation: any }) => {
   const [loading, setLoading] = useState(true);
@@ -147,6 +152,14 @@ const AppContainer = ({ navigation }: { navigation: any }) => {
       <Drawer.Screen name="edit" component={EditInfoScreen} />
       <Drawer.Screen name="editGender" component={EditGender} />
       <Drawer.Screen name="editHobbies" component={EditHobbies} />
+      <Drawer.Screen name="editEmail" component={EditEmail} />
+      <Drawer.Screen name="editPassword" component={EditPassword} />
+      <Drawer.Screen
+        name="editGenderPreference"
+        component={EditGenderPreference}
+      />
+      <Drawer.Screen name="editLocation" component={EditLocation} />
+      <Drawer.Screen name="support" component={SupportScreen} />
     </Drawer.Navigator>
   );
 };

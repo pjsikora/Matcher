@@ -34,7 +34,12 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
       </View>
       <View style={styles.buttonsContainer}>
         <Text style={styles.categoryText}>Account Settings</Text>
-        <TouchableOpacity style={styles.buttonContainerWBottom}>
+        <TouchableOpacity
+          style={styles.buttonContainerWBottom}
+          onPress={() => {
+            navigation.navigate("editEmail");
+          }}
+        >
           <Text style={styles.titleButtonText}>Change your e-mail</Text>
           <Image
             style={styles.icon}
@@ -42,7 +47,12 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            navigation.navigate("editPassword");
+          }}
+        >
           <Text style={styles.titleButtonText}>Change your password</Text>
           <Image
             style={styles.icon}
@@ -51,7 +61,12 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
         </TouchableOpacity>
         {/* Location section */}
         <Text style={styles.categoryText}>Location Settings</Text>
-        <TouchableOpacity style={styles.buttonContainerWBottom}>
+        <TouchableOpacity
+          style={styles.buttonContainerWBottom}
+          onPress={() => {
+            navigation.navigate("editLocation");
+          }}
+        >
           <Text style={styles.titleButtonText}>Set your Location</Text>
           <Image
             style={styles.icon}
@@ -113,7 +128,12 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
             maximumTrackTintColor="#1E1E1E"
           />
         </View>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            navigation.navigate("editGenderPreference");
+          }}
+        >
           <Text style={styles.titleButtonText}>Gender preferences</Text>
           <Image
             style={styles.icon}
@@ -122,7 +142,12 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
         </TouchableOpacity>
 
         <Text style={styles.categoryText}>Contact Us </Text>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            navigation.navigate("support");
+          }}
+        >
           <Text style={styles.titleButtonText}>Help & Support</Text>
           <Image
             style={styles.icon}
@@ -130,9 +155,9 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps) => {
           />
         </TouchableOpacity>
       </View>
-      <View>
+      <TouchableOpacity>
         <Text style={styles.deleteButtonText}>Delete Account</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
