@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   View,
   Text,
@@ -9,13 +9,15 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
-} from "react-native";
+} from 'react-native'
 
 interface EditLocationProps {
-  navigation: any;
+  navigation: any
 }
 const EditLocation = ({ navigation }: EditLocationProps) => {
-  const [enteredLocation, setEnteredLocation] = useState("");
+  const [enteredLocation, setEnteredLocation] = useState('')
+
+  console.log(enteredLocation)
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.allContains}>
@@ -23,8 +25,8 @@ const EditLocation = ({ navigation }: EditLocationProps) => {
           <Text style={styles.title}>Location</Text>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("settings");
-              setEnteredLocation("");
+              navigation.navigate('settings')
+              setEnteredLocation('')
             }}
           >
             <Text style={styles.done}>Done</Text>
@@ -35,8 +37,8 @@ const EditLocation = ({ navigation }: EditLocationProps) => {
             <View style={styles.textInputContainer}>
               <TextInput
                 style={styles.input}
-                placeholder="Enter your location"
-                placeholderTextColor="#ABABAB"
+                placeholder='Enter your location'
+                placeholderTextColor='#ABABAB'
                 value={enteredLocation}
                 onChangeText={(newLocation) => setEnteredLocation(newLocation)}
               />
@@ -45,76 +47,76 @@ const EditLocation = ({ navigation }: EditLocationProps) => {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   allContains: {
-    width: "100%",
-    minHeight: "100%",
-    backgroundColor: "#FFF",
-    alignItems: "center",
+    width: '100%',
+    minHeight: '100%',
+    backgroundColor: '#FFF',
+    alignItems: 'center',
   },
   headerContainer: {
-    width: "85%",
+    width: '85%',
     height: 70,
-    display: "flex",
-    marginTop: "15%",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
+    display: 'flex',
+    marginTop: '15%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   container: {
-    display: "flex",
-    width: "85%",
-    alignItems: "center",
+    display: 'flex',
+    width: '85%',
+    alignItems: 'center',
   },
   curContainer: {
-    width: "100%",
-    height: "20%",
-    marginTop: "5%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    width: '100%',
+    height: '20%',
+    marginTop: '5%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   title: {
     fontSize: 34,
-    fontFamily: "montSBold",
-    color: "#1E1E1E",
+    fontFamily: 'montSBold',
+    color: '#1E1E1E',
   },
   done: {
     fontSize: 20,
-    color: "#CF56A1",
-    fontFamily: "montSBold",
+    color: '#CF56A1',
+    fontFamily: 'montSBold',
   },
   formContainer: {
-    width: "90%",
-    height: "35%",
-    display: "flex",
-    marginTop: "10%",
+    width: '90%',
+    height: '35%',
+    display: 'flex',
+    marginTop: '10%',
   },
   textInputContainer: {
-    width: "100%",
-    height: "30%",
+    width: '100%',
+    height: '30%',
     paddingBottom: 3,
     // borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: "3%",
-    borderBottomColor: "#ABABAB",
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: '3%',
+    borderBottomColor: '#ABABAB',
     borderBottomWidth: 1,
     // paddingTop: 5,
-    marginBottom: "15%",
+    marginBottom: '15%',
   },
   input: {
-    width: "80%",
-    height: "100%",
-    color: "#1E1E1E",
+    width: '80%',
+    height: '100%',
+    color: '#1E1E1E',
     lineHeight: 23,
-    fontFamily: "montRegular",
+    fontFamily: 'montRegular',
   },
-});
+})
 
-export default EditLocation;
+export default EditLocation
