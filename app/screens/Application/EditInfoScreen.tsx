@@ -34,6 +34,7 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
 
   console.log(state)
   useEffect(() => {
+    console.log('Hi')
     let isMounted = true
 
     isMounted &&
@@ -44,7 +45,7 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
     return () => {
       isMounted = false
     }
-  }, [state.user.desc, state.user.gender])
+  }, [])
 
   useEffect(() => {
     setLoading(false)
@@ -83,7 +84,7 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
     console.log(result)
   }
   return (
-    !loading && (
+    userData && (
       <View style={styles.allContains}>
         <View style={styles.headerContainer}>
           <Text style={styles.title}>Edit info</Text>
@@ -109,7 +110,8 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
                 style={styles.input}
                 placeholder='About me'
                 placeholderTextColor='#ABABAB'
-                value={state.user.desc}
+                onChangeText={(desc) => setUserData({ ...userData, desc })}
+                value={userData.desc}
               />
               <TouchableOpacity
                 style={{
