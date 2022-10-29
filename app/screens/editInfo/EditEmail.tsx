@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -11,7 +11,8 @@ import {
   Alert,
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { sendCodeCall } from '../../controllers/userController'
+import { changeEmailCall, sendCodeCall } from '../../controllers/userController'
+import { showSuccess } from '../../tools/alertHandlers'
 
 interface EditEmailProps {
   navigation: any
@@ -19,8 +20,11 @@ interface EditEmailProps {
 const EditEmail = ({ navigation }: EditEmailProps) => {
   const [isVerificationCodeSend, setIsVerificationCodeSend] = useState(false)
   const [enteredNewEmail, setEnteredNewEmail] = useState('')
+  const [code, setCode] = useState('')
+  const [error, setError] = useState('')
 
   const user = useSelector((state: any) => state.userData.user)
+  const state = useSelector((state: any) => state.userData)
   const dispatch = useDispatch()
 
   const showAlert = () => {
@@ -38,11 +42,34 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
     )
   }
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setEnteredNewEmail('')
+      setIsVerificationCodeSend(false)
+      setCode('')
+      setError('')
+    })
+    return unsubscribe
+  }, [navigation])
+
   const sendCodeHandler = async () => {
     const result = await sendCodeCall(user.email, dispatch)
 
     if (result) {
       showAlert()
+    }
+  }
+  const changeEmailHandler = async () => {
+    const result = await changeEmailCall(
+      state.accessToken,
+      enteredNewEmail.toLowerCase(),
+      code,
+      dispatch
+    )
+    if (result.success) {
+      showSuccess(navigation)
+    } else {
+      setError(result.message)
     }
   }
   return (
@@ -110,6 +137,8 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
                   style={styles.input}
                   placeholder='Enter verification code'
                   placeholderTextColor='#ABABAB'
+                  value={code}
+                  onChangeText={(code) => setCode(code)}
                 />
               </View>
             )}
@@ -129,7 +158,11 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
               )}
               <TouchableOpacity
                 style={styles.sendButton}
-                onPress={sendCodeHandler}
+                onPress={() => {
+                  !isVerificationCodeSend
+                    ? sendCodeHandler()
+                    : changeEmailHandler()
+                }}
               >
                 {!isVerificationCodeSend && (
                   <Text
@@ -156,6 +189,7 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
               </TouchableOpacity>
             </View>
           </View>
+          <Text style={styles.error}>{error && error}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -246,6 +280,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  error: {
+    marginTop: '13%',
+    color: 'red',
   },
 })
 
