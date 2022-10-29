@@ -37,11 +37,13 @@ export const updateUserCall = async (
       { ...values },
       { params: { accessToken } }
     )
-    dispatch(updateUser(res.data))
+    dispatch(updateUser(res.data.message))
     dispatch(requestSuccess())
-
     return res.data
-  } catch (err) {
-    //dispatch(requestError())
+  } catch (err: any) {
+    dispatch(requestError())
+
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
   }
 }

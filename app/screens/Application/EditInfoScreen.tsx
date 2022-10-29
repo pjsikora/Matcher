@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react'
 import { userSlice } from '../../redux/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUserCall } from '../../controllers/userController'
+import LoadingDots from 'react-native-loading-dots'
+import { showError, showSuccess } from '../../tools/alertHandlers'
 
 const user = {
   description: 'Wronka to pedał',
@@ -30,9 +32,8 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
   const state = useSelector((state: any) => state.userData)
   const dispatch = useDispatch()
   const [userData, setUserData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  console.log(state)
   useEffect(() => {
     console.log('Hi')
     let isMounted = true
@@ -41,6 +42,7 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
       setUserData({
         desc: state.user.desc,
         gender: state.user.gender,
+        hobbies: state.user.hobbies,
       })
     return () => {
       isMounted = false
@@ -48,8 +50,8 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
   }, [])
 
   useEffect(() => {
-    setLoading(false)
-  }, [userData])
+    setLoading(state.pending)
+  }, [state.pending])
 
   const showAlert = () => {
     Alert.alert(
@@ -78,90 +80,99 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
     const result = await updateUserCall(state.accessToken, userData, dispatch)
 
     if (result.success) {
-      navigation.goBack()
-      navigation.openDrawer()
+      showSuccess(navigation)
+    } else {
+      showError()
     }
-    console.log(result)
   }
   return (
     userData && (
-      <View style={styles.allContains}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.title}>Edit info</Text>
-          <TouchableOpacity
-            onPress={() => {
-              showAlert()
-            }}
-          >
-            <Text style={styles.done}>Done</Text>
-          </TouchableOpacity>
-        </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.container}>
-            <View style={styles.imagesContainer}>
-              <Text style={styles.categoryText}>Images</Text>
-              <EditInfoAddPhotoTiles />
-            </View>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.categoryText}>Description</Text>
-              <TextInput
-                multiline={true}
-                numberOfLines={6}
-                style={styles.input}
-                placeholder='About me'
-                placeholderTextColor='#ABABAB'
-                onChangeText={(desc) => setUserData({ ...userData, desc })}
-                value={userData.desc}
-              />
+      <>
+        <View style={styles.allContains}>
+          <View style={styles.wrapper}>
+            <View style={styles.headerContainer}>
+              <Text style={styles.title}>Edit info</Text>
               <TouchableOpacity
-                style={{
-                  width: '20%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                onPress={() => {
+                  showAlert()
                 }}
               >
-                <Text style={styles.editText}>Edit</Text>
+                <Text style={styles.done}>Done</Text>
               </TouchableOpacity>
             </View>
-            <View>
-              <View style={styles.genderContainer}>
-                <Text style={styles.categoryText}>Gender</Text>
-                <TouchableOpacity
-                  style={styles.buttonContainer}
-                  onPress={() => {
-                    navigation.navigate('editGender', {
-                      gender: userData.gender,
-                      setUserData,
-                    })
-                  }}
-                >
-                  <Text style={styles.buttonText}>{userData.gender}</Text>
-                  <Image
-                    style={styles.icon}
-                    source={require('../../images/editArrow.png')}
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.container}>
+                <View style={styles.imagesContainer}>
+                  <Text style={styles.categoryText}>Images</Text>
+                  <EditInfoAddPhotoTiles />
+                </View>
+                <View style={styles.descriptionContainer}>
+                  <Text style={styles.categoryText}>Description</Text>
+                  <TextInput
+                    multiline={true}
+                    numberOfLines={6}
+                    style={styles.input}
+                    placeholder='About me'
+                    placeholderTextColor='#ABABAB'
+                    onChangeText={(desc) => setUserData({ ...userData, desc })}
+                    value={userData.desc}
                   />
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      width: '20%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Text style={styles.editText}>Edit</Text>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <View style={styles.genderContainer}>
+                    <Text style={styles.categoryText}>Gender</Text>
+                    <TouchableOpacity
+                      style={styles.buttonContainer}
+                      onPress={() => {
+                        navigation.navigate('editGender', {
+                          gender: userData.gender,
+                          setUserData,
+                        })
+                      }}
+                    >
+                      <Text style={styles.buttonText}>{userData.gender}</Text>
+                      <Image
+                        style={styles.icon}
+                        source={require('../../images/editArrow.png')}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.genderContainer}>
+                    <Text style={styles.categoryText}>Hobbies</Text>
+                    <TouchableOpacity
+                      style={styles.buttonContainer}
+                      onPress={() => {
+                        navigation.navigate('editHobbies')
+                      }}
+                    >
+                      <Text style={styles.buttonText}>{userData.hobbies}</Text>
+                      <Image
+                        style={styles.icon}
+                        source={require('../../images/editArrow.png')}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
-              <View style={styles.genderContainer}>
-                <Text style={styles.categoryText}>Hobbies</Text>
-                <TouchableOpacity
-                  style={styles.buttonContainer}
-                  onPress={() => {
-                    navigation.navigate('editHobbies')
-                  }}
-                >
-                  <Text style={styles.buttonText}>{user.hobbies}</Text>
-                  <Image
-                    style={styles.icon}
-                    source={require('../../images/editArrow.png')}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
+            </ScrollView>
           </View>
-        </ScrollView>
-      </View>
+          {loading && (
+            <View style={styles.loading}>
+              <LoadingDots />
+            </View>
+          )}
+        </View>
+      </>
     )
   )
 }
@@ -172,6 +183,8 @@ const styles = StyleSheet.create({
   allContains: {
     width: '100%',
     minHeight: '100%',
+  },
+  wrapper: {
     backgroundColor: '#FFF',
     alignItems: 'center',
   },
@@ -266,5 +279,16 @@ const styles = StyleSheet.create({
     color: '#CF56A1',
     marginTop: 20,
     marginBottom: 20,
+  },
+  loading: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: '0%',
+    left: '0%',
+    flexDirection: 'column',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
