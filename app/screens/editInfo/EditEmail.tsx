@@ -8,8 +8,10 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { sendCodeCall } from '../../controllers/userController'
 
 interface EditEmailProps {
   navigation: any
@@ -19,6 +21,30 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
   const [enteredNewEmail, setEnteredNewEmail] = useState('')
 
   const user = useSelector((state: any) => state.userData.user)
+  const dispatch = useDispatch()
+
+  const showAlert = () => {
+    Alert.alert(
+      'Success',
+      'We send confirmation code to your CURRENT email. Please type it belowe!',
+      [
+        {
+          text: 'Ok',
+          onPress: () => {
+            setIsVerificationCodeSend(true)
+          },
+        },
+      ]
+    )
+  }
+
+  const sendCodeHandler = async () => {
+    const result = await sendCodeCall(user.email, dispatch)
+
+    if (result) {
+      showAlert()
+    }
+  }
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.allContains}>
@@ -103,9 +129,7 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
               )}
               <TouchableOpacity
                 style={styles.sendButton}
-                onPress={() => {
-                  setIsVerificationCodeSend(true)
-                }}
+                onPress={sendCodeHandler}
               >
                 {!isVerificationCodeSend && (
                   <Text

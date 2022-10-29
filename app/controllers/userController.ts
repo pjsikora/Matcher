@@ -47,3 +47,19 @@ export const updateUserCall = async (
     else return { sucess: false, message: err }
   }
 }
+export const sendCodeCall = async (email: string, dispatch: Dispatch) => {
+  dispatch(requestStart())
+
+  try {
+    const res = await axios.post(
+      'http://192.168.1.132:6000/api/auth/activate/resend',
+      {
+        email,
+      }
+    )
+    dispatch(requestSuccess())
+    return res.data
+  } catch (err) {
+    dispatch(requestError())
+  }
+}
