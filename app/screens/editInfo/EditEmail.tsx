@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   View,
   Text,
@@ -8,18 +8,17 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-} from "react-native";
-
-const user = {
-  email: "bartlomiej.wydrzycki@gmail.com",
-};
+} from 'react-native'
+import { useSelector } from 'react-redux'
 
 interface EditEmailProps {
-  navigation: any;
+  navigation: any
 }
 const EditEmail = ({ navigation }: EditEmailProps) => {
-  const [isVerificationCodeSend, setIsVerificationCodeSend] = useState(false);
-  const [enteredNewEmail, setEnteredNewEmail] = useState("");
+  const [isVerificationCodeSend, setIsVerificationCodeSend] = useState(false)
+  const [enteredNewEmail, setEnteredNewEmail] = useState('')
+
+  const user = useSelector((state: any) => state.userData.user)
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.allContains}>
@@ -27,8 +26,8 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
           <Text style={styles.title}>Email</Text>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("settings");
-              setIsVerificationCodeSend(false);
+              navigation.navigate('settings')
+              setIsVerificationCodeSend(false)
             }}
           >
             <Text style={styles.done}>Done</Text>
@@ -39,8 +38,8 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
             <Text
               style={{
                 fontSize: 14,
-                color: "#1E1E1E",
-                fontFamily: "montRegular",
+                color: '#1E1E1E',
+                fontFamily: 'montRegular',
               }}
             >
               Your current email
@@ -48,8 +47,8 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
             <Text
               style={{
                 fontSize: 20,
-                color: "#CF56A1",
-                fontFamily: "montMedium",
+                color: '#CF56A1',
+                fontFamily: 'montMedium',
               }}
             >
               {user.email}
@@ -60,8 +59,8 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
             <Text
               style={{
                 fontSize: 16,
-                color: "1E1E1E",
-                fontFamily: "montRegular",
+                color: '1E1E1E',
+                fontFamily: 'montRegular',
               }}
             >
               Change your email
@@ -69,12 +68,12 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
             <View style={styles.textInputContainer}>
               <Image
                 style={styles.icon}
-                source={require("../../images/mailVector.png")}
+                source={require('../../images/mailVector.png')}
               />
               <TextInput
                 style={styles.input}
-                placeholder="Enter your new email"
-                placeholderTextColor="#ABABAB"
+                placeholder='Enter your new email'
+                placeholderTextColor='#ABABAB'
                 value={enteredNewEmail}
                 onChangeText={(newEmail) => setEnteredNewEmail(newEmail)}
               />
@@ -83,8 +82,8 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
               <View style={styles.textInputContainer}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Enter verification code"
-                  placeholderTextColor="#ABABAB"
+                  placeholder='Enter verification code'
+                  placeholderTextColor='#ABABAB'
                 />
               </View>
             )}
@@ -94,8 +93,8 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
                   <Text
                     style={{
                       fontSize: 13,
-                      color: "#1E1E1E",
-                      fontFamily: "montRegular",
+                      color: '#1E1E1E',
+                      fontFamily: 'montRegular',
                     }}
                   >
                     Resend verification code
@@ -105,15 +104,15 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
               <TouchableOpacity
                 style={styles.sendButton}
                 onPress={() => {
-                  setIsVerificationCodeSend(true);
+                  setIsVerificationCodeSend(true)
                 }}
               >
                 {!isVerificationCodeSend && (
                   <Text
                     style={{
-                      color: "#FFF",
+                      color: '#FFF',
                       fontSize: 16,
-                      fontFamily: "montMedium",
+                      fontFamily: 'montMedium',
                     }}
                   >
                     Send verification code
@@ -122,9 +121,9 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
                 {isVerificationCodeSend && (
                   <Text
                     style={{
-                      color: "#FFF",
+                      color: '#FFF',
                       fontSize: 16,
-                      fontFamily: "montMedium",
+                      fontFamily: 'montMedium',
                     }}
                   >
                     Submit
@@ -136,94 +135,94 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   allContains: {
-    width: "100%",
-    minHeight: "100%",
-    backgroundColor: "#FFF",
-    alignItems: "center",
+    width: '100%',
+    minHeight: '100%',
+    backgroundColor: '#FFF',
+    alignItems: 'center',
   },
   headerContainer: {
-    width: "85%",
+    width: '85%',
     height: 70,
-    display: "flex",
-    marginTop: "15%",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
+    display: 'flex',
+    marginTop: '15%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   container: {
-    display: "flex",
-    width: "85%",
-    alignItems: "center",
+    display: 'flex',
+    width: '85%',
+    alignItems: 'center',
   },
   curContainer: {
-    width: "100%",
-    height: "20%",
-    marginTop: "5%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    width: '100%',
+    height: '20%',
+    marginTop: '5%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   title: {
     fontSize: 34,
-    fontFamily: "montSBold",
-    color: "#1E1E1E",
+    fontFamily: 'montSBold',
+    color: '#1E1E1E',
   },
   done: {
     fontSize: 20,
-    color: "#CF56A1",
-    fontFamily: "montSBold",
+    color: '#CF56A1',
+    fontFamily: 'montSBold',
   },
   formContainer: {
-    width: "90%",
-    height: "35%",
-    display: "flex",
-    marginTop: "10%",
+    width: '90%',
+    height: '35%',
+    display: 'flex',
+    marginTop: '10%',
   },
   textInputContainer: {
-    width: "100%",
-    height: "30%",
+    width: '100%',
+    height: '30%',
     padding: 10,
     // borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: "3%",
-    borderBottomColor: "#ABABAB",
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: '3%',
+    borderBottomColor: '#ABABAB',
     borderBottomWidth: 1,
   },
   input: {
-    width: "90%",
-    height: "100%",
-    color: "#1E1E1E",
+    width: '90%',
+    height: '100%',
+    color: '#1E1E1E',
     lineHeight: 23,
-    fontFamily: "montRegular",
+    fontFamily: 'montRegular',
   },
   icon: {
-    marginTop: "5%",
-    marginRight: "2%",
+    marginTop: '5%',
+    marginRight: '2%',
   },
   sendButton: {
-    backgroundColor: "#CF56A1",
+    backgroundColor: '#CF56A1',
     borderRadius: 10,
     height: 50,
     padding: 15,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: "auto",
-    marginTop: "10%",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 'auto',
+    marginTop: '10%',
   },
   buttonsContainer: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "row",
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
-});
+})
 
-export default EditEmail;
+export default EditEmail
