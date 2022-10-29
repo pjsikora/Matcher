@@ -29,6 +29,8 @@ import { View, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TestScreen from "./screens/Application/TestScrees";
 import AppContainer from "./screens/Application/AppContainer";
+import ForgotPasswordScreen from "./screens/SignIn/ResetPassword/ForgotPasswordScreen";
+import ResetPasswordScreen from "./screens/SignIn/ResetPassword/ResetPasswordScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -257,6 +259,16 @@ export default function App() {
             <Stack.Screen
               name="signIn"
               component={SignInScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="forgotPassword"
+              component={ForgotPasswordScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="resetPassword"
+              component={ResetPasswordScreen}
               options={{ title: "" }}
             />
             <Stack.Screen

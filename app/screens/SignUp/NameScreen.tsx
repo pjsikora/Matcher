@@ -46,6 +46,7 @@ const NameScreen = ({ navigation }: EmailScreenProps) => {
           <BackButton navigation={navigation} />
           <Text style={styles.title}>Your Name is...</Text>
           <TextInput
+            pointerEvents="box-only"
             style={styles.input}
             onChangeText={(name) => setName(name)}
             value={name}

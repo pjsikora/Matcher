@@ -131,6 +131,24 @@ const SignInScreen = ({ navigation }: EmailScreenProps) => {
                 />
               </TouchableOpacity>
             </View>
+            <TouchableOpacity
+              style={{ width: "100%" }}
+              onPress={() => {
+                navigation.navigate("forgotPassword");
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: "#FFF",
+                  marginRight: "auto",
+                  marginLeft: "10%",
+                  fontFamily: "montRegular",
+                }}
+              >
+                Forgot your password?
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.error}>{error && error} </Text>
           </View>
           <SignInButton

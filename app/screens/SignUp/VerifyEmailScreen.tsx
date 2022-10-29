@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,32 +8,32 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
-} from 'react-native'
-import RegisterButton from '../../components/UI/RegisterButton'
-import { LinearGradient } from 'expo-linear-gradient'
-import { RegisterStateData } from '../../types/types'
-import { useDispatch, useSelector } from 'react-redux'
-import { activationCall, loginCall } from '../../controllers/loginController'
-import BackButton from '../../components/UI/BackButton'
-import { saveUserData } from '../../redux/userSlice'
+} from "react-native";
+import RegisterButton from "../../components/UI/RegisterButton";
+import { LinearGradient } from "expo-linear-gradient";
+import { RegisterStateData } from "../../types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { activationCall, loginCall } from "../../controllers/loginController";
+import BackButton from "../../components/UI/BackButton";
+import { saveUserData } from "../../redux/userSlice";
 
 interface EmailScreenProps {
-  route: any
-  navigation: any
+  route: any;
+  navigation: any;
 }
 const VerifyEmailScreen = ({ route, navigation }: EmailScreenProps) => {
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [code, setCode] = useState('')
-  const [error, setError] = useState('')
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
 
-  console.log(route.params.email)
+  console.log(route.params.email);
 
-  const dispatch = useDispatch()
-  const state = useSelector((state: any) => state.userData)
+  const dispatch = useDispatch();
+  const state = useSelector((state: any) => state.userData);
 
   const navigate = (screen: string) => {
-    navigation.navigate(screen)
-  }
+    navigation.navigate(screen);
+  };
   const loginHandler = async () => {
     const result = await loginCall(
       {
@@ -42,50 +42,50 @@ const VerifyEmailScreen = ({ route, navigation }: EmailScreenProps) => {
       },
       navigate,
       dispatch
-    )
-    console.log('aktywacja logowanie')
-    console.log(result)
+    );
+    console.log("aktywacja logowanie");
+    console.log(result);
     if (result.success) {
-      dispatch(saveUserData({ ...result.userData }))
-      navigation.navigate('appContainer')
+      dispatch(saveUserData({ ...result.userData }));
+      navigation.navigate("appContainer");
     } else {
-      setError(result.message)
+      setError(result.message);
     }
-  }
+  };
   const activationHandler = async () => {
     const result = await activationCall({
       email: route.params.email.toLowerCase(),
       code,
-    })
+    });
 
-    console.log(result)
+    console.log(result);
     if (result.success) {
-      loginHandler()
+      loginHandler();
     } else {
-      setError(result.message)
+      setError(result.message);
     }
-  }
+  };
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
 
     if (isMounted) {
       if (code) {
-        setIsDisabled(false)
+        setIsDisabled(false);
       } else {
-        setIsDisabled(true)
+        setIsDisabled(true);
       }
     }
 
     return () => {
-      isMounted = false
-    }
-  }, [code])
+      isMounted = false;
+    };
+  }, [code]);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <LinearGradient
-          colors={['#AD439C', '#FAAEBE']}
+          colors={["#AD439C", "#FAAEBE"]}
           style={styles.linearGradient}
         >
           <View style={styles.whiteContainer}>
@@ -93,93 +93,94 @@ const VerifyEmailScreen = ({ route, navigation }: EmailScreenProps) => {
             <Text style={styles.title}>Verify Your Email...</Text>
             <Image
               style={styles.icon}
-              source={require('../../images/mailIcon.png')}
+              source={require("../../images/mailIcon.png")}
             />
             <Text style={styles.desc}>
               A cerification code has been sent to your email adress
             </Text>
             <TextInput
+              pointerEvents="box-only"
               style={styles.input}
               onChangeText={(code) => setCode(code)}
-              placeholder='Enter verification code'
-              placeholderTextColor='#ABABAB'
+              placeholder="Enter verification code"
+              placeholderTextColor="#ABABAB"
             />
             <Text style={styles.error}>{error && error}</Text>
             <RegisterButton
               isDisabled={isDisabled}
-              toScreen='Welcome'
+              toScreen="Welcome"
               navigation={navigation}
               callback={activationHandler}
             />
           </View>
           <Image
             style={styles.bcgHearths}
-            source={require('../../images/Hearts.png')}
+            source={require("../../images/Hearts.png")}
           />
         </LinearGradient>
       </View>
     </TouchableWithoutFeedback>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   linearGradient: {
     borderRadius: 5,
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
   whiteContainer: {
-    backgroundColor: '#FFFFFF',
-    minHeight: '60%',
-    width: '100%',
+    backgroundColor: "#FFFFFF",
+    minHeight: "60%",
+    width: "100%",
     borderBottomRightRadius: 60,
     borderBottomLeftRadius: 60,
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
     fontSize: 55,
-    marginBottom: '15%',
-    width: '80%',
-    fontFamily: 'montSBold',
+    marginBottom: "15%",
+    width: "80%",
+    fontFamily: "montSBold",
   },
   icon: {
-    marginTop: '5%',
+    marginTop: "5%",
   },
   desc: {
     fontSize: 12,
-    marginTop: '2%',
-    marginBottom: '5%',
+    marginTop: "2%",
+    marginBottom: "5%",
   },
   btnTitle: {
     fontSize: 20,
-    marginTop: '15%',
+    marginTop: "15%",
   },
   input: {
-    width: '50%',
-    height: '10%',
-    marginTop: '2%',
-    marginBottom: '15%',
-    textAlign: 'center',
-    borderBottomColor: '#1E1E1E',
+    width: "50%",
+    height: "10%",
+    marginTop: "2%",
+    marginBottom: "15%",
+    textAlign: "center",
+    borderBottomColor: "#1E1E1E",
     borderBottomWidth: 1,
     lineHeight: 35,
     fontSize: 20,
   },
   btn: {},
   bcgHearths: {
-    position: 'absolute',
-    top: '60%',
+    position: "absolute",
+    top: "60%",
     zIndex: -1,
   },
   error: {
-    color: 'red',
-    marginBottom: '5%',
+    color: "red",
+    marginBottom: "5%",
   },
-})
-export default VerifyEmailScreen
+});
+export default VerifyEmailScreen;

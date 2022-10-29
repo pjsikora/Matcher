@@ -9,17 +9,17 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import RegisterButton from "../../components/UI/RegisterButton";
+import RegisterButton from "../../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../redux/registerSlice";
-import BackButton from "../../components/UI/BackButton";
-import { validators } from "../../validators/validators";
+import { addItem } from "../../../redux/registerSlice";
+import BackButton from "../../../components/UI/BackButton";
+import { validators } from "../../../validators/validators";
 
-interface PasswordScreenProp {
+interface ResetPasswordScreenProp {
   navigation: any;
 }
-const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
+const ResetPasswordScreen = ({ navigation }: ResetPasswordScreenProp) => {
   const dispatch = useDispatch();
 
   const [isDisabled, setIsDisabled] = useState(true);
@@ -61,11 +61,11 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
         >
           <View style={styles.whiteContainer}>
             <BackButton navigation={navigation} />
-            <Text style={styles.title}>Your Password is...</Text>
+            <Text style={styles.title}>Reset Your Password</Text>
             <View style={styles.textInputContainer}>
               <Image
                 style={styles.icon}
-                source={require("../../images/lockIcon.png")}
+                source={require("../../../images/lockIcon.png")}
               />
               <TextInput
                 pointerEvents="box-only"
@@ -85,8 +85,8 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
                 <Image
                   source={
                     isPasswordSecured
-                      ? require("../../images/eyeIcon.png")
-                      : require("../../images/eyeSlashIcon.png")
+                      ? require("../../../images/eyeIcon.png")
+                      : require("../../../images/eyeSlashIcon.png")
                   }
                 />
               </TouchableOpacity>
@@ -94,7 +94,7 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
             <View style={styles.textInputContainer}>
               <Image
                 style={styles.icon}
-                source={require("../../images/lockIcon.png")}
+                source={require("../../../images/lockIcon.png")}
               />
               <TextInput
                 pointerEvents="box-only"
@@ -111,13 +111,13 @@ const PasswordScreen = ({ navigation }: PasswordScreenProp) => {
             <Text style={styles.error}>{password && error}</Text>
             <RegisterButton
               isDisabled={isDisabled}
-              toScreen="nameInput"
+              toScreen="signIn"
               navigation={navigation}
             />
           </View>
           <Image
             style={styles.bcgHearths}
-            source={require("../../images/Hearts.png")}
+            source={require("../../../images/Hearts.png")}
           />
         </LinearGradient>
       </View>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 55,
+    fontSize: 40,
     marginBottom: "5%",
     width: "80%",
     fontFamily: "montSBold",
@@ -199,4 +199,4 @@ const styles = StyleSheet.create({
     height: 22,
   },
 });
-export default PasswordScreen;
+export default ResetPasswordScreen;
