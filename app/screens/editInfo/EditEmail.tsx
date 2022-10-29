@@ -144,7 +144,7 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
             )}
             <View style={styles.buttonsContainer}>
               {isVerificationCodeSend && (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={sendCodeHandler}>
                   <Text
                     style={{
                       fontSize: 13,
