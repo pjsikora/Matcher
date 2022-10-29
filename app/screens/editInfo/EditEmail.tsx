@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeEmailCall, sendCodeCall } from '../../controllers/userController'
+import LoadingDots from 'react-native-loading-dots'
 import { showSuccess } from '../../tools/alertHandlers'
 
 interface EditEmailProps {
@@ -22,6 +23,7 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
   const [enteredNewEmail, setEnteredNewEmail] = useState('')
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const user = useSelector((state: any) => state.userData.user)
   const state = useSelector((state: any) => state.userData)
@@ -48,9 +50,13 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
       setIsVerificationCodeSend(false)
       setCode('')
       setError('')
+      setLoading(false) ///Jak cos nie działa to przez to
     })
     return unsubscribe
   }, [navigation])
+  useEffect(() => {
+    setLoading(state.pending)
+  }, [state.pending])
 
   const sendCodeHandler = async () => {
     const result = await sendCodeCall(user.email, dispatch)
@@ -191,6 +197,11 @@ const EditEmail = ({ navigation }: EditEmailProps) => {
           </View>
           <Text style={styles.error}>{error && error}</Text>
         </View>
+        {loading && (
+          <View style={styles.loading}>
+            <LoadingDots />
+          </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
   )
@@ -284,6 +295,17 @@ const styles = StyleSheet.create({
   error: {
     marginTop: '13%',
     color: 'red',
+  },
+  loading: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: '0%',
+    left: '0%',
+    flexDirection: 'column',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
 
