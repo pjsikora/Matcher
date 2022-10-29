@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 const User = require('../models/userModel')
 const ErrorHandler = require('../tools/errorHandler')
+const bcrypt = require('bcrypt')
 
 exports.getUser = (
   req: Request & { user: any },
@@ -50,6 +51,52 @@ exports.updateUser = async (
     } = user._doc
 
     res.status(200).json({ success: true, message: others })
+  } catch (err) {
+    next(new ErrorHandler(err, 500))
+  }
+}
+exports.changeEmail = async (
+  req: Request & { user: any },
+  res: Response,
+  next: Function
+) => {
+  const { newEmail, code } = req.body
+
+  try {
+    const user = await User.findOne({ email: req.user.email })
+
+    if (!user) {
+      return next(new ErrorHandler('User not found', 404))
+    }
+    const match = await bcrypt.compare(code, user.activation_code)
+
+    if (match && new Date() < user.activation_code_exp) {
+      user.activation_code = null
+      user.activation_code_exp = null
+
+      user.email = newEmail
+
+      console.log(user)
+      const newUser = await user.save()
+
+      const {
+        password,
+        account_status,
+        activation_code,
+        activation_code_exp,
+        __v,
+        _id,
+        createdAt,
+        updatedAt,
+        ...others
+      } = newUser._doc
+
+      return res.status(200).json({ success: true, message: others })
+    } else {
+      return next(
+        new ErrorHandler('Activation code is invalid or expired', 400)
+      )
+    }
   } catch (err) {
     next(new ErrorHandler(err, 500))
   }
