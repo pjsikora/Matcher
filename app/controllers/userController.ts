@@ -1,11 +1,16 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { requestError, requestStart, requestSuccess } from '../redux/userSlice'
+import {
+  requestError,
+  requestStart,
+  requestSuccess,
+  updateUser,
+} from '../redux/userSlice'
 
 export const getUserCall = async (accessToken: string, dispatch: Dispatch) => {
   dispatch(requestStart())
   try {
-    const res = await axios.get('http://192.168.8.179:6000/api/user/', {
+    const res = await axios.get('http://192.168.1.132:6000/api/user/', {
       params: {
         accessToken,
       },
@@ -18,5 +23,25 @@ export const getUserCall = async (accessToken: string, dispatch: Dispatch) => {
   } catch (err) {
     dispatch(requestError())
     console.log(err)
+  }
+}
+export const updateUserCall = async (
+  accessToken: string,
+  values: any,
+  dispatch: Dispatch
+) => {
+  dispatch(requestStart())
+  try {
+    const res = await axios.post(
+      'http://192.168.1.132:6000/api/user/update',
+      { ...values },
+      { params: { accessToken } }
+    )
+    dispatch(updateUser(res.data))
+    dispatch(requestSuccess())
+
+    return res.data
+  } catch (err) {
+    //dispatch(requestError())
   }
 }

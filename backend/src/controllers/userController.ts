@@ -20,6 +20,8 @@ exports.updateUser = async (
 ) => {
   const { ...values } = req.body
 
+  console.log(values)
+
   const itemsToEdit = Object.keys(values).map((key) => [key, values[key]])
 
   try {
@@ -35,7 +37,19 @@ exports.updateUser = async (
 
     const newUser = await user.save()
 
-    res.status(200).json({ success: true, message: newUser })
+    const {
+      password,
+      account_status,
+      activation_code,
+      activation_code_exp,
+      __v,
+      _id,
+      createdAt,
+      updatedAt,
+      ...others
+    } = user._doc
+
+    res.status(200).json({ success: true, message: others })
   } catch (err) {
     next(new ErrorHandler(err, 500))
   }
