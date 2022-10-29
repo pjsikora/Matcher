@@ -101,3 +101,42 @@ exports.changeEmail = async (
     next(new ErrorHandler(err, 500))
   }
 }
+exports.changePassword = async (
+  req: Request & { user: any },
+  res: Response,
+  next: Function
+) => {
+  const { currentPassword, newPassword } = req.body
+  try {
+    const user = await User.findOne({ email: req.user.email }).select(
+      '+password'
+    )
+
+    if (!user) return next(new ErrorHandler('User not found', 404))
+
+    const isCorrect = await bcrypt.compare(currentPassword, user.password)
+
+    console.log(isCorrect)
+
+    if (!isCorrect) {
+      return next(new ErrorHandler('Invalid password', 400))
+    }
+
+    bcrypt.hash(
+      newPassword,
+      Number(process.env.SALT_ROUNDS),
+      async function (err: Error, hash: String) {
+        user.password = hash
+
+        await user.save()
+
+        res.status(200).json({
+          success: true,
+          message: 'Password changed successfully',
+        })
+      }
+    )
+  } catch (err) {
+    next(new ErrorHandler(err, 500))
+  }
+}

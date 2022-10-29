@@ -93,3 +93,44 @@ export const changeEmailCall = async (
     else return { sucess: false, message: err }
   }
 }
+export const checkPasswordCall = async (
+  accessToken: string,
+  currentPassword: string,
+  dispatch: Dispatch
+) => {
+  dispatch(requestStart())
+  try {
+    const res = await axios.post(
+      'http://192.168.1.132:6000/api/auth/password/check',
+      { currentPassword },
+      { params: { accessToken } }
+    )
+    dispatch(requestSuccess())
+    return res.data
+  } catch (err: any) {
+    dispatch(requestError())
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
+  }
+}
+export const changePasswordCall = async (
+  accessToken: string,
+  currentPassword: string,
+  newPassword: string,
+  dispatch: Dispatch
+) => {
+  dispatch(requestStart())
+  try {
+    const res = await axios.post(
+      'http://192.168.1.132:6000/api/user/update/password',
+      { currentPassword, newPassword },
+      { params: { accessToken } }
+    )
+    dispatch(requestSuccess())
+    return res.data
+  } catch (err: any) {
+    dispatch(requestError())
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
+  }
+}
