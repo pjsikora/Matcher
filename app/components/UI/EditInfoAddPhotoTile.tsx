@@ -7,11 +7,15 @@ import {
   ImageBackground,
 } from "react-native";
 
-const EditInfoAddPhotoTile = () => {
+const EditInfoAddPhotoTile = (props: any) => {
   return (
     <View style={styles.boxContainer}>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
@@ -27,7 +31,11 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
@@ -43,7 +51,11 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
@@ -59,7 +71,11 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
@@ -75,7 +91,11 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
@@ -91,7 +111,11 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}

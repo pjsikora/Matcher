@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserCall } from "../../controllers/userController";
 import LoadingDots from "react-native-loading-dots";
 import { showError, showSuccess } from "../../tools/alertHandlers";
+import PhotoModal from "../../components/UI/PhotoModal";
 
 const user = {
   description: "Wronka to pedał",
@@ -33,6 +34,12 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [isModalShowedUp, setIsModalShowedUp] = useState(false);
+  const [images, setImages] = useState([{}]);
+
+  const addImagesHandler = (items: any) => {
+    setImages((current) => [...current, items]);
+  };
 
   useEffect(() => {
     console.log("Hi");
@@ -89,6 +96,13 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
     userData && (
       <>
         <View style={styles.allContains}>
+          <PhotoModal
+            modalShow={isModalShowedUp}
+            onCancel={() => {
+              setIsModalShowedUp(false);
+            }}
+            onAddImage={addImagesHandler}
+          />
           <View style={styles.wrapper}>
             <View style={styles.headerContainer}>
               <Text style={styles.title}>Edit info</Text>
@@ -104,7 +118,11 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
               <View style={styles.container}>
                 <View style={styles.imagesContainer}>
                   <Text style={styles.categoryText}>Images</Text>
-                  <EditInfoAddPhotoTiles />
+                  <EditInfoAddPhotoTiles
+                    onShowModal={() => {
+                      setIsModalShowedUp(true);
+                    }}
+                  />
                 </View>
                 <View style={styles.descriptionContainer}>
                   <Text style={styles.categoryText}>Description</Text>
