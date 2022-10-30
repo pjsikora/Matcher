@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -53,9 +53,10 @@ const hobbies = [
 ];
 
 interface EditHobbiesProps {
+  route: any;
   navigation: any;
 }
-const EditHobbies = ({ navigation }: EditHobbiesProps) => {
+const EditHobbies = ({ route, navigation }: EditHobbiesProps) => {
   const [gender, setGender] = useState(user.gender);
   const [restart, setRestart] = useState(false);
   const [chosenHobbies, setChosenHobbies] = useState([]);
@@ -68,6 +69,10 @@ const EditHobbies = ({ navigation }: EditHobbiesProps) => {
       return false;
     }
   };
+
+  // useEffect(() => {
+  //   console.log(route.params.hobbies);
+  // }, []);
 
   const filteredHobbies = hobbies.filter(filterBySearch);
 

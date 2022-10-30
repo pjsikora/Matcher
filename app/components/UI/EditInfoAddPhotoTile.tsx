@@ -7,16 +7,21 @@ import {
   ImageBackground,
 } from "react-native";
 
-const EditInfoAddPhotoTile = () => {
+const EditInfoAddPhotoTile = (props: any) => {
   return (
     <View style={styles.boxContainer}>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+            console.log(props.images[0]);
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
               imageStyle={{ borderRadius: 10 }}
-              source={require("../../images/users/zdj1.jpg")}
+              source={props.images[1]}
             >
               <Image
                 style={styles.btnImage}
@@ -27,12 +32,16 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
               imageStyle={{ borderRadius: 10 }}
-              source={require("../../images/users/zdj2.jpg")}
+              source={props.images[2]}
             >
               <Image
                 style={styles.btnImage}
@@ -43,12 +52,16 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
               imageStyle={{ borderRadius: 10 }}
-              source={require("../../images/users/zdj3.jpg")}
+              source={props.images[3]}
             >
               <Image
                 style={styles.btnImage}
@@ -59,12 +72,16 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
               imageStyle={{ borderRadius: 10 }}
-              source={require("../../images/users/zdj4.jpg")}
+              source={props.images[4]}
             >
               <Image
                 style={styles.btnImage}
@@ -75,12 +92,16 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
               imageStyle={{ borderRadius: 10 }}
-              source={require("../../images/users/zdj5.jpg")}
+              source={props.images[5]}
             >
               <Image
                 style={styles.btnImage}
@@ -91,12 +112,16 @@ const EditInfoAddPhotoTile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.onShowModal();
+          }}
+        >
           <View style={styles.photo}>
             <ImageBackground
               style={{ width: "100%", height: "100%" }}
               imageStyle={{ borderRadius: 10 }}
-              source={require("../../images/users/zdj6.png")}
+              source={props.images[6]}
             >
               <Image
                 style={styles.btnImage}
