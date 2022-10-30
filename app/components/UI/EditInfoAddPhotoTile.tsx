@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
 
 const EditInfoAddPhotoTile = () => {
   return (
@@ -6,60 +13,96 @@ const EditInfoAddPhotoTile = () => {
       <View style={styles.box}>
         <TouchableOpacity>
           <View style={styles.photo}>
-            <Image
-              style={styles.btnImage}
-              source={require("../../images/addBtn.png")}
-            />
+            <ImageBackground
+              style={{ width: "100%", height: "100%" }}
+              imageStyle={{ borderRadius: 10 }}
+              source={require("../../images/users/zdj1.jpg")}
+            >
+              <Image
+                style={styles.btnImage}
+                source={require("../../images/addBtn.png")}
+              />
+            </ImageBackground>
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
         <TouchableOpacity>
           <View style={styles.photo}>
-            <Image
-              style={styles.btnImage}
-              source={require("../../images/addBtn.png")}
-            />
+            <ImageBackground
+              style={{ width: "100%", height: "100%" }}
+              imageStyle={{ borderRadius: 10 }}
+              source={require("../../images/users/zdj2.jpg")}
+            >
+              <Image
+                style={styles.btnImage}
+                source={require("../../images/addBtn.png")}
+              />
+            </ImageBackground>
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
         <TouchableOpacity>
           <View style={styles.photo}>
-            <Image
-              style={styles.btnImage}
-              source={require("../../images/addBtn.png")}
-            />
+            <ImageBackground
+              style={{ width: "100%", height: "100%" }}
+              imageStyle={{ borderRadius: 10 }}
+              source={require("../../images/users/zdj3.jpg")}
+            >
+              <Image
+                style={styles.btnImage}
+                source={require("../../images/addBtn.png")}
+              />
+            </ImageBackground>
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
         <TouchableOpacity>
           <View style={styles.photo}>
-            <Image
-              style={styles.btnImage}
-              source={require("../../images/addBtn.png")}
-            />
+            <ImageBackground
+              style={{ width: "100%", height: "100%" }}
+              imageStyle={{ borderRadius: 10 }}
+              source={require("../../images/users/zdj4.jpg")}
+            >
+              <Image
+                style={styles.btnImage}
+                source={require("../../images/addBtn.png")}
+              />
+            </ImageBackground>
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
         <TouchableOpacity>
           <View style={styles.photo}>
-            <Image
-              style={styles.btnImage}
-              source={require("../../images/addBtn.png")}
-            />
+            <ImageBackground
+              style={{ width: "100%", height: "100%" }}
+              imageStyle={{ borderRadius: 10 }}
+              source={require("../../images/users/zdj5.jpg")}
+            >
+              <Image
+                style={styles.btnImage}
+                source={require("../../images/addBtn.png")}
+              />
+            </ImageBackground>
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.box}>
         <TouchableOpacity>
           <View style={styles.photo}>
-            <Image
-              style={styles.btnImage}
-              source={require("../../images/addBtn.png")}
-            />
+            <ImageBackground
+              style={{ width: "100%", height: "100%" }}
+              imageStyle={{ borderRadius: 10 }}
+              source={require("../../images/users/zdj6.png")}
+            >
+              <Image
+                style={styles.btnImage}
+                source={require("../../images/addBtn.png")}
+              />
+            </ImageBackground>
           </View>
         </TouchableOpacity>
       </View>
