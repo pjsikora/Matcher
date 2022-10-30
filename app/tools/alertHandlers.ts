@@ -1,7 +1,9 @@
 import { Alert } from 'react-native'
 
-export const showError = () => {
-  Alert.alert('Error', 'Something went wrong, please try again', [
+export const showError = (
+  customText = 'Something went wrong, please try again'
+) => {
+  Alert.alert('Error', customText, [
     {
       text: 'Ok',
       onPress: () => {},

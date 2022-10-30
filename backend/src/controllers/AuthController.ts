@@ -215,3 +215,33 @@ exports.resendActivationCode = async (
     })
   }
 }
+exports.checkPassword = async (
+  req: Request & { user: any },
+  res: Response,
+  next: Function
+) => {
+  const { currentPassword } = req.body
+  try {
+    const user = await User.findOne({ email: req.user.email }).select(
+      '+password'
+    )
+
+    console.log(user)
+
+    if (!user) return next(new ErrorHandler('User not found', 404))
+
+    const isCorrect = await bcrypt.compare(currentPassword, user.password)
+
+    console.log(isCorrect)
+
+    if (!isCorrect) {
+      return next(new ErrorHandler('Invalid password', 400))
+    } else
+      return res.status(200).json({
+        success: true,
+        message: 'Password matches',
+      })
+  } catch (err) {
+    next(new ErrorHandler(err, 500))
+  }
+}

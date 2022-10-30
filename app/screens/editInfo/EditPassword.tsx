@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -9,21 +9,71 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
-} from "react-native";
+} from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  changePasswordCall,
+  checkPasswordCall,
+} from '../../controllers/userController'
+import { showError, showSuccess } from '../../tools/alertHandlers'
+import LoadingDots from 'react-native-loading-dots'
 
 const user = {
-  password: "zaq1@WSX",
-};
+  password: 'zaq1@WSX',
+}
 
 interface EditPasswordProps {
-  navigation: any;
+  navigation: any
 }
 const EditPassword = ({ navigation }: EditPasswordProps) => {
-  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
-  const [enteredOldPassword, setEnteredOldPassword] = useState("");
-  const [enteredNewPassword, setEnteredNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isPasswordSecured, setIsPasswordSecured] = useState(true);
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false)
+  const [enteredOldPassword, setEnteredOldPassword] = useState('')
+  const [enteredNewPassword, setEnteredNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [isPasswordSecured, setIsPasswordSecured] = useState(true)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setIsPasswordCorrect(false)
+      setEnteredOldPassword('')
+      setEnteredNewPassword('')
+      setConfirmPassword('')
+      setIsPasswordSecured(true)
+    })
+    return unsubscribe
+  }, [navigation])
+
+  const state = useSelector((state: any) => state.userData)
+  const dispatch = useDispatch()
+
+  const checkPassword = async () => {
+    if (enteredNewPassword && enteredNewPassword === confirmPassword) {
+      const res = await changePasswordCall(
+        state.accessToken,
+        enteredOldPassword,
+        enteredNewPassword,
+        dispatch
+      )
+      if (res.success) {
+        showSuccess(navigation)
+      }
+      return res.success
+    } else if (enteredNewPassword && enteredNewPassword !== confirmPassword) {
+      showError('Passwords are not the same')
+      return true
+    } else {
+      const res = await checkPasswordCall(
+        state.accessToken,
+        enteredOldPassword,
+        dispatch
+      )
+      return res.success
+    }
+  }
+  useEffect(() => {
+    setLoading(state.pending)
+  }, [state.pending])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -32,11 +82,11 @@ const EditPassword = ({ navigation }: EditPasswordProps) => {
           <Text style={styles.title}>Password</Text>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("settings");
-              setIsPasswordCorrect(false);
-              setEnteredOldPassword("");
-              setEnteredNewPassword("");
-              setConfirmPassword("");
+              navigation.navigate('settings')
+              setIsPasswordCorrect(false)
+              setEnteredOldPassword('')
+              setEnteredNewPassword('')
+              setConfirmPassword('')
             }}
           >
             <Text style={styles.done}>Done</Text>
@@ -53,13 +103,13 @@ const EditPassword = ({ navigation }: EditPasswordProps) => {
             >
               <Image
                 style={styles.icon}
-                source={require("../../images/lockIcon.png")}
+                source={require('../../images/lockIcon.png')}
               />
               <TextInput
                 editable={!isPasswordCorrect}
                 style={styles.input}
-                placeholder="Enter your password"
-                placeholderTextColor="#ABABAB"
+                placeholder='Enter your password'
+                placeholderTextColor='#ABABAB'
                 secureTextEntry={true}
                 value={enteredOldPassword}
                 onChangeText={(oldPassword) =>
@@ -72,12 +122,12 @@ const EditPassword = ({ navigation }: EditPasswordProps) => {
                 <View style={styles.textInputContainer}>
                   <Image
                     style={styles.icon}
-                    source={require("../../images/lockIcon.png")}
+                    source={require('../../images/lockIcon.png')}
                   />
                   <TextInput
                     style={styles.input}
-                    placeholder="Enter your new password"
-                    placeholderTextColor="#ABABAB"
+                    placeholder='Enter your new password'
+                    placeholderTextColor='#ABABAB'
                     secureTextEntry={isPasswordSecured}
                     value={enteredNewPassword}
                     onChangeText={(newPassword) =>
@@ -87,14 +137,14 @@ const EditPassword = ({ navigation }: EditPasswordProps) => {
                   <TouchableOpacity
                     style={styles.iconRight}
                     onPress={() => {
-                      setIsPasswordSecured(!isPasswordSecured);
+                      setIsPasswordSecured(!isPasswordSecured)
                     }}
                   >
                     <Image
                       source={
                         isPasswordSecured
-                          ? require("../../images/eyeIcon.png")
-                          : require("../../images/eyeSlashIcon.png")
+                          ? require('../../images/eyeIcon.png')
+                          : require('../../images/eyeSlashIcon.png')
                       }
                     />
                   </TouchableOpacity>
@@ -102,12 +152,12 @@ const EditPassword = ({ navigation }: EditPasswordProps) => {
                 <View style={styles.textInputContainer}>
                   <Image
                     style={styles.icon}
-                    source={require("../../images/lockIcon.png")}
+                    source={require('../../images/lockIcon.png')}
                   />
                   <TextInput
                     style={styles.input}
-                    placeholder="Confirm your new password"
-                    placeholderTextColor="#ABABAB"
+                    placeholder='Confirm your new password'
+                    placeholderTextColor='#ABABAB'
                     secureTextEntry={isPasswordSecured}
                     value={confirmPassword}
                     onChangeText={(newPassword) =>
@@ -117,24 +167,25 @@ const EditPassword = ({ navigation }: EditPasswordProps) => {
                 </View>
               </>
             )}
+
             <View style={styles.buttonsContainer}>
               <TouchableOpacity
                 style={styles.sendButton}
-                onPress={() => {
-                  if (enteredOldPassword === user.password) {
-                    setIsPasswordCorrect(true);
+                onPress={async () => {
+                  if (await checkPassword()) {
+                    setIsPasswordCorrect(true)
                   } else {
-                    Alert.alert("Password is incorrect", "Please. Try again.", [
-                      { text: "OK", onPress: () => console.log("OK Pressed") },
-                    ]);
+                    Alert.alert('Password is incorrect', 'Please. Try again.', [
+                      { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    ])
                   }
                 }}
               >
                 <Text
                   style={{
-                    color: "#FFF",
+                    color: '#FFF',
                     fontSize: 16,
-                    fontFamily: "montMedium",
+                    fontFamily: 'montMedium',
                   }}
                 >
                   Submit
@@ -143,116 +194,133 @@ const EditPassword = ({ navigation }: EditPasswordProps) => {
             </View>
           </View>
         </View>
+
+        {loading && (
+          <View style={styles.loading}>
+            <LoadingDots />
+          </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   allContains: {
-    width: "100%",
-    minHeight: "100%",
-    backgroundColor: "#FFF",
-    alignItems: "center",
+    width: '100%',
+    minHeight: '100%',
+    backgroundColor: '#FFF',
+    alignItems: 'center',
   },
   headerContainer: {
-    width: "85%",
+    width: '85%',
     height: 70,
-    display: "flex",
-    marginTop: "15%",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
+    display: 'flex',
+    marginTop: '15%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   container: {
-    display: "flex",
-    width: "85%",
-    alignItems: "center",
+    display: 'flex',
+    width: '85%',
+    alignItems: 'center',
   },
   curContainer: {
-    width: "100%",
-    height: "20%",
-    marginTop: "5%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    width: '100%',
+    height: '20%',
+    marginTop: '5%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   title: {
     fontSize: 34,
-    fontFamily: "montSBold",
-    color: "#1E1E1E",
+    fontFamily: 'montSBold',
+    color: '#1E1E1E',
   },
   done: {
     fontSize: 20,
-    color: "#CF56A1",
-    fontFamily: "montSBold",
+    color: '#CF56A1',
+    fontFamily: 'montSBold',
   },
   formContainer: {
-    width: "90%",
-    height: "35%",
-    display: "flex",
-    marginTop: "10%",
+    width: '90%',
+    height: '35%',
+    display: 'flex',
+    marginTop: '10%',
   },
   textInputContainer: {
-    width: "100%",
-    height: "30%",
+    width: '100%',
+    height: '30%',
     paddingBottom: 3,
     // borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: "3%",
-    borderBottomColor: "#ABABAB",
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: '3%',
+    borderBottomColor: '#ABABAB',
     borderBottomWidth: 1,
     // paddingTop: 5,
-    marginBottom: "15%",
+    marginBottom: '15%',
   },
   textInputContainerDisabled: {
-    width: "100%",
-    height: "30%",
+    width: '100%',
+    height: '30%',
     paddingBottom: 3,
     // borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: "3%",
-    borderBottomColor: "#ABABAB",
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: '3%',
+    borderBottomColor: '#ABABAB',
     borderBottomWidth: 1,
     // paddingTop: 5,
     opacity: 0.5,
-    marginBottom: "15%",
+    marginBottom: '15%',
   },
   input: {
-    width: "80%",
-    height: "100%",
-    color: "#1E1E1E",
+    width: '80%',
+    height: '100%',
+    color: '#1E1E1E',
     lineHeight: 23,
-    fontFamily: "montRegular",
+    fontFamily: 'montRegular',
   },
   icon: {
-    marginRight: "2%",
-    marginTop: "2.5%",
+    marginRight: '2%',
+    marginTop: '2.5%',
   },
   sendButton: {
-    backgroundColor: "#CF56A1",
+    backgroundColor: '#CF56A1',
     borderRadius: 10,
     height: 50,
     padding: 15,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: "auto",
-    marginTop: "10%",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 'auto',
+    marginTop: '10%',
   },
   buttonsContainer: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "row",
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   iconRight: {
-    marginTop: "4%",
-    marginLeft: "4%",
+    marginTop: '4%',
+    marginLeft: '4%',
   },
-});
+  loading: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: '0%',
+    left: '0%',
+    flexDirection: 'column',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
 
-export default EditPassword;
+export default EditPassword
