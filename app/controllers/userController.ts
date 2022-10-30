@@ -10,7 +10,7 @@ import {
 export const getUserCall = async (accessToken: string, dispatch: Dispatch) => {
   dispatch(requestStart())
   try {
-    const res = await axios.get('http://192.168.1.132:6000/api/user/', {
+    const res = await axios.get('/user/', {
       params: {
         accessToken,
       },
@@ -33,7 +33,7 @@ export const updateUserCall = async (
   dispatch(requestStart())
   try {
     const res = await axios.post(
-      'http://192.168.1.132:6000/api/user/update',
+      '/user/update',
       { ...values },
       { params: { accessToken } }
     )
@@ -51,12 +51,9 @@ export const sendCodeCall = async (email: string, dispatch: Dispatch) => {
   dispatch(requestStart())
 
   try {
-    const res = await axios.post(
-      'http://192.168.1.132:6000/api/auth/activate/resend',
-      {
-        email,
-      }
-    )
+    const res = await axios.post('/auth/activate/resend', {
+      email,
+    })
     dispatch(requestSuccess())
     return res.data
   } catch (err: any) {
@@ -78,7 +75,7 @@ export const changeEmailCall = async (
   console.log(code)
   try {
     const res = await axios.post(
-      'http://192.168.1.132:6000/api/user/update/email',
+      '/user/update/email',
       { newEmail, code },
       { params: { accessToken } }
     )
@@ -101,7 +98,7 @@ export const checkPasswordCall = async (
   dispatch(requestStart())
   try {
     const res = await axios.post(
-      'http://192.168.1.132:6000/api/auth/password/check',
+      '/auth/password/check',
       { currentPassword },
       { params: { accessToken } }
     )
@@ -122,7 +119,7 @@ export const changePasswordCall = async (
   dispatch(requestStart())
   try {
     const res = await axios.post(
-      'http://192.168.1.132:6000/api/user/update/password',
+      '/user/update/password',
       { currentPassword, newPassword },
       { params: { accessToken } }
     )
