@@ -1,20 +1,42 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
 import RegisterButton from "../../components/UI/RegisterButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useSelector } from "react-redux";
 import BackButton from "../../components/UI/BackButton";
 import PhotoModal from "../../components/UI/PhotoModal";
+import { set } from "react-native-reanimated";
+import { preventAutoHideAsync } from "expo-splash-screen";
 interface EmailScreenProps {
   navigation: any;
 }
 const PhotosScreen = ({ navigation }: EmailScreenProps) => {
   const count = useSelector((state: RegisterUserData) => state);
+  const [isModalShowedUp, setIsModalShowedUp] = useState(true);
+  const [images, setImages] = useState([{}]);
+
+  const addImagesHandler = (items: any) => {
+    setImages([...images, items]);
+    console.log(images);
+  };
 
   return (
     <View style={styles.container}>
-      <PhotoModal />
+      <PhotoModal
+        modalShow={isModalShowedUp}
+        onCancel={() => {
+          setIsModalShowedUp(false);
+        }}
+        onAddImage={addImagesHandler}
+      />
       <LinearGradient
         colors={["#AD439C", "#FAAEBE"]}
         style={styles.linearGradient}
@@ -24,62 +46,122 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
           <Text style={styles.title}>What do You look like?</Text>
           <View style={styles.photosContainer}>
             <View style={styles.box}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsModalShowedUp(true);
+                }}
+              >
                 <View style={styles.photo}>
-                  <Image
-                    style={styles.btnImage}
-                    source={require("../../images/addBtn.png")}
-                  />
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    imageStyle={{ borderRadius: 10 }}
+                    source={require("../../images/users/zdj1.jpg")}
+                  >
+                    <Image
+                      style={styles.btnImage}
+                      source={require("../../images/addBtn.png")}
+                    />
+                  </ImageBackground>
                 </View>
               </TouchableOpacity>
             </View>
             <View style={styles.box}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsModalShowedUp(true);
+                }}
+              >
                 <View style={styles.photo}>
-                  <Image
-                    style={styles.btnImage}
-                    source={require("../../images/addBtn.png")}
-                  />
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    imageStyle={{ borderRadius: 10 }}
+                    source={require("../../images/users/zdj2.jpg")}
+                  >
+                    <Image
+                      style={styles.btnImage}
+                      source={require("../../images/addBtn.png")}
+                    />
+                  </ImageBackground>
                 </View>
               </TouchableOpacity>
             </View>
             <View style={styles.box}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsModalShowedUp(true);
+                }}
+              >
                 <View style={styles.photo}>
-                  <Image
-                    style={styles.btnImage}
-                    source={require("../../images/addBtn.png")}
-                  />
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    imageStyle={{ borderRadius: 10 }}
+                    source={require("../../images/users/zdj3.jpg")}
+                  >
+                    <Image
+                      style={styles.btnImage}
+                      source={require("../../images/addBtn.png")}
+                    />
+                  </ImageBackground>
                 </View>
               </TouchableOpacity>
             </View>
             <View style={styles.box}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsModalShowedUp(true);
+                }}
+              >
                 <View style={styles.photo}>
-                  <Image
-                    style={styles.btnImage}
-                    source={require("../../images/addBtn.png")}
-                  />
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    imageStyle={{ borderRadius: 10 }}
+                    source={require("../../images/users/zdj4.jpg")}
+                  >
+                    <Image
+                      style={styles.btnImage}
+                      source={require("../../images/addBtn.png")}
+                    />
+                  </ImageBackground>
                 </View>
               </TouchableOpacity>
             </View>
             <View style={styles.box}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsModalShowedUp(true);
+                }}
+              >
                 <View style={styles.photo}>
-                  <Image
-                    style={styles.btnImage}
-                    source={require("../../images/addBtn.png")}
-                  />
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    imageStyle={{ borderRadius: 10 }}
+                    source={require("../../images/users/zdj5.jpg")}
+                  >
+                    <Image
+                      style={styles.btnImage}
+                      source={require("../../images/addBtn.png")}
+                    />
+                  </ImageBackground>
                 </View>
               </TouchableOpacity>
             </View>
             <View style={styles.box}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsModalShowedUp(true);
+                }}
+              >
                 <View style={styles.photo}>
-                  <Image
-                    style={styles.btnImage}
-                    source={require("../../images/addBtn.png")}
-                  />
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    imageStyle={{ borderRadius: 10 }}
+                    source={require("../../images/users/zdj6.png")}
+                  >
+                    <Image
+                      style={styles.btnImage}
+                      source={require("../../images/addBtn.png")}
+                    />
+                  </ImageBackground>
                 </View>
               </TouchableOpacity>
             </View>
