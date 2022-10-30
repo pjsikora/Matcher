@@ -1,136 +1,133 @@
-import { Dispatch } from "@reduxjs/toolkit";
-import axios from "axios";
+import { Dispatch } from '@reduxjs/toolkit'
+import axios from 'axios'
 import {
   requestError,
   requestStart,
   requestSuccess,
   updateUser,
-} from "../redux/userSlice";
+} from '../redux/userSlice'
 
 export const getUserCall = async (accessToken: string, dispatch: Dispatch) => {
-  dispatch(requestStart());
+  dispatch(requestStart())
   try {
-    const res = await axios.get("http://192.168.8.179:6000/api/user/", {
+    const res = await axios.get('/user/', {
       params: {
         accessToken,
       },
-    });
+    })
     setTimeout(() => {
-      dispatch(requestSuccess());
-    }, 2000);
+      dispatch(requestSuccess())
+    }, 2000)
 
-    return res.data;
+    return res.data
   } catch (err) {
-    dispatch(requestError());
-    console.log(err);
+    dispatch(requestError())
+    console.log(err)
   }
-};
+}
 export const updateUserCall = async (
   accessToken: string,
   values: any,
   dispatch: Dispatch
 ) => {
-  dispatch(requestStart());
+  dispatch(requestStart())
   try {
     const res = await axios.post(
-      "http://192.168.8.179:6000/api/user/update",
+      '/user/update',
       { ...values },
       { params: { accessToken } }
-    );
-    dispatch(updateUser(res.data.message));
-    dispatch(requestSuccess());
-    return res.data;
+    )
+    dispatch(updateUser(res.data.message))
+    dispatch(requestSuccess())
+    return res.data
   } catch (err: any) {
-    dispatch(requestError());
+    dispatch(requestError())
 
-    if (err.hasOwnProperty("response")) return err.response.data;
-    else return { sucess: false, message: err };
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
   }
-};
+}
 export const sendCodeCall = async (email: string, dispatch: Dispatch) => {
-  dispatch(requestStart());
+  dispatch(requestStart())
 
   try {
-    const res = await axios.post(
-      "http://192.168.8.179:6000/api/auth/activate/resend",
-      {
-        email,
-      }
-    );
-    dispatch(requestSuccess());
-    return res.data;
+    const res = await axios.post('/auth/activate/resend', {
+      email,
+    })
+    dispatch(requestSuccess())
+    return res.data
   } catch (err: any) {
-    if (err.hasOwnProperty("response")) return err.response.data;
-    else return { sucess: false, message: err };
-    dispatch(requestError());
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
+    dispatch(requestError())
   }
-};
+}
 export const changeEmailCall = async (
   accessToken: string,
   newEmail: string,
   code: string,
   dispatch: Dispatch
 ) => {
-  dispatch(requestStart());
+  dispatch(requestStart())
 
-  console.log(accessToken);
-  console.log(newEmail);
-  console.log(code);
+  console.log(accessToken)
+  console.log(newEmail)
+  console.log(code)
   try {
     const res = await axios.post(
-      "http://192.168.8.179:6000/api/user/update/email",
+      '/user/update/email',
       { newEmail, code },
       { params: { accessToken } }
-    );
+    )
 
-    dispatch(updateUser(res.data.message));
-    dispatch(requestSuccess());
+    dispatch(updateUser(res.data.message))
+    dispatch(requestSuccess())
 
-    return res.data;
+    return res.data
   } catch (err: any) {
-    dispatch(requestError());
-    if (err.hasOwnProperty("response")) return err.response.data;
-    else return { sucess: false, message: err };
+    dispatch(requestError())
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
   }
-};
+}
 export const checkPasswordCall = async (
   accessToken: string,
   currentPassword: string,
   dispatch: Dispatch
 ) => {
-  dispatch(requestStart());
+  dispatch(requestStart())
   try {
     const res = await axios.post(
-      "http://192.168.8.179:6000/api/auth/password/check",
+      '/auth/password/check',
       { currentPassword },
       { params: { accessToken } }
-    );
-    dispatch(requestSuccess());
-    return res.data;
+    )
+    dispatch(requestSuccess())
+    return res.data
   } catch (err: any) {
-    dispatch(requestError());
-    if (err.hasOwnProperty("response")) return err.response.data;
-    else return { sucess: false, message: err };
+    dispatch(requestError())
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
   }
-};
+}
 export const changePasswordCall = async (
   accessToken: string,
   currentPassword: string,
   newPassword: string,
   dispatch: Dispatch
 ) => {
-  dispatch(requestStart());
+  dispatch(requestStart())
   try {
     const res = await axios.post(
-      "http://192.168.8.179:6000/api/user/update/password",
+      '/user/update/password',
       { currentPassword, newPassword },
       { params: { accessToken } }
-    );
-    dispatch(requestSuccess());
-    return res.data;
+    )
+    dispatch(requestSuccess())
+    return res.data
   } catch (err: any) {
-    dispatch(requestError());
-    if (err.hasOwnProperty("response")) return err.response.data;
-    else return { sucess: false, message: err };
+    dispatch(requestError())
+    if (err.hasOwnProperty('response')) return err.response.data
+    else return { sucess: false, message: err }
   }
-};
+}
