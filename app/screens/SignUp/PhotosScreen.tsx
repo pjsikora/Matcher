@@ -24,8 +24,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
   const [images, setImages] = useState([{}]);
 
   const addImagesHandler = (items: any) => {
-    setImages([...images, items]);
-    console.log(images);
+    setImages((current) => [...current, items]);
   };
 
   return (
