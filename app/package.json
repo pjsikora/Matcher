@@ -72,5 +72,6 @@
     "react-test-renderer": "18.0.0",
     "typescript": "~4.3.5"
   },
-  "private": true
+  "private": true,
+  "proxy": "http://192.168.1.132:6000/api"
 }

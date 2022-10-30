@@ -8,6 +8,8 @@ const moment = require('moment')
 const sendEmail = require('../tools/mailSender')
 const jwtGenerator = require('../tools/jwtGenerator')
 const ErrorHandler = require('../tools/errorHandler')
+const fs = require('fs')
+const { cloudinaryImageUploadMethod } = require('../tools/imageUploader')
 
 exports.loginController = async (
   req: Request,

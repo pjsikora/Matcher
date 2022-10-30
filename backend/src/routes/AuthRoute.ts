@@ -6,8 +6,10 @@ const {
   checkEmail,
   loginController,
   checkPassword,
+  uploadPhotos,
 } = require('../controllers/authController')
 const { checkAuthentication } = require('../middleware/authentication')
+const { upload } = require('../app')
 
 router.route('/register').post(registerController)
 router.route('/register/check').post(checkEmail)

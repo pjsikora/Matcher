@@ -1,8 +1,17 @@
-import { Request, Response } from 'express'
-const User = require('../models/userModel')
-const ErrorHandler = require('../tools/errorHandler')
-const { upload } = require('../app')
+const { cloudinaryImageUploadMethod } = require('../tools/imageUploader')
+const fs = require('fs')
 
-exports.uploadPhoto = async (req: Request, res: Response, next: Function) => {
-  upload.single('image')
+exports.uploadPhotos = async (req: Request & { files: any }, res: any) => {
+  const urls = []
+  const files = req.files
+
+  for (const file of files) {
+    const { path } = file
+    const newPath = await cloudinaryImageUploadMethod(path)
+    urls.push(newPath)
+    console.log(path)
+    fs.unlinkSync(path)
+  }
+
+  res.status(200).json(urls)
 }

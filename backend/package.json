@@ -25,6 +25,5 @@
   "scripts": {
     "build": "tsc -p . --watch",
     "start": "nodemon ./dist/server"
-  },
-  "proxy": "http://192.168.1.132:6000/api"
+  }
 }
