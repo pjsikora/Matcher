@@ -1,6 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { requestError, requestStart, requestSuccess } from '../redux/userSlice'
+import { API_URL } from '@env'
 
 type LoginData = {
   email: string
@@ -13,7 +14,8 @@ export const loginCall = async (
 ) => {
   dispatch(requestStart())
   try {
-    const res = await axios.post('/auth/login', data)
+    console.log(API_URL)
+    const res = await axios.post(API_URL.toString() + '/auth/login', data)
     dispatch(requestSuccess())
     return res.data
   } catch (err: any) {
@@ -24,7 +26,7 @@ export const loginCall = async (
 
       if (error.accountStatus === false) {
         try {
-          await axios.post('/auth/activate/resend', {
+          await axios.post(API_URL.toString() + '/auth/activate/resend', {
             email: data.email,
           })
           navigate('tokenInput')
@@ -53,7 +55,7 @@ type ActivationData = {
 }
 export const activationCall = async (data: ActivationData) => {
   try {
-    const res = await axios.post('/auth/activate', data)
+    const res = await axios.post(API_URL.toString() + '/auth/activate', data)
 
     return res.data
   } catch (err: any) {

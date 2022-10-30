@@ -6,11 +6,12 @@ import {
   requestSuccess,
   updateUser,
 } from '../redux/userSlice'
+import { API_URL } from '@env'
 
 export const getUserCall = async (accessToken: string, dispatch: Dispatch) => {
   dispatch(requestStart())
   try {
-    const res = await axios.get('/user/', {
+    const res = await axios.get(API_URL.toString() + '/user/', {
       params: {
         accessToken,
       },
@@ -33,7 +34,7 @@ export const updateUserCall = async (
   dispatch(requestStart())
   try {
     const res = await axios.post(
-      '/user/update',
+      API_URL.toString() + '/user/update',
       { ...values },
       { params: { accessToken } }
     )
@@ -51,7 +52,7 @@ export const sendCodeCall = async (email: string, dispatch: Dispatch) => {
   dispatch(requestStart())
 
   try {
-    const res = await axios.post('/auth/activate/resend', {
+    const res = await axios.post(API_URL.toString() + '/auth/activate/resend', {
       email,
     })
     dispatch(requestSuccess())
@@ -75,7 +76,7 @@ export const changeEmailCall = async (
   console.log(code)
   try {
     const res = await axios.post(
-      '/user/update/email',
+      API_URL.toString() + '/user/update/email',
       { newEmail, code },
       { params: { accessToken } }
     )
@@ -98,7 +99,7 @@ export const checkPasswordCall = async (
   dispatch(requestStart())
   try {
     const res = await axios.post(
-      '/auth/password/check',
+      API_URL.toString() + '/auth/password/check',
       { currentPassword },
       { params: { accessToken } }
     )
@@ -119,7 +120,7 @@ export const changePasswordCall = async (
   dispatch(requestStart())
   try {
     const res = await axios.post(
-      '/user/update/password',
+      API_URL.toString() + '/user/update/password',
       { currentPassword, newPassword },
       { params: { accessToken } }
     )

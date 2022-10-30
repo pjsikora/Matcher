@@ -5,11 +5,12 @@ import {
   requestStart,
   requestSuccess,
 } from '../redux/registerSlice'
+import { API_URL } from '@env'
 
 export const registerCall = async (data: any, dispatch: Dispatch) => {
   dispatch(requestStart())
   try {
-    const res = await axios.post('/auth/register', data)
+    const res = await axios.post(API_URL.toString() + '/auth/register', data)
     dispatch(requestSuccess())
     return res.data
   } catch (err: any) {
@@ -25,7 +26,9 @@ export const registerCall = async (data: any, dispatch: Dispatch) => {
 export const checkEmailCall = async (email: string, dispatch: Dispatch) => {
   dispatch(requestStart())
   try {
-    const res = await axios.post('/auth/register/check', { email })
+    const res = await axios.post(API_URL.toString() + '/auth/register/check', {
+      email,
+    })
     dispatch(requestSuccess())
     if (res.data.message.email) return true
     else false
