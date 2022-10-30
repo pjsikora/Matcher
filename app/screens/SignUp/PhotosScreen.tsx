@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { RegisterUserData } from "../../types/types";
 import { useSelector } from "react-redux";
 import BackButton from "../../components/UI/BackButton";
-
+import PhotoModal from "../../components/UI/PhotoModal";
 interface EmailScreenProps {
   navigation: any;
 }
@@ -14,6 +14,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
 
   return (
     <View style={styles.container}>
+      <PhotoModal />
       <LinearGradient
         colors={["#AD439C", "#FAAEBE"]}
         style={styles.linearGradient}
