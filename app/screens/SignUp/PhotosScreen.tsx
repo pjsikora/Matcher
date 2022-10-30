@@ -20,11 +20,17 @@ interface EmailScreenProps {
 }
 const PhotosScreen = ({ navigation }: EmailScreenProps) => {
   const count = useSelector((state: RegisterUserData) => state);
-  const [isModalShowedUp, setIsModalShowedUp] = useState(true);
+  const [isModalShowedUp, setIsModalShowedUp] = useState(false);
   const [images, setImages] = useState([{}]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const addImagesHandler = (items: any) => {
     setImages((current) => [...current, items]);
+    if (images.length >= 1) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
   };
 
   return (
@@ -54,7 +60,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
-                    source={require("../../images/users/zdj1.jpg")}
+                    source={images[1]}
                   >
                     <Image
                       style={styles.btnImage}
@@ -74,7 +80,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
-                    source={require("../../images/users/zdj2.jpg")}
+                    source={images[2]}
                   >
                     <Image
                       style={styles.btnImage}
@@ -94,7 +100,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
-                    source={require("../../images/users/zdj3.jpg")}
+                    source={images[3]}
                   >
                     <Image
                       style={styles.btnImage}
@@ -114,7 +120,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
-                    source={require("../../images/users/zdj4.jpg")}
+                    source={images[4]}
                   >
                     <Image
                       style={styles.btnImage}
@@ -134,7 +140,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
-                    source={require("../../images/users/zdj5.jpg")}
+                    source={images[5]}
                   >
                     <Image
                       style={styles.btnImage}
@@ -154,7 +160,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
-                    source={require("../../images/users/zdj6.png")}
+                    source={images[6]}
                   >
                     <Image
                       style={styles.btnImage}
@@ -166,7 +172,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
             </View>
           </View>
           <RegisterButton
-            isDisabled={false}
+            isDisabled={isDisabled}
             toScreen="aboutYourselfInput"
             navigation={navigation}
           />

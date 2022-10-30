@@ -17,12 +17,6 @@ import LoadingDots from "react-native-loading-dots";
 import { showError, showSuccess } from "../../tools/alertHandlers";
 import PhotoModal from "../../components/UI/PhotoModal";
 
-const user = {
-  description: "Wronka to pedał",
-  gender: "Female",
-  hobbies: "Travel, DIY, Computer Progra...",
-};
-
 interface EditInfoScreenProps {
   navigation: any;
 }
@@ -74,7 +68,7 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
           style: "cancel",
         },
         {
-          text: "Ues",
+          text: "Yes",
           onPress: () => {
             updateHandler();
           },
@@ -119,6 +113,7 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
                 <View style={styles.imagesContainer}>
                   <Text style={styles.categoryText}>Images</Text>
                   <EditInfoAddPhotoTiles
+                    images={images}
                     onShowModal={() => {
                       setIsModalShowedUp(true);
                     }}
@@ -160,10 +155,15 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
                     <TouchableOpacity
                       style={styles.buttonContainer}
                       onPress={() => {
-                        navigation.navigate("editHobbies");
+                        navigation.navigate("editHobbies"),
+                          {
+                            hobbies: userData.hobbies,
+                          };
                       }}
                     >
-                      <Text style={styles.buttonText}>{userData.hobbies}</Text>
+                      <Text style={styles.buttonText}>
+                        {userData.hobbies.join(", ")}
+                      </Text>
                       <Image
                         style={styles.icon}
                         source={require("../../images/editArrow.png")}
