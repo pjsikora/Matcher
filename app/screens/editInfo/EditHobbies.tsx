@@ -62,6 +62,8 @@ const EditHobbies = ({ route, navigation }: EditHobbiesProps) => {
   const [chosenHobbies, setChosenHobbies] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  const hobbyparams = route.params.hobbies;
+
   const filterBySearch = (item) => {
     if (item.name.includes(searchText)) {
       return true;
@@ -70,9 +72,15 @@ const EditHobbies = ({ route, navigation }: EditHobbiesProps) => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(route.params.hobbies);
-  // }, []);
+  useEffect(() => {
+    hobbies.map((hobby) => {
+      hobbyparams.map((hobbyparam: any) => {
+        if (hobby.name === hobbyparam) {
+          hobby.isChosen = true;
+        }
+      });
+    });
+  }, []);
 
   const filteredHobbies = hobbies.filter(filterBySearch);
 
@@ -85,7 +93,7 @@ const EditHobbies = ({ route, navigation }: EditHobbiesProps) => {
           hobby.isChosen = !hobby.isChosen;
           setChosenHobbies(hobbies.filter((hoby) => hoby.isChosen === true));
           setRestart(!restart);
-          console.log(chosenHobbies);
+          console.log(hobbyparams.hobbies);
         }}
       >
         <Text

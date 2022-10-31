@@ -155,10 +155,9 @@ const EditInfoScreen = ({ navigation }: EditInfoScreenProps) => {
                     <TouchableOpacity
                       style={styles.buttonContainer}
                       onPress={() => {
-                        navigation.navigate("editHobbies"),
-                          {
-                            hobbies: userData.hobbies,
-                          };
+                        navigation.navigate("editHobbies", {
+                          hobbies: userData.hobbies,
+                        });
                       }}
                     >
                       <Text style={styles.buttonText}>
