@@ -29,7 +29,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
   const addImagesHandler = (items: any) => {
     setImages((current) => [...current, items]);
     setIsModalShowedUp(false);
-    if (images.length >= 1) {
+    if (images[0] !== null) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -77,7 +77,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
               <View style={styles.photo}>
                 <ImageBackground
                   style={{ width: "100%", height: "100%" }}
-                  imageStyle={{ borderRadius: 10 }}
+                  imageStyle={{ borderRadius: 6 }}
                   source={images[0]}
                   key={images[0]}
                 >
@@ -120,8 +120,8 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                 <View style={styles.photo}>
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
-                    imageStyle={{ borderRadius: 10 }}
-                    source={{ uri: images[1] }}
+                    imageStyle={{ borderRadius: 6 }}
+                    source={images[1]}
                     key={images[1]}
                   >
                     {images.length >= 0 && images.length < 2 ? (
@@ -162,7 +162,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                 <View style={styles.photo}>
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
-                    imageStyle={{ borderRadius: 10 }}
+                    imageStyle={{ borderRadius: 6 }}
                     source={images[2]}
                     key={images[2]}
                   >
@@ -204,7 +204,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                 <View style={styles.photo}>
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
-                    imageStyle={{ borderRadius: 10 }}
+                    imageStyle={{ borderRadius: 6 }}
                     source={images[3]}
                     key={images[3]}
                   >
@@ -246,7 +246,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                 <View style={styles.photo}>
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
-                    imageStyle={{ borderRadius: 10 }}
+                    imageStyle={{ borderRadius: 6 }}
                     source={images[4]}
                     key={images[4]}
                   >
@@ -288,7 +288,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                 <View style={styles.photo}>
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
-                    imageStyle={{ borderRadius: 10 }}
+                    imageStyle={{ borderRadius: 6 }}
                     source={images[5]}
                     key={images[5]}
                   >
