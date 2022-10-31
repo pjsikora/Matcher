@@ -35,12 +35,17 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
 
   const registerHandler = async () => {
     ////const result = await registerCall(state.data, dispatch);
-    const result = await uploadPhotosCall(state.data.photos, dispatch)
+    const uploadResult = await uploadPhotosCall(state.data.photos, dispatch)
 
-    console.log(result)
-    if (result.success) {
-      navigation.navigate('success')
-    } else setError(result.message)
+    console.log(uploadResult)
+
+    if (uploadResult.success) {
+      dispatch(addItem({ value: 'images', data: uploadResult.message }))
+      const registerResult = await registerCall(state.data, dispatch)
+
+      if (registerResult.success) navigation.navigate('success')
+      else setError(registerResult.message)
+    } else setError(uploadResult.message)
   }
 
   useEffect(() => {

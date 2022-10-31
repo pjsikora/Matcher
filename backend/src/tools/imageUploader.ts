@@ -6,8 +6,8 @@ exports.cloudinaryImageUploadMethod = async (file: any) => {
       if (err) return res.status(500).send('upload image error')
       else
         resolve({
-          id: res.public_id,
-          res: res.secure_url,
+          public_id: res.public_id,
+          url: res.secure_url,
         })
     })
   })

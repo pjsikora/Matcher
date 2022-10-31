@@ -44,11 +44,10 @@ export const uploadPhotosCall = async (photos: any, dispatch: Dispatch) => {
   const formData = new FormData()
   photos.forEach((photo: any) => {
     formData.append('image', {
-      name: 'ty',
+      name: 'image',
       type: photo.type,
       uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
     })
-    console.log(formData)
   })
 
   try {

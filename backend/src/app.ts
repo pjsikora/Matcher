@@ -13,6 +13,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary')
 const { checkAuthentication } = require('./middleware/authentication')
 const multer = require('multer')
 const path = require('path')
+const uniqid = require('uniqid')
 
 const app = express()
 
@@ -27,8 +28,7 @@ const storage = multer.diskStorage({
     cb(null, process.cwd() + '/uploads')
   },
   filename: function (req, file, cb) {
-    ///cb(null, Date.now() + file.originalname.replace(/\s+/g, '-'))
-    cb(null, Date.now() + '')
+    cb(null, uniqid().toString())
   },
 })
 

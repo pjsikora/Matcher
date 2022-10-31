@@ -14,6 +14,7 @@ const initialState: RegisterStateData = {
     city: '',
     hobbies: [],
     photos: [],
+    images: [],
   },
   pending: false,
   error: false,

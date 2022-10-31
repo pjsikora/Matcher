@@ -16,5 +16,5 @@ exports.uploadPhotos = async (req: Request & { files: any }, res: any) => {
     fs.unlinkSync(path)
   }
 
-  res.status(200).json({ sucess: true, message: urls })
+  res.status(200).json({ success: true, message: urls })
 }
