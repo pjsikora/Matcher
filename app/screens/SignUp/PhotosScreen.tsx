@@ -79,6 +79,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   style={{ width: "100%", height: "100%" }}
                   imageStyle={{ borderRadius: 10 }}
                   source={images[0]}
+                  key={images[0]}
                 >
                   {images.length >= 0 && images.length < 1 ? (
                     <TouchableOpacity
@@ -121,6 +122,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
                     source={{ uri: images[1] }}
+                    key={images[1]}
                   >
                     {images.length >= 0 && images.length < 2 ? (
                       <TouchableOpacity
@@ -162,6 +164,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
                     source={images[2]}
+                    key={images[2]}
                   >
                     {images.length >= 0 && images.length < 3 ? (
                       <TouchableOpacity
@@ -203,6 +206,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
                     source={images[3]}
+                    key={images[3]}
                   >
                     {images.length >= 0 && images.length < 4 ? (
                       <TouchableOpacity
@@ -244,6 +248,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
                     source={images[4]}
+                    key={images[4]}
                   >
                     {images.length >= 0 && images.length < 5 ? (
                       <TouchableOpacity
@@ -285,6 +290,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
                     source={images[5]}
+                    key={images[5]}
                   >
                     {images.length >= 0 && images.length < 6 ? (
                       <TouchableOpacity
