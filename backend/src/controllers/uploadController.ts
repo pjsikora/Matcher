@@ -2,8 +2,11 @@ const { cloudinaryImageUploadMethod } = require('../tools/imageUploader')
 const fs = require('fs')
 
 exports.uploadPhotos = async (req: Request & { files: any }, res: any) => {
+  console.log('wtiam')
   const urls = []
   const files = req.files
+
+  console.log(files)
 
   for (const file of files) {
     const { path } = file
@@ -13,5 +16,5 @@ exports.uploadPhotos = async (req: Request & { files: any }, res: any) => {
     fs.unlinkSync(path)
   }
 
-  res.status(200).json(urls)
+  res.status(200).json({ sucess: true, message: urls })
 }

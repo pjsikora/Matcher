@@ -27,11 +27,15 @@ const storage = multer.diskStorage({
     cb(null, process.cwd() + '/uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname.replace(/\s+/g, '-'))
+    ///cb(null, Date.now() + file.originalname.replace(/\s+/g, '-'))
+    cb(null, Date.now() + '')
   },
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({
+  storage: storage,
+  limits: { fieldSize: 25 * 1024 * 1024 },
+})
 
 app.use(express.json())
 app.use('/api/auth', AuthRoute)
