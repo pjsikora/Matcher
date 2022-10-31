@@ -23,7 +23,7 @@ interface EmailScreenProps {
 const PhotosScreen = ({ navigation }: EmailScreenProps) => {
   const count = useSelector((state: RegisterUserData) => state);
   const [isModalShowedUp, setIsModalShowedUp] = useState(false);
-  const [images, setImages] = useState([{}]);
+  const [images, setImages] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const addImagesHandler = (items: any) => {
@@ -78,13 +78,14 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                 <ImageBackground
                   style={{ width: "100%", height: "100%" }}
                   imageStyle={{ borderRadius: 10 }}
-                  source={images[1]}
+                  source={images[0]}
                 >
-                  {images.length >= 1 && images.length < 2 ? (
+                  {images.length >= 0 && images.length < 1 ? (
                     <TouchableOpacity
                       style={{ height: "100%", width: "100%" }}
                       onPress={() => {
                         setIsModalShowedUp(true);
+                        console.log(images);
                       }}
                     >
                       <Image
@@ -96,7 +97,8 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     <TouchableOpacity
                       style={{ height: "100%", width: "100%" }}
                       onPress={() => {
-                        removeImageHandler(1);
+                        removeImageHandler(0);
+                        console.log(images);
                       }}
                     >
                       <Image
@@ -118,9 +120,50 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                   <ImageBackground
                     style={{ width: "100%", height: "100%" }}
                     imageStyle={{ borderRadius: 10 }}
+                    source={{ uri: images[1] }}
+                  >
+                    {images.length >= 0 && images.length < 2 ? (
+                      <TouchableOpacity
+                        style={{ height: "100%", width: "100%" }}
+                        onPress={() => {
+                          setIsModalShowedUp(true);
+                        }}
+                      >
+                        <Image
+                          style={styles.btnImage}
+                          source={require("../../images/addBtn.png")}
+                        />
+                      </TouchableOpacity>
+                    ) : (
+                      <TouchableOpacity
+                        style={{ height: "100%", width: "100%" }}
+                        onPress={() => {
+                          removeImageHandler(1);
+                        }}
+                      >
+                        <Image
+                          style={styles.btnImage}
+                          source={require("../../images/deleteBtn.png")}
+                        />
+                      </TouchableOpacity>
+                    )}
+                  </ImageBackground>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsModalShowedUp(true);
+                }}
+              >
+                <View style={styles.photo}>
+                  <ImageBackground
+                    style={{ width: "100%", height: "100%" }}
+                    imageStyle={{ borderRadius: 10 }}
                     source={images[2]}
                   >
-                    {images.length >= 1 && images.length < 3 ? (
+                    {images.length >= 0 && images.length < 3 ? (
                       <TouchableOpacity
                         style={{ height: "100%", width: "100%" }}
                         onPress={() => {
@@ -161,7 +204,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     imageStyle={{ borderRadius: 10 }}
                     source={images[3]}
                   >
-                    {images.length >= 1 && images.length < 4 ? (
+                    {images.length >= 0 && images.length < 4 ? (
                       <TouchableOpacity
                         style={{ height: "100%", width: "100%" }}
                         onPress={() => {
@@ -202,7 +245,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     imageStyle={{ borderRadius: 10 }}
                     source={images[4]}
                   >
-                    {images.length >= 1 && images.length < 5 ? (
+                    {images.length >= 0 && images.length < 5 ? (
                       <TouchableOpacity
                         style={{ height: "100%", width: "100%" }}
                         onPress={() => {
@@ -243,7 +286,7 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                     imageStyle={{ borderRadius: 10 }}
                     source={images[5]}
                   >
-                    {images.length >= 1 && images.length < 6 ? (
+                    {images.length >= 0 && images.length < 6 ? (
                       <TouchableOpacity
                         style={{ height: "100%", width: "100%" }}
                         onPress={() => {
@@ -260,47 +303,6 @@ const PhotosScreen = ({ navigation }: EmailScreenProps) => {
                         style={{ height: "100%", width: "100%" }}
                         onPress={() => {
                           removeImageHandler(5);
-                        }}
-                      >
-                        <Image
-                          style={styles.btnImage}
-                          source={require("../../images/deleteBtn.png")}
-                        />
-                      </TouchableOpacity>
-                    )}
-                  </ImageBackground>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.box}>
-              <TouchableOpacity
-                onPress={() => {
-                  setIsModalShowedUp(true);
-                }}
-              >
-                <View style={styles.photo}>
-                  <ImageBackground
-                    style={{ width: "100%", height: "100%" }}
-                    imageStyle={{ borderRadius: 10 }}
-                    source={images[6]}
-                  >
-                    {images.length >= 1 && images.length < 7 ? (
-                      <TouchableOpacity
-                        style={{ height: "100%", width: "100%" }}
-                        onPress={() => {
-                          setIsModalShowedUp(true);
-                        }}
-                      >
-                        <Image
-                          style={styles.btnImage}
-                          source={require("../../images/addBtn.png")}
-                        />
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        style={{ height: "100%", width: "100%" }}
-                        onPress={() => {
-                          removeImageHandler(6);
                         }}
                       >
                         <Image
