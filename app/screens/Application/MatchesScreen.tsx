@@ -9,7 +9,10 @@ import {
   ImageBackground,
 } from "react-native";
 
-const MatchesScreen = () => {
+interface MatchesScreenProps {
+  navigation: any;
+}
+const MatchesScreen = ({ navigation }: MatchesScreenProps) => {
   const location = "Kielce, Poland";
 
   const users = [
@@ -65,45 +68,68 @@ const MatchesScreen = () => {
 
   const usersList = users.map((user) => {
     return (
-      <View key={user.id} style={styles.item}>
-        <ImageBackground
-          source={user.photo}
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            justifyContent: "flex-end",
-          }}
-          imageStyle={{ borderRadius: 18 }}
-        >
-          <Text
-            style={{
-              marginLeft: 10,
-              fontSize: 22,
-              color: "#FFF",
-              fontFamily: "montBold",
-            }}
-          >{`${user.name}, ${user.age}`}</Text>
-          <View
+      <TouchableOpacity
+        style={{ width: "45%", height: 180, marginBottom: "5%" }}
+        onPress={() => {
+          navigation.navigate("profilInfo", {
+            user: user,
+          });
+        }}
+      >
+        <View key={user.id} style={styles.item}>
+          <ImageBackground
+            source={user.photo}
             style={{
               width: "100%",
+              height: "100%",
               display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "flex-end",
             }}
+            imageStyle={{ borderRadius: 21 }}
           >
             <Text
-              style={{ fontSize: 11, color: "#FFF", fontFamily: "montRegular" }}
+              style={{
+                fontSize: 22,
+                color: "#FFF",
+                fontFamily: "montBold",
+                marginLeft: 10,
+              }}
+            >{`${user.name}, ${user.age}`}</Text>
+            <View
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                marginLeft: 10,
+                marginBottom: 10,
+              }}
             >
-              {user.location}
-            </Text>
-            <Image source={require("../../images/locationPin.png")} />
-            <Text>{user.distance}km</Text>
-          </View>
-        </ImageBackground>
-      </View>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: "#FFF",
+                  fontFamily: "montRegular",
+                }}
+              >
+                {user.location}
+              </Text>
+              <Image source={require("../../images/locationPin.png")} />
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: "#FFF",
+                  fontFamily: "montRegular",
+                }}
+              >
+                {user.distance}km
+              </Text>
+            </View>
+          </ImageBackground>
+        </View>
+      </TouchableOpacity>
     );
   });
 
@@ -148,7 +174,7 @@ const MatchesScreen = () => {
               fontFamily: "montBold",
             }}
           >
-            6
+            {users.length}
           </Text>
         </Text>
       </View>
@@ -233,10 +259,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   item: {
-    width: "45%",
-    height: 180,
+    width: "100%",
+    height: "100%",
     marginBottom: "5%",
-    borderRadius: 18,
+    borderRadius: 24,
+    borderRightWidth: 3,
+    borderBottomWidth: 3,
+    borderColor: "#CF56A1",
   },
 });
 
