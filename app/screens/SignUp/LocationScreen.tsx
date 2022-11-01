@@ -36,14 +36,14 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
   const registerHandler = async () => {
     ////const result = await registerCall(state.data, dispatch);
     const uploadResult = await uploadPhotosCall(state.data.photos, dispatch);
-
     console.log(uploadResult);
-
     if (uploadResult.success) {
-      let newState = state.data;
-      newState.images = uploadResult.message;
-      const registerResult = await registerCall(newState, dispatch);
-
+      // dispatch(addItem({ value: "images", data: uploadResult.message }));
+      console.log(state.data);
+      const registerResult = await registerCall(
+        { ...state.data, images: uploadResult.message },
+        dispatch
+      );
       if (registerResult.success) navigation.navigate("success");
       else setError(registerResult.message);
     } else setError(uploadResult.message);
