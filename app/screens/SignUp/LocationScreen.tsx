@@ -40,8 +40,9 @@ const LocationScreen = ({ navigation }: EmailScreenProps) => {
     console.log(uploadResult)
 
     if (uploadResult.success) {
-      dispatch(addItem({ value: 'images', data: uploadResult.message }))
-      const registerResult = await registerCall(state.data, dispatch)
+      const newState = state.data
+      newState.images = uploadResult.message
+      const registerResult = await registerCall(newState, dispatch)
 
       if (registerResult.success) navigation.navigate('success')
       else setError(registerResult.message)
