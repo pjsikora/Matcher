@@ -34,6 +34,7 @@ const PhotoModal = (props: any) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
       quality: 1,
+      allowsEditing: true,
     });
 
     if (!result.cancelled) {
@@ -50,7 +51,9 @@ const PhotoModal = (props: any) => {
       return;
     }
 
-    const result = await ImagePicker.launchCameraAsync();
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+    });
 
     if (!result.cancelled) {
       props.onAddImage(result);
