@@ -46,18 +46,9 @@ const userSchema = new Schema(
       enum: ['Male', 'Female', 'Both'],
       required: [true, 'You have to set up yuur prferences!'],
     },
-    images: [
-      {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    images: {
+      type: Array,
+    },
     hobbies: {
       type: Array, ///tu bedzie enum
     },
