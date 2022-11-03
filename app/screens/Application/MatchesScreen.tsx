@@ -9,101 +9,187 @@ import {
   ImageBackground,
 } from "react-native";
 
-const MatchesScreen = () => {
+interface MatchesScreenProps {
+  navigation: any;
+}
+const MatchesScreen = ({ navigation }: MatchesScreenProps) => {
   const location = "Kielce, Poland";
 
   const users = [
     {
       id: "id1",
       name: "Jakub",
+      desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ab, voluptas cumque similique a veritatis assumenda maxime deserunt aliquam voluptatem.",
       photo: require("../../images/users/zdj1.jpg"),
       age: 24,
       location: "Kielce",
       distance: 2,
+      hobbies: [
+        "Art",
+        "Football",
+        "Swimming",
+        "Travel",
+        "Gym",
+        "React programming",
+        "DIY",
+      ],
     },
     {
       id: "id2",
       name: "Patryk",
+      desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ab, voluptas cumque similique a veritatis assumenda maxime deserunt aliquam voluptatem.",
       photo: require("../../images/users/zdj2.jpg"),
       age: 18,
       location: "Kielce",
       distance: 2,
+      hobbies: [
+        "Art",
+        "Football",
+        "Swimming",
+        "Travel",
+        "Gym",
+        "React programming",
+        "DIY",
+      ],
     },
     {
       id: "id3",
       name: "Stanisław",
+      desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ab, voluptas cumque similique a veritatis assumenda maxime deserunt aliquam voluptatem.",
       photo: require("../../images/users/zdj3.jpg"),
       age: 22,
       location: "Kielce",
       distance: 2,
+      hobbies: [
+        "Art",
+        "Football",
+        "Swimming",
+        "Travel",
+        "Gym",
+        "React programming",
+        "DIY",
+      ],
     },
     {
       id: "id4",
       name: "Kasztan",
+      desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ab, voluptas cumque similique a veritatis assumenda maxime deserunt aliquam voluptatem.",
       photo: require("../../images/users/zdj4.jpg"),
       age: 23,
       location: "Kielce",
       distance: 2,
+      hobbies: [
+        "Art",
+        "Football",
+        "Swimming",
+        "Travel",
+        "Gym",
+        "React programming",
+        "DIY",
+      ],
     },
     {
       id: "id5",
       name: "Zuzia",
+      desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ab, voluptas cumque similique a veritatis assumenda maxime deserunt aliquam voluptatem.",
       photo: require("../../images/users/zdj5.jpg"),
       age: 19,
       location: "Kielce",
       distance: 2,
+      hobbies: [
+        "Art",
+        "Football",
+        "Swimming",
+        "Travel",
+        "Gym",
+        "React programming",
+        "DIY",
+      ],
     },
     {
       id: "id6",
       name: "Agnieszka",
-      photo: require("../../images/users/zdj6.png"),
+      desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ab, voluptas cumque similique a veritatis assumenda maxime deserunt aliquam voluptatem.",
       age: 20,
       location: "Kielce",
       distance: 2,
+      hobbies: [
+        "Art",
+        "Football",
+        "Swimming",
+        "Travel",
+        "Gym",
+        "React programming",
+        "DIY",
+      ],
     },
   ];
 
   const usersList = users.map((user) => {
     return (
-      <View key={user.id} style={styles.item}>
-        <ImageBackground
-          source={user.photo}
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            justifyContent: "flex-end",
-          }}
-          imageStyle={{ borderRadius: 18 }}
-        >
-          <Text
-            style={{
-              marginLeft: 10,
-              fontSize: 22,
-              color: "#FFF",
-              fontFamily: "montBold",
-            }}
-          >{`${user.name}, ${user.age}`}</Text>
-          <View
+      <TouchableOpacity
+        key={user.id}
+        style={{ width: "45%", height: 180, marginBottom: "5%" }}
+        onPress={() => {
+          navigation.navigate("profilInfo", {
+            user: user,
+          });
+        }}
+      >
+        <View style={styles.item}>
+          <ImageBackground
+            source={user.photo}
             style={{
               width: "100%",
+              height: "100%",
               display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "flex-end",
             }}
+            imageStyle={{ borderRadius: 21 }}
           >
             <Text
-              style={{ fontSize: 11, color: "#FFF", fontFamily: "montRegular" }}
+              style={{
+                fontSize: 22,
+                color: "#FFF",
+                fontFamily: "montBold",
+                marginLeft: 10,
+              }}
+            >{`${user.name}, ${user.age}`}</Text>
+            <View
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                marginLeft: 10,
+                marginBottom: 10,
+              }}
             >
-              {user.location}
-            </Text>
-            <Image source={require("../../images/locationPin.png")} />
-            <Text>{user.distance}km</Text>
-          </View>
-        </ImageBackground>
-      </View>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: "#FFF",
+                  fontFamily: "montRegular",
+                }}
+              >
+                {user.location}
+              </Text>
+              <Image source={require("../../images/locationPin.png")} />
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: "#FFF",
+                  fontFamily: "montRegular",
+                }}
+              >
+                {user.distance}km
+              </Text>
+            </View>
+          </ImageBackground>
+        </View>
+      </TouchableOpacity>
     );
   });
 
@@ -148,7 +234,7 @@ const MatchesScreen = () => {
               fontFamily: "montBold",
             }}
           >
-            6
+            {users.length}
           </Text>
         </Text>
       </View>
@@ -233,10 +319,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   item: {
-    width: "45%",
-    height: 180,
+    width: "100%",
+    height: "100%",
     marginBottom: "5%",
-    borderRadius: 18,
+    borderRadius: 24,
+    borderRightWidth: 3,
+    borderBottomWidth: 3,
+    borderColor: "#CF56A1",
   },
 });
 
