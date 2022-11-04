@@ -11,6 +11,7 @@ import { Platform } from 'react-native'
 export const registerCall = async (data: any, dispatch: Dispatch) => {
   dispatch(requestStart())
   try {
+    console.log(data)
     const res = await axios.post(API_URL.toString() + '/auth/register', data)
     dispatch(requestSuccess())
     return res.data
