@@ -100,7 +100,7 @@ const HomeScreen = () => {
             style={{
               width: "100%",
               height: "100%",
-              borderRadius: 18,
+              borderRadius: 14,
               position: "absolute",
             }}
             source={require("../../images/users/bigUser.png")}
@@ -178,27 +178,7 @@ const styles = StyleSheet.create({
     color: "#AD439C",
     marginTop: "1.6%",
   },
-  searchBarContainer: {
-    width: "80%",
-    marginTop: "1%",
-    backgroundColor: "#F2F2F2",
-    borderRadius: 15,
-    height: 50,
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom: "7%",
-  },
-  searchIcon: {
-    marginLeft: 20,
-    marginRight: 10,
-  },
-  searchInput: {
-    width: "80%",
-    height: 30,
-    fontFamily: "montMedium",
-    fontSize: 14,
-  },
+
   text: {
     color: "#1E1E1E",
     fontSize: 18,
@@ -255,7 +235,7 @@ const styles = StyleSheet.create({
   },
   nearbyContainer: {
     width: "80%",
-    height: "45%",
+    height: "55%",
     marginTop: "10%",
     display: "flex",
     flexDirection: "row",
@@ -266,9 +246,12 @@ const styles = StyleSheet.create({
   },
   userNearYou: {
     marginTop: "20%",
-    width: "75%",
+    width: "90%",
     height: "75%",
     borderRadius: 18,
+    borderRightWidth: 3,
+    borderBottomWidth: 3,
+    borderColor: "#CB54A0",
   },
   nearbyUserInfo: {
     position: "relative",

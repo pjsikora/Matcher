@@ -111,6 +111,7 @@ const MatchesScreen = ({ navigation }: MatchesScreenProps) => {
       name: "Agnieszka",
       desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ab, voluptas cumque similique a veritatis assumenda maxime deserunt aliquam voluptatem.",
       age: 20,
+      photo: require("../../images/users/zdj6.png"),
       location: "Kielce",
       distance: 2,
       hobbies: [

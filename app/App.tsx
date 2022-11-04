@@ -31,6 +31,7 @@ import TestScreen from "./screens/Application/TestScrees";
 import AppContainer from "./screens/Application/AppContainer";
 import ForgotPasswordScreen from "./screens/SignIn/ResetPassword/ForgotPasswordScreen";
 import ResetPasswordScreen from "./screens/SignIn/ResetPassword/ResetPasswordScreen";
+import MessageScreen from "./screens/Application/MessageScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -274,6 +275,11 @@ export default function App() {
             <Stack.Screen
               name="appContainer"
               component={AppContainer}
+              options={{ title: "", gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name="message"
+              component={MessageScreen}
               options={{ title: "", gestureEnabled: false }}
             />
           </Stack.Navigator>
